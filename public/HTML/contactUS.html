@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es-ES" class="text-[16px] md:text-[14px] lg:text-[16px]">
+
+<head>
+  <meta charset="UTF-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Med & Track - Contáctanos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "custom-bg": "#b8d5db",
+            "custom-form": "#ECECEC",
+          },
+          fontFamily: {
+            roboto: ["Roboto", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+</head>
+
+<body class="bg-custom-bg min-h-screen flex items-center justify-center p-4 font-roboto">
+  <div class="w-full max-w-6xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden flex flex-col md:flex-row">
+    <!-- Sección izquierda (logo e imagen) -->
+    <div class="w-full md:w-1/2 bg-cover bg-center h-64 md:h-auto relative">
+      <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center p-4">
+        <img src="../assets/LOGO_VECTORIZADOsvg.svg" class="h-32 w-32 rounded-full object-cover shadow-lg mb-4" />
+        <div class="text-white text-center">
+          <h1 class="text-3xl md:text-5xl font-bold mb-2">Med & Track</h1>
+          <p class="text-lg md:text-xl">Su compañero de salud</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección derecha (formulario) -->
+    <div class="w-full md:w-1/2 bg-custom-form p-6 md:p-8 lg:p-12 flex flex-col justify-center">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 md:mb-8">
+        Contáctenos
+      </h2>
+      <form class="space-y-4 md:space-y-6">
+        <div>
+          <label for="usuario" class="block text-lg md:text-xl font-medium text-gray-700 mb-1">
+            Usuario <span class="text-red-500">*</span>
+          </label>
+          <input type="text" name="usuario" id="usuario" required placeholder="Ingrese su usuario."
+            class="w-full px-3 py-2 text-base md:text-lg border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black transition duration-300 ease-in-out transform hover:scale-105" />
+        </div>
+        <div>
+          <label for="correo" class="block text-lg md:text-xl font-medium text-gray-700 mb-1">
+            Dirección de correo electrónico
+            <span class="text-red-500">*</span>
+          </label>
+          <input type="email" name="correo" id="correo" required placeholder="Ingrese su correo electrónico."
+            class="w-full px-3 py-2 text-base md:text-lg border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black transition duration-300 ease-in-out transform hover:scale-105" />
+        </div>
+        <div>
+          <label class="block text-lg md:text-xl font-medium text-gray-700 mb-1">
+            Razón del contacto: <span class="text-red-500">*</span>
+          </label>
+          <div class="flex flex-wrap gap-4">
+            <label class="inline-flex items-center">
+              <input type="radio" name="razon" id="queja" value="queja"
+                class="form-radio h-5 w-5 text-black transition duration-300 ease-in-out transform hover:scale-110"
+                required />
+              <span class="ml-2 text-base md:text-lg">Sugerencia</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" name="razon" id="duda" value="duda"
+                class="form-radio h-5 w-5 text-black transition duration-300 ease-in-out transform hover:scale-110"
+                required />
+              <span class="ml-2 text-base md:text-lg">Duda</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" name="razon" id="aclaracion" value="aclaracion"
+                class="form-radio h-5 w-5 text-black transition duration-300 ease-in-out transform hover:scale-110"
+                required />
+              <span class="ml-2 text-base md:text-lg">Aclaración</span>
+            </label>
+          </div>
+        </div>
+        <div>
+          <label for="detalles" class="block text-lg md:text-xl font-medium text-gray-700 mb-1">
+            Detalles <span class="text-red-500">*</span>
+          </label>
+          <textarea name="detalles" id="detalles" rows="4" required
+            placeholder="Escriba aquí los detalles de su contacto."
+            class="w-full px-3 py-2 text-base md:text-lg border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black resize-none transition duration-300 ease-in-out transform hover:scale-105"></textarea>
+        </div>
+        <div>
+          <label for="ubicacion" class="block text-lg md:text-xl font-medium text-gray-700 mb-1">
+            ¿Cómo nos ubicó? <span class="text-red-500">*</span>
+          </label>
+          <div class="relative">
+            <select id="ubicacion" name="ubicacion" required
+              class="w-full h-12 appearance-none bg-white border border-gray-300 rounded-md px-4 pr-8 text-base md:text-lg focus:outline-none focus:ring-2 focus:ring-black focus:animate-pulse transition duration-300 ease-in-out transform hover:scale-105">
+              <option selected>Seleccione</option>
+              <option value="hospital">Recomendación del Hospital</option>
+              <option value="publicidad">Publicidad</option>
+              <option value="conocidos">Conocidos</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col items-end">
+          <button id="envioContacto" type="submit"
+            class="w-full sm:w-auto relative inline-flex items-center justify-center px-6 py-3 overflow-hidden rounded-lg group bg-black text-white hover:text-white text-base md:text-lg transition duration-300 ease-in-out transform hover:scale-105">
+            <span
+              class="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-700 rounded-full group-hover:w-56 group-hover:h-56"></span>
+            <span class="relative transition-colors duration-200 ease-in-out z-10">
+              Siguiente
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

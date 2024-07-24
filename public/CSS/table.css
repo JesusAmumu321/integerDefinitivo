@@ -1,0 +1,178 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #b8d5db;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#divGeneral {
+  width: 95vw;
+  min-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  margin: 5vh auto;
+  background-color: #f1f1f1;
+  padding: 10px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #d9d9d9;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.navegacion a {
+  color: #000;
+  margin: 0 15px;
+  font-weight: unset;
+}
+
+.acciones {
+  display: flex;
+}
+
+.botonHeader {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.botonHeader:hover {
+  background-color: #444;
+}
+
+.seccionBody {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.texto {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-right: 20px;
+}
+
+.texto p {
+  font-size: 24px;
+  font-weight: unset;
+  margin: 0 0 20px 0;
+  animation: fade 1s ease-in-out;
+}
+
+.carrusel {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+}
+
+.carrusel-items {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+.carrusel-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  background-color: #f0f0f0;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+}
+
+.carrusel-item.active {
+  opacity: 1;
+  pointer-events: auto;
+  animation: fade 1s ease-in-out;
+}
+
+.carrusel-antes,
+.carrusel-despues {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: default;
+  z-index: 10;
+}
+
+.carrusel-antes {
+  left: 10px;
+}
+
+.carrusel-despues {
+  right: 10px;
+}
+
+#botonSesion {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+#botonSesion:hover {
+  background-color: #444;
+}
+
+/*
+keyframes hace una animacion simple de opacidad
+.fade aplica la animacion a los elementos con de la clase
+*/
+
+@keyframes fade {
+  from {
+    opacity: 0.1;
+  }
+  to {
+    opacity: 1;
+  }
+}
+

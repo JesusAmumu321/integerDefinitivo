@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es-ES" class="h-full w-full">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Med & Track</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module" src="../JS/main.js"></script>
+  <script src="../JS/mainPagejs.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          backgroundColor: {
+            "bg-personalizado": "#b8d5db",
+            "hd-personalizado": "#d9d9d9",
+          },
+          fontSize: {
+            g: "clamp(1rem, 2vw, 2.25rem)",
+            m: "clamp(0.75rem, 1.5vw, 1.5rem)",
+            s: "clamp(0.50rem, 1vw, 1.2rem)",
+          },
+          animation: {
+            pulse: "pulse 1s ease-in-out",
+            scaleUp: "scaleUp 0.2s ease-in-out",
+          },
+          keyframes: {
+            pulse: {
+              "0%, 100%": { opacity: 1 },
+              "50%": { opacity: 0.5 },
+            },
+            scaleUp: {
+              "0%": { transform: "scale(1)" },
+              "50%": { transform: "scale(1.1)" },
+              "100%": { transform: "scale(1)" },
+            },
+          },
+        },
+      },
+    };
+  </script>
+
+
+  <!-- <link rel="stylesheet" href="/CSS/mainPageStyle.css" /> -->
+</head>
+
+<body class="h-full m-0 p-0 bg-bg-personalizado flex justify-center items-center overflow-x-hidden">
+  <div id="divGeneral"
+    class="relative w-[98vw] min-h-[96vh] flex flex-col my-[2vh] mx-auto bg-gray-100 p-2.5 box-border rounded">
+    <header
+      class="flex flex-wrap items-center sm:m-1 p-4 bg-hd-personalizado w-full box-border relative top-0 left-0 min-h-[6rem] rounded-t-lg">
+
+      <div class="logo flex items-center flex-grow mb-2 sm:mb-0">
+
+        <img src="../assets/LOGO_VECTORIZADOsvg.svg" alt="logo" class="h-12 mr-2" />
+        <h1 class="text-m font-bold">Med & Track</h1>
+      </div>
+
+
+      <nav class="navegacion flex ml-auto mb-2 sm:mb-3 sm:mt-5 order-3 mr-10 mt-2 sm:text-lg ">
+        <div class="flex space-x-4">
+          <a href="../HTML/contactUS.html" class="text-black font-medium hover:italic">Contáctenos</a>
+          <a href="https://www.utch.edu.mx" class="text-black font-medium hover:italic">Utch</a>
+        </div>
+      </nav>
+
+      <div class="acciones flex flex-wrap justify-center sm:justify-end w-full sm:w-auto order-2 sm:order-3">
+        <a href="/HTML/registro.html" class="w-full sm:w-auto mb-2 sm:mb-0">
+          <button id="registro"
+            class="w-full sm:w-auto relative inline-flex items-center justify-center px-6 py-2 overflow-hidden rounded-lg group bg-black text-white hover:text-white text-s mx-1 sm:mx-2 transition duration-300 ease-in-out transform hover:scale-105">
+            <span
+              class="absolute inset-0 w-full h-full transition-all duration-300 ease-out bg-gray-700 rounded-lg opacity-0 group-hover:opacity-100"></span>
+            <span class="relative transition-colors duration-200 ease-in-out z-10">
+              Registrese
+            </span>
+          </button>
+        </a>
+        <a href="/HTML/Login.html" class="w-full sm:w-auto">
+          <button id="Login"
+            class="w-full sm:w-auto relative inline-flex items-center justify-center px-6 py-2 overflow-hidden rounded-lg group bg-black text-white hover:text-white text-s mx-1 sm:mx-2 transition duration-300 ease-in-out transform hover:scale-105">
+            <span
+              class="absolute inset-0 w-full h-full transition-all duration-300 ease-out bg-gray-700 rounded-lg opacity-0 group-hover:opacity-100"></span>
+            <span class="relative transition-colors duration-200 ease-in-out z-10">
+              Inicie sesión
+            </span>
+          </button>
+        </a>
+      </div>
+    </header>
+    <section class="flex-1 flex flex-col md:flex-row justify-between items-center p-5 bg-white">
+      <div class="flex-1 flex flex-col justify-center items-start pr-5 mb-5 md:mb-0">
+        <p id="textoCarrusel" class="text-g font-normal mb-5 animation-fade"></p>
+
+        <div class="absolute bottom-5 left-5 flex gap-2.5">
+          <circle class="botonInferior w-3.5 h-3.5 rounded-full bg-gray-300 cursor-default"></circle>
+          <circle class="botonInferior w-3.5 h-3.5 rounded-full bg-gray-300 cursor-default"></circle>
+          <circle class="botonInferior w-3.5 h-3.5 rounded-full bg-gray-300 cursor-default"></circle>
+          <circle class="botonInferior w-3.5 h-3.5 rounded-full bg-gray-300 cursor-default"></circle>
+        </div>
+      </div>
+      <div class="flex-1 relative overflow-hidden h-[300px] w-full md:w-1/2">
+        <div class="relative h-full w-full">
+          <div
+            class="carrusel-item absolute top-0 left-0 w-full h-full flex justify-center items-center text-g bg-gray-200 transition-opacity duration-500 opacity-0 pointer-events-none bg-cover bg-center">
+          </div>
+          <div
+            class="carrusel-item absolute top-0 left-0 w-full h-full flex justify-center items-center text-g bg-gray-200 transition-opacity duration-500 opacity-0 pointer-events-none bg-cover bg-center">
+          </div>
+          <div
+            class="carrusel-item absolute top-0 left-0 w-full h-full flex justify-center items-center text-g bg-gray-200 transition-opacity duration-500 opacity-0 pointer-events-none bg-cover bg-center">
+          </div>
+          <div
+            class="carrusel-item absolute top-0 left-0 w-full h-full flex justify-center items-center text-g bg-gray-200 transition-opacity duration-500 opacity-0 pointer-events-none bg-cover bg-center">
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    
+
+  </div>
+</body>
+
+</html>

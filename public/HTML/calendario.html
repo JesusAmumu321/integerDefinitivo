@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es-ES" class="h-full w-full">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calendario - Med & Track</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="../CSS/calendario.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          backgroundColor: {
+            "bg-personalizado": "#b8d5db",
+            "hd-personalizado": "#d9d9d9",
+          },
+          fontSize: {
+            g: "clamp(1rem, 2vw, 2.25rem)",
+            m: "clamp(0.75rem, 1.5vw, 1.5rem)",
+            s: "clamp(0.50rem, 1vw, 1.2rem)",
+          },
+          fontFamily: {
+            roboto: ["Roboto", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        width: 100% !important;
+        min-height: auto !important;
+      }
+
+      .izquierda,
+      .derecha {
+        width: 100% !important;
+      }
+
+      .calendar-custom {
+        font-size: 0.8rem;
+      }
+
+      .dias {
+        grid-template-columns: repeat(7, 1fr);
+      }
+    }
+  </style>
+  <script src="../JS/calendario.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
+</head>
+
+<body class="min-h-full m-0 p-0 bg-bg-personalizado flex justify-center items-center overflow-x-hidden font-roboto">
+  <div id="divGeneral" class="w-[97vw] flex flex-col min-h-[97vh] my-2 mx-auto bg-gray-100 p-3.5 box-border rounded">
+
+    <header class="flex flex-wrap items-center p-4 bg-hd-personalizado rounded mb-4 min-h-[5rem]">
+      <div class="logo flex items-center mb-2 sm:mb-0">
+        <a class="flex flex-row items-start">
+          <img src="../assets/LOGO_VECTORIZADOsvg.svg" alt="logo" class="h-12 mr-1" />
+          <h1 class="text-2xl font-bold mt-2 ml-3">Med & Track</h1>
+        </a>
+      </div>
+
+      <nav class="navegacion flex ml-auto mb-2 sm:mb-0 order-3">
+        <div class="flex space-x-4">
+          <a href="../HTML/contactUS.html"
+            class="text-black font-medium text-base font-bold hover:italic">Contáctenos</a>
+          <a href="https://www.utch.edu.mx" class="text-black font-medium text-base font-bold hover:italic">Utch</a>
+        </div>
+      </nav>
+
+    </header>
+
+    <section class="flex-1 flex flex-col p-5 bg-white">
+
+      <div class="mb-4">
+        <div class="inline-flex bg-gray-100 rounded-lg overflow-hidden">
+          <a href="../HTML/agregarMed.html"
+            class="px-4 py-1.5 text-gray-600 text-m hover:bg-hd-personalizado hover:ease-in-out hover:duration-300 hover:z-10 hover:transition-colors hover:rounded">Agregar
+            Medicamento</a>
+          <a href="../HTML/tablaMed.html"
+            class="px-4 py-1.5 text-gray-600 text-m hover:bg-hd-personalizado hover:ease-in-out hover:duration-300 hover:z-10 hover:transition-colors hover:rounded">Sus
+            Medicamentos</a>
+          <a
+            class="bg-white border-solid border-2 rounded-lg font-semibold 1 border-bg-personalizado px-4 py-1.5 text-gray-600 text-m">Calendario</a>
+        </div>
+      </div>
+
+
+
+      <div class="flex flex-col items-center border-b-2 border-t-2 py-3 mb-4">
+        <h2 class="text-g font-bold mb-2">Consulte su calendario</h2>
+        <p class="text-s mb-2 text-center">
+          Consulte sus proximas tomas.
+        </p>
+      </div>
+
+      <div
+        class="relative w-full max-w-[1600px] min-h-[900px] mx-auto p-[5px] text-white flex rounded-[10px] bg-[#d9d9d9] container">
+        <div class="w-full lg:w-[90%] p-[20px] izquierda">
+          <div
+            class="relative w-full h-full flex flex-col flex-wrap justify-between text-[#878895] rounded-[5px] bg-white calendar-custom">
+            <div class="mes">
+              <i class="fa fa-angle-left prev"></i>
+              <div class="date"></div>
+              <i class="fa fa-angle-right next"></i>
+            </div>
+            <div class="diasSemana">
+              <div>Dom</div>
+              <div>Lun</div>
+              <div>Mar</div>
+              <div>Mie</div>
+              <div>Jue</div>
+              <div>Vie</div>
+              <div>Sab</div>
+            </div>
+            <div class="dias">
+              <!-- se anaden los dias con el js -->
+            </div>
+            <div class="goto-hoy">
+              <div class="goto">
+                <input type="text" placeholder="mm/aaaa" class="tiempo-input" />
+                <button class="goto-btn">Ir</button>
+              </div>
+              <button class="hoy-btn">Hoy</button>
+            </div>
+          </div>
+        </div>
+        <div class="derecha w-full lg:w-auto">
+          <div class="hoy-fecha">
+            <div class="evento-dia"></div>
+            <div class="evento-fecha"></div>
+          </div>
+          <div class="eventos">
+            <!-- we will add events through js -->
+          </div>
+          <div class="agregar-evento-contenedor">
+            <div class="agregar-encabezado-evento">
+              <div class="titulo">Agregar evento</div>
+              <i class="fas fa-times close"></i>
+            </div>
+            <div class="agregar-cuerpo-evento">
+              <div class="agregar-entrada-evento">
+                <input type="text" placeholder="Nombre del Evento" class="nombre-evento" />
+              </div>
+              <div class="agregar-entrada-evento">
+                <input type="text" placeholder="Hora de Inicio del Evento" class="inicio-evento" />
+              </div>
+              <div class="agregar-entrada-evento">
+                <input type="text" placeholder="Hora de Fin del Evento" class="fin-evento" />
+              </div>
+            </div>
+            <div class="agregar-pie-pag">
+              <button class="agregar-evento-btn">Agregar Evento</button>
+            </div>
+          </div>
+        </div>
+
+        <button class="borrar-eventos-btn absolute right-2 md:border-black" onclick="borrarEventosAutomaticos()">
+          <i>Borrar todos los eventos</i>
+        </button>
+
+      </div>
+    </section>
+  </div>
+</body>
+
+</html>
