@@ -71,9 +71,7 @@ function iniciarCalendario() {
       obtenerDiaActivo(i);
       actualizarEventos(i);
 
-      diasHtml += `<div class="dia siempre activo ${
-        evento ? "evento" : ""
-      }">${i}</div>`;
+      diasHtml += `<div class="dia siempre activo ${evento ? "evento" : ""}">${i}</div>`;
     } else {
       diasHtml += `<div class="dia ${evento ? "evento" : ""}">${i}</div>`;
     }
@@ -92,19 +90,19 @@ window.generarEventosAutomaticos = function generarEventosAutomaticos(
   intervaloHoras,
   fechaFin
 ) {
-  // Obtener la hora actual al momento de agregar el medicamento
   let fechaActual = new Date();
 
-  // Establecer fechaFin como un objeto Date si es una cadena
   if (typeof fechaFin === "string") {
     fechaFin = new Date(fechaFin);
   }
 
-  // Configurar la hora de fin del día de fechaFin
+  // Ajustar la fecha final para que incluya todo el día
   const fechaFinal = new Date(fechaFin);
   fechaFinal.setHours(23, 59, 59, 999);
 
-  // Generar eventos hasta la fecha de fin
+  console.log("Fecha inicial:", fechaActual);
+  console.log("Fecha final:", fechaFinal);
+
   while (fechaActual <= fechaFinal) {
     const eventoExistente = eventosArr.find(
       (evento) =>
@@ -131,15 +129,14 @@ window.generarEventosAutomaticos = function generarEventosAutomaticos(
       };
 
       eventosArr.push(evento);
+      console.log("Evento agregado:", evento);
     }
 
-    // Incrementar fechaActual por el intervalo de horas especificado
-    fechaActual = new Date(
-      fechaActual.getTime() + intervaloHoras * 60 * 60 * 1000
-    );
+    fechaActual = new Date(fechaActual.getTime() + intervaloHoras * 60 * 60 * 1000);
   }
 
-  // Guardar eventos e iniciar calendario
+  console.log("Eventos generados:", eventosArr);
+
   saveEvents();
   iniciarCalendario();
 };
@@ -151,7 +148,7 @@ function formatearHora(fecha) {
   horas = horas % 12;
   horas = horas ? horas : 12;
   minutos = minutos < 10 ? "0" + minutos : minutos;
-  return horas + ":" + minutos + " " + ampm;
+  return horas + ":" + minutos + ' ' + ampm;
 }
 
 function mesAnterior() {
@@ -193,19 +190,7 @@ function gotoDate() {
       return;
     }
   }
-  Swal.fire({
-    icon: "warning",
-    title: "Fecha Inválida.",
-    showConfirmButton: false,
-    timer: 1500,
-    /*
-    Estos tres de abajo sirven para que no se pueda hacer clic afuera de la alerta
-    para quitarla, al igual q en con el escape o con el enter y ya
-    */
-    allowOutsideClick: false,
-    allowEscapeKey: false,
-    allowEnterKey: false,
-  });
+  alert("fecha inválida");
 }
 
 function agregarEscuchador() {
@@ -248,8 +233,8 @@ function actualizarEventos(fecha) {
       año === eventoDia.año
     ) {
       eventoDia.eventos.forEach((evento) => {
-        eventos += `
-  <div class="evento">
+        eventos += 
+  `<div class="evento">
     <div class="titulo">
       <i class="fas fa-circle"></i>
       <h3 class="titulo-evento">${evento.titulo}</h3>
@@ -257,8 +242,7 @@ function actualizarEventos(fecha) {
     <div class="hora-evento">
       <span class="hora-evento">${evento.tiempo}</span>
     </div>
-  </div>
-`;
+  </div>`;
       });
     }
   });
@@ -294,4 +278,6 @@ function borrarEventosAutomaticos() {
   console.log("Todos los eventos automáticos han sido borrados");
 }
 
-iniciarCalendario();
+document.addEventListener('DOMContentLoaded', function() {
+  iniciarCalendario();
+});
