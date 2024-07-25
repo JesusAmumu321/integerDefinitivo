@@ -11,7 +11,7 @@ async function verificarSesion() {
   }
 }
 
-// Función para manejar el inicio de sesión
+// funcion para el inicio de sesión
 async function handleLogin(event) {
   event.preventDefault();
 
@@ -61,21 +61,21 @@ async function handleLogin(event) {
 }
 
 // Función para manejar la expiración de sesión
-function handleSessionExpiration(response) {
-  if (response.status === 401) {
-    return response.json().then((data) => {
-      if (data.redirigir) {
-        localStorage.setItem(
-          "returningUserMessage",
-          `Bienvenido de nuevo, ${data.usuario}`
-        );
-        window.location.href = data.redirigir;
-      }
-      throw new Error(data.mensaje);
-    });
-  }
-  return response;
-}
+// function handleSessionExpiration(response) {
+//   if (response.status === 401) {
+//     return response.json().then((data) => {
+//       if (data.redirigir) {
+//         localStorage.setItem(
+//           "returningUserMessage",
+//           `Bienvenido de nuevo, ${data.usuario}`
+//         );
+//         window.location.href = data.redirigir;
+//       }
+//       throw new Error(data.mensaje);
+//     });
+//   }
+//   return response;
+// }
 
 // Evento que se ejecuta cuando el DOM está completamente cargado
 document.addEventListener("DOMContentLoaded", () => {
