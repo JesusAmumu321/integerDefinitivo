@@ -62,4 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // muestra el primer item en verguisa
   mostrarItem(0);
+  
 });
+
+
+// PARA LOS DESPLEGABLES, https://www.creative-tim.com/twcomponents/component/responsive-tailwind-css-navbar
