@@ -12,6 +12,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script type="module" src="../JS/mainPageHeader.js"></script>
+  <script src="../JS/langs.js"></script>
+
+  <script src="../JS/calendario.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
 
 
   <script>
@@ -56,14 +61,11 @@
       }
     }
   </style>
-  <script src="../JS/calendario.js" defer></script>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
 </head>
 
 <body class="min-h-full m-0 p-0 bg-bg-personalizado flex justify-center items-center overflow-x-hidden font-roboto">
   <div id="divGeneral" class="w-[97vw] flex flex-col min-h-[97vh] my-2 mx-auto bg-gray-100 p-3.5 box-border rounded">
 
-    <script type="module" src="../JS/mainPageHeader.js"></script>
     <nav class="max-w-2xl p-2 w-full mx-auto mb-2 text-xl">
 
       <!-- ------------------------------------------------------- -->
@@ -95,51 +97,56 @@
 
           <ul class="flex-col md:flex-row flex md:space-x-8 mt-4 md:mt-0 md:font-medium">
 
-            <li>
+            <li class="py-2 md:py-0">
               <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
-                class="text-zinc-400 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 pl-3 pr-4 py-2 md:hover:text-gray-500 md:hover:italic hover:font-bold  md:p-0 font-medium flex items-center justify-between w-full md:w-auto">Idioma
+                class="text-zinc-400 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 pl-3 pr-4 py-2 md:hover:text-gray-500 md:hover:italic hover:font-bold md:p-0 font-medium flex items-center justify-between w-full md:w-auto">
+                <span data-section="headerMain" data-value="idioma">Idioma</span>
                 <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-
                   <path fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 111.414 1.414l-4 4a1 1 01-1.414 0l-4-4a1 1 010-1.414z"
                     clip-rule="evenodd"></path>
                 </svg>
               </button>
 
               <!-- Dropdown menu -->
               <div id="dropdownNavbar" class="hidden bg-white z-10 divide-y divide-gray-100 rounded shadow">
-                <ul class="py-1 flex flex-grow space-x-2" aria-labelledby="dropdownLargeButton">
-                  <li>
-                    <button
-                      class="text-sm hover:bg-gray-100 text-zinc-400 hover:text-gray-700 hover:italic hover:font-bold hover:rounded block px-4 py-2 ml-2"
-                      onclick="cambiarIdioma()">Español</button>
-                  </li>
 
-                  <li style="cursor: default;" class="py-1">
-                    |
-                  </li>
+                <div id="flags" class="flags py-1 flex flex-wrap" aria-labelledby="dropdownLargeButton">
 
-                  <li>
+                  <div class="flags__item" data-language="es">
+                    <!-- <li> -->
                     <button
-                      class="text-sm hover:bg-gray-100 text-zinc-400 hover:text-gray-700 hover:italic hover:font-bold hover:rounded block px-4 py-2 mr-2"
-                      onclick="cambiarIdioma()">English</button>
-                  </li>
-              </div>
+                      class="langs translate text-sm hover:bg-gray-100 text-zinc-400 hover:text-gray-700 hover:italic hover:font-bold hover:rounded block px-4 py-2 ml-2">Español</button>
+                    <!-- </li> -->
+                  </div>
+
+                  <div class="flags__item" data-language="en">
+                    <!-- <li style="cursor: default;" class="py-1">|</li> -->
+                    <!-- <li> -->
+                    <button
+                      class="langs translate text-sm hover:bg-gray-100 text-zinc-400 hover:text-gray-700 hover:italic hover:font-bold hover:rounded block px-4 py-2 mr-2">English</button>
+                    <!-- </li> -->
+                  </div>
+
+                </div>
+              </div> <!-- DIV dropdownNavbar-->
             </li>
-            <div class="flex md:space-x-5">
 
-              <li>
-                <a href="../HTML/contactUS.html"
-                  class="text-zinc-400 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 pl-3 pr-4 py-2 md:hover:text-gray-500 md:hover:italic hover:font-bold  md:p-0 font-medium ">
-                  Contactenos </a>
-              </li>
+            <li class="py-2 md:py-0">
+              <a href="../HTML/contactUS.html" data-translate-key="headerMain.contactUs"
+                class="text-zinc-400 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-gray-500 md:hover:italic hover:font-bold md:p-0 font-medium"
+                data-section="headerMain" data-value="contactenos">
+                Contáctenos
+              </a>
+            </li>
 
-              <li>
-                <a href="https://www.utch.edu.mx"
-                  class="text-zinc-400 hover:bg-gray-50 hover:rounded border-b border-gray-100 md:hover:bg-transparent md:border-0 pl-3 pr-4 py-2 md:hover:text-gray-500 md:hover:italic hover:font-bold md:p-0 font-medium ">Utch</a>
-              </li>
+            <li class="py-2 md:py-0">
+              <a href="https://www.utch.edu.mx" data-translate-key="headerMain.utch"
+                class="text-zinc-400 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-gray-500 md:hover:italic hover:font-bold md:p-0 font-medium">
+                Utch
+              </a>
+            </li>
 
-            </div>
           </ul>
         </div>
       </div>
@@ -149,13 +156,13 @@
 
       <div class="mb-4">
         <div class="inline-flex bg-gray-100 rounded-lg overflow-hidden">
-          <a href="../HTML/agregarMed.html"
+          <a href="../HTML/agregarMed.html" data-section="textosNavPaginas" data-value="agregarMedicamento"
             class="px-4 py-1.5 text-gray-600 text-m hover:bg-hd-personalizado hover:ease-in-out hover:duration-300 hover:z-10 hover:transition-colors hover:rounded">Agregar
             Medicamento</a>
-          <a href="../HTML/tablaMed.html"
+          <a href="../HTML/tablaMed.html" data-section="textosNavPaginas" data-value="susMedicamentos"
             class="px-4 py-1.5 text-gray-600 text-m hover:bg-hd-personalizado hover:ease-in-out hover:duration-300 hover:z-10 hover:transition-colors hover:rounded">Sus
             Medicamentos</a>
-          <a
+          <a data-section="textosNavPaginas" data-value="calendario"
             class="bg-white border-solid border-2 rounded-lg font-semibold 1 border-bg-personalizado px-4 py-1.5 text-gray-600 text-m">Calendario</a>
         </div>
       </div>
@@ -163,8 +170,9 @@
 
 
       <div class="flex flex-col items-center border-b-2 border-t-2 py-3 mb-4">
-        <h2 class="text-g font-bold mb-2">Consulte su calendario</h2>
-        <p class="text-s mb-2 text-center">
+        <h2 data-section="seccionConsulteCalendario" data-value="h2" class="text-g font-bold mb-2">Consulte su
+          calendario</h2>
+        <p data-section="seccionConsulteCalendario" data-value="p" class="text-s mb-2 text-center">
           Consulte sus proximas tomas.
         </p>
       </div>
@@ -176,17 +184,17 @@
             class="relative w-full h-full flex flex-col flex-wrap justify-between text-[#878895] rounded-[5px] bg-white calendar-custom">
             <div class="mes">
               <i class="fa fa-angle-left prev"></i>
-              <div class="date"></div>
+              <div class="date" data-section="divCalendario" data-value="meses"></div>
               <i class="fa fa-angle-right next"></i>
             </div>
             <div class="diasSemana">
-              <div>Dom</div>
-              <div>Lun</div>
-              <div>Mar</div>
-              <div>Mie</div>
-              <div>Jue</div>
-              <div>Vie</div>
-              <div>Sab</div>
+              <div data-value="0">Lun</div>
+              <div data-value="1">Mar</div>
+              <div data-value="2">Mié</div>
+              <div data-value="3">Jue</div>
+              <div data-value="4">Vie</div>
+              <div data-value="5">Sáb</div>
+              <div data-value="6">Dom</div>
             </div>
             <div class="dias">
               <!-- se anaden los dias con el js -->
@@ -194,9 +202,9 @@
             <div class="goto-hoy">
               <div class="goto">
                 <input type="text" placeholder="mm/aaaa" class="tiempo-input" />
-                <button class="goto-btn">Ir</button>
+                <button data-section="divCalendario" data-value="irCalendario" class="goto-btn">Ir</button>
               </div>
-              <button class="hoy-btn">Hoy</button>
+              <button data-section="divCalendario" data-value="botonHoy" class="hoy-btn">Hoy</button>
             </div>
           </div>
         </div>
@@ -206,8 +214,9 @@
             <div class="evento-fecha"></div>
           </div>
           <div class="eventos">
-            <!-- we will add events through js -->
+
           </div>
+          
           <div class="agregar-evento-contenedor">
             <div class="agregar-encabezado-evento">
               <div class="titulo">Agregar evento</div>
@@ -231,7 +240,7 @@
         </div>
 
         <button class="borrar-eventos-btn absolute right-2 md:border-black" onclick="borrarEventosAutomaticos()">
-          <i>Borrar todos los eventos</i>
+          <i data-section="divCalendario" data-value="botonBorrarEventosCa">Borrar todos los eventos</i>
         </button>
 
       </div>

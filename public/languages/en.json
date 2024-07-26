@@ -1,30 +1,44 @@
 {
   "headerMain": {
-    "contactenos": "Contact us",
+    "idioma": "Language",
+    "contactenos": "Contact Us",
     "utch": "Utch",
-    "registrese": "Sign Up",
+    "registrese": "Register",
     "inicieSesion": "Log In"
   },
 
-  "textoCarruselMain": {
-    "primero": "Get better monitoring of your medications.",
-    "segundo": "Add the medications you want.",
-    "tercero": "Get a schedule for your medication.",
-    "cuarto": "Download your schedule at any time."
+  "carrusel": {
+    "textos": [
+      "Get better monitoring of your medications.",
+      "Add the medications you want.",
+      "Get a schedule for your medication.",
+      "Download your schedule at any time."
+    ],
+    "gifs": [
+      "url_del_gif_1.gif",
+      "url_del_gif_2.gif",
+      "url_del_gif_3.gif",
+      "url_del_gif_4.gif"
+    ]
   },
 
   "registroPagina": {
     "ladoDerecho": "Your health companion",
 
     "registro": "Sign Up",
-    "yaTieneCuenta": "Already have an account? Log in",
-    "labelNombreUsuario": "Username",
+    "yaTieneCuenta": "Already have an account? ",
+    "inicieSesion": "Log in",
+
+    "labelNombreUsuario": "Username: ",
     "inputNombreUsuario": "Please enter your username.",
-    "labelCorreo": "Email address",
+
+    "labelCorreo": "Email address: ",
     "inputCorreo": "Please enter your email address.",
-    "labelContrasena": "Create your password",
+
+    "labelContrasena": "Create your password: ",
     "inputContrasena": "At least 8 characters.",
-    "labelContrasenaConfirmada": "Confirm your password",
+
+    "labelContrasenaConfirmada": "Confirm your password: ",
     "inputContrasenaConfirmada": "Passwords must match.",
 
     "botonRegistro": "Sign Up"
@@ -43,11 +57,15 @@
     "ladoDerecho": "Your health companion",
 
     "bienvenido": "Welcome back!",
-    "noTieneCuenta": "Don't have an account? Sign up here",
-    "labelCorreo": "Email address",
+    "noTieneCuenta": "Don't have an account? ",
+    "registreseAqui": "Sign up here",
+
+    "labelCorreo": "Email address: ",
     "inputCorreo": "Please enter your email address.",
-    "labelContrasena": "Password",
+
+    "labelContrasena": "Password: ",
     "inputContrasena": "Please enter your password.",
+
     "botonInicioSesion": "Log In"
   },
 
@@ -57,11 +75,6 @@
     "textoAlertaElseResponseOk": "",
     "alertaCatchInicioSesion": "Login error. Please try again.",
     "textoAlertaCatchInicioSesion": ""
-  },
-
-  "headerPaginasConSesionIniciada": {
-    "contactenos": "Contact us",
-    "utch": "Utch"
   },
 
   "textosNavPaginas": {
@@ -98,7 +111,9 @@
 
     "labelCaducidadMedicamento": "Medication expiration date:",
 
-    "labelFechaFinalizacion": "Medication end date:"
+    "labelFechaFinalizacion": "Medication end date:",
+
+    "botonAgregar": "Add medication"
   },
 
   "seccionVisualiceSusMedicamentos": {
@@ -144,17 +159,8 @@
       "6": "Saturday",
       "7": "Sunday"
     },
-    "diasSemanaAbreviado": {
-      "1": "Mon",
-      "2": "Tue",
-      "3": "Wed",
-      "4": "Thu",
-      "5": "Fri",
-      "6": "Sat",
-      "7": "Sun"
-    },
 
-    "irCalendario": "Go to Calendar",
+    "irCalendario": "Go to date",
 
     "sinEventos": "No events",
 
@@ -168,21 +174,21 @@
 
     "contactenosHeader": "Contact us",
 
-    "labelNombreUsuario": "Username",
+    "labelNombreUsuario": "Username: ",
     "inputNombreUsuario": "Please enter your username.",
 
-    "labelCorreo": "Email address",
+    "labelCorreo": "Email address: ",
     "inputCorreo": "Please enter your email address.",
 
-    "razonContactoLabel": "Reason for contact:",
+    "razonContactoLabel": "Reason for contact: ",
     "input1Contacto": "Suggestion",
     "input2Contacto": "Question",
     "input3Contacto": "Clarification",
 
-    "labelDetallesContactenos": "Details",
+    "labelDetallesContactenos": "Contact details: ",
     "placeHolderDetallesContactenos": "Enter the details of your contact here.",
 
-    "labelComoNosUbico": "How did you find us?",
+    "labelComoNosUbico": "How did you find us? ",
     "input1ComoNosUbico": "Select",
     "input2ComoNosUbico": "Hospital recommendation",
     "input3ComoNosUbico": "Advertising",

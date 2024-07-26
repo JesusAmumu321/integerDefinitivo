@@ -1,30 +1,44 @@
 {
   "headerMain": {
+    "idioma": "Idioma",
     "contactenos": "Contáctenos",
     "utch": "Utch",
     "registrese": "Registrese",
     "inicieSesion": "Inicie Sesión"
   },
 
-  "textoCarruselMain": {
-    "primero": "Obtenga un mejor monitoreo de sus medicamentos.",
-    "segundo": "Agregue los medicamentos que desee.",
-    "tercero": "Obtenga un calendario para su medicación.",
-    "cuarto": "Descargue su calendario en cualquier momento."
+  "carrusel": {
+    "textos": [
+      "Obtenga un mejor monitoreo de sus medicamentos.",
+      "Agregue los medicamentos que desee.",
+      "Obtenga un calendario para su medicación.",
+      "Descargue su calendario en cualquier momento."
+    ],
+    "gifs": [
+      "url_del_gif_1.gif",
+      "url_del_gif_2.gif",
+      "url_del_gif_3.gif",
+      "url_del_gif_4.gif"
+    ]
   },
 
   "registroPagina": {
     "ladoDerecho": "Su compañero de salud",
 
     "registro": "Registro",
-    "yaTieneCuenta": "¿Ya tiene una cuenta? Inicie sesión",
-    "labelNombreUsuario": "Nombre de usuario",
+    "yaTieneCuenta": "¿Ya tiene una cuenta? ",
+    "inicieSesion": "Inicie sesión",
+
+    "labelNombreUsuario": "Nombre de usuario: ",
     "inputNombreUsuario": "Por favor, ingrese su nombre de usuario.",
-    "labelCorreo": "Dirección de correo electrónico",
+
+    "labelCorreo": "Dirección de correo electrónico: ",
     "inputCorreo": "Introduzca su dirección de correo electrónico.",
-    "labelContrasena": "Cree su contraseña",
+
+    "labelContrasena": "Cree su contraseña: ",
     "inputContrasena": "Mínimo 8 caracteres.",
-    "labelContrasenaConfirmada": "Confirme su contraseña",
+
+    "labelContrasenaConfirmada": "Confirme su contraseña: ",
     "inputContrasenaConfirmada": "Las contraseñas deben de coincidir.",
 
     "botonRegistro": "Regístrese"
@@ -43,24 +57,24 @@
     "ladoDerecho": "Su compañero de salud",
 
     "bienvenido": "¡Bienvenido de nuevo!",
-    "noTieneCuenta": "¿No tiene una cuenta? Regístrese aquí",
-    "labelCorreo": "Dirección de correo electrónico",
+    "noTieneCuenta": "¿No tiene una cuenta? ",
+    "registreseAqui": "Regístrese aquí",
+
+    "labelCorreo": "Dirección de correo electrónico: ",
     "inputCorreo": "Ingrese su dirección de correo electrónico.",
-    "labelContrasena": "Contraseña",
+
+    "labelContrasena": "Contraseña: ",
     "inputContrasena": "Ingrese su contraseña.",
+
     "botonInicioSesion": "Inicie sesión"
   },
+
   "alertasInicioSesion": {
     "alertaInicioExitoso": "Inicio de sesión exitoso, redirigiendo...",
     "alertaElseResponseOk": "Error al inicio de sesión",
     "textoAlertaElseResponseOk": "",
     "alertaCatchInicioSesion": "Error al inicio de sesión. Por favor, intente nuevamente.",
     "textoAlertaCatchInicioSesion": ""
-  },
-
-  "headerPaginasConSesionIniciada": {
-    "contactenos": "Contáctenos",
-    "utch": "Utch"
   },
 
   "textosNavPaginas": {
@@ -75,29 +89,32 @@
   },
 
   "formularioAnadirMedicamento": {
-    "labelPresentacionMedicamento": "Presentación del medicamento:",
+    "labelPresentacionMedicamento": "Presentación del medicamento: ",
     "input1PresentacionMed": "Seleccione",
     "input2PresentacionMed": "Pastillas",
     "input3PresentacionMed": "Líquido",
 
-    "labelFrecuenciaDosis": "Frecuencia de la dosis: (en horas)",
+    "labelFrecuenciaDosis": "Frecuencia de la dosis: (en horas) ",
     "placeHolderFrecuenciaDosis": "Ej. 8.",
 
-    "labelNombreMedicamento": "Nombre del medicamento o suplemento:",
+    "labelNombreMedicamento": "Nombre del medicamento o suplemento: ",
     "placeHolderNombreMedicamento": "Ej. Paracetamol.",
 
-    "labelCantidadPastillas": "Cantidad de pastillas por dosis:",
+    "labelCantidadPastillas": "Cantidad de pastillas por dosis :",
     "placeHolderCantidadPastillas": "Ej. 2",
 
-    "labelCantidadUnidadesCaja": "Cantidad de unidades por caja:",
+    "labelCantidadUnidadesCaja": "Cantidad de unidades por caja: ",
     "placeHolderCantidadUnidadesCaja": "Ej. 10",
 
-    "labelCantidadCajasDisponibles": "Cantidad de cajas disponibles:",
+    "labelCantidadCajasDisponibles": "Cantidad de cajas disponibles: ",
     "placeHolderCantidadCajasDisponibles": "Ej. 3",
 
-    "labelCaducidadMedicamento": "Fecha de caducidad del medicamento:",
+    "labelCaducidadMedicamento": "Fecha de caducidad del medicamento: ",
 
-    "labelFechaFinalizacion": "Fecha de finalización del medicamento:"
+    "labelFechaFinalizacion": "Fecha de finalización del medicamento: ",
+
+    "botonAgregar": "Agregar"
+
   },
 
   "seccionVisualiceSusMedicamentos": {
@@ -143,15 +160,7 @@
       "6": "Sábado",
       "7": "Domingo"
     },
-    "diasSemanaAbreviado": {
-      "1": "Lun",
-      "2": "Mar",
-      "3": "Mié",
-      "4": "Jue",
-      "5": "Vie",
-      "6": "Sáb",
-      "7": "Dom"
-    },
+   
 
     "irCalendario": "Ir",
 
@@ -161,26 +170,28 @@
 
     "botonBorrarEventosCa": "Borrar todos los eventos"
   },
+
   "contactenosForm": {
     "ladoDerecho": "Su compañero de salud",
 
     "contactenosHeader": "Contáctenos",
+    "contactenosParrafo": "Todos los campos son obligatorios",
 
-    "labelNombreUsuario": "Nombre de usuario",
+    "labelNombreUsuario": "Usuario: ",
     "inputNombreUsuario": "Ingrese su usuario.",
 
-    "labelCorreo": "Dirección de correo electrónico",
+    "labelCorreo": "Dirección de correo electrónico: ",
     "inputCorreo": "Ingrese su dirección de correo electrónico.",
 
-    "razonContactoLabel": "Razón del contacto:",
+    "razonContactoLabel": "Razón del contacto: ",
     "input1Contacto": "Sugerencia",
     "input2Contacto": "Duda",
     "input3Contacto": "Aclaración",
 
-    "labelDetallesContactenos": "Detalles",
+    "labelDetallesContactenos": "Detalles del contacto: ",
     "placeHolderDetallesContactenos": "Escriba aquí los detalles de su contacto.",
 
-    "labelComoNosUbico": "¿Cómo nos ubicó?",
+    "labelComoNosUbico": "¿Cómo nos ubicó? ",
     "input1ComoNosUbico": "Seleccione",
     "input2ComoNosUbico": "Recomendación del Hospital",
     "input3ComoNosUbico": "Publicidad",

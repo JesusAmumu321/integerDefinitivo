@@ -132,14 +132,11 @@ window.generarEventosAutomaticos = function generarEventosAutomaticos(
 
       eventosArr.push(evento);
     }
-
-    // Incrementar fechaActual por el intervalo de horas especificado
     fechaActual = new Date(
       fechaActual.getTime() + intervaloHoras * 60 * 60 * 1000
     );
   }
 
-  // Guardar eventos e iniciar calendario
   saveEvents();
   iniciarCalendario();
 };
@@ -249,22 +246,23 @@ function actualizarEventos(fecha) {
     ) {
       eventoDia.eventos.forEach((evento) => {
         eventos += `
-  <div class="evento">
-    <div class="titulo">
-      <i class="fas fa-circle"></i>
-      <h3 class="titulo-evento">${evento.titulo}</h3>
-    </div>
-    <div class="hora-evento">
-      <span class="hora-evento">${evento.tiempo}</span>
-    </div>
-  </div>
-`;
+      <div class="evento">
+        <div class="titulo">
+          <i class="fas fa-circle"></i>
+          <h3 class="titulo-evento">${evento.titulo}</h3>
+        </div>
+        <div class="hora-evento">
+          <span class="hora-evento">${evento.tiempo}</span>
+        </div>
+      </div>
+          ` ;
       });
     }
   });
 
   if (eventos === "") {
-    eventos = '<div class="no-evento"><h3>Sin eventos</h3></div>';
+    eventos =
+      '<div class="no-evento"><h3 >Sin eventos</h3></div>';
   }
   eventosContenedor.innerHTML = eventos;
   saveEvents();
