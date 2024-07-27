@@ -102,7 +102,7 @@
   },
 
   "formularioAnadirMedicamento": {
-    "labelPresentacionMedicamento": "Medication form:",
+    "labelPresentacionMedicamento": "Medication form: ",
     "input1PresentacionMed": "Select",
     "input2PresentacionMed": "Pills",
     "input3PresentacionMed": "Liquid",
@@ -110,28 +110,28 @@
     "labelFrecuenciaDosis": "Dose frequency: (in hours)",
     "placeHolderFrecuenciaDosis": "Example: 8.",
 
-    "labelNombreMedicamento": "Medication or supplement name:",
+    "labelNombreMedicamento": "Medication or supplement name: ",
     "placeHolderNombreMedicamento": "Example: Paracetamol.",
 
-    "labelCantidadPastillas": "Number of pills per dose:",
+    "labelCantidadPastillas": "Number of pills per dose: ",
     "placeHolderCantidadPastillas": "Example: 2",
 
-    "labelCantidadUnidadesCaja": "Number of units per box:",
+    "labelCantidadUnidadesCaja": "Number of units per box: ",
     "placeHolderCantidadUnidadesCaja": "Example: 10",
 
-    "labelCantidadCajasDisponibles": "Number of available boxes:",
+    "labelCantidadCajasDisponibles": "Number of available boxes: ",
     "placeHolderCantidadCajasDisponibles": "Example: 3",
 
-    "labelCaducidadMedicamento": "Medication expiration date:",
+    "labelCaducidadMedicamento": "Medication expiration date: ",
 
     "labelFechaFinalizacion": "Medication end date:",
 
+    "frecuenciaDosis": "Dose frequency: ",
     "cada8Hrs": "Every 8 hours",
     "cada6Hrs": "Every 6 hours",
     "cada10Hrs": "Every 10 hours",
     "cada12Hrs": "Every 12 hours",
     "cada24Hrs": "Every 24 Hours",
-
 
     "botonAgregar": "Add medication"
   },

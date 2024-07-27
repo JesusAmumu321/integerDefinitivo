@@ -113,7 +113,7 @@
     "labelNombreMedicamento": "Nombre del medicamento o suplemento: ",
     "placeHolderNombreMedicamento": "Ej. Paracetamol.",
 
-    "labelCantidadPastillas": "Cantidad de pastillas por dosis :",
+    "labelCantidadPastillas": "Cantidad de pastillas por dosis: ",
     "placeHolderCantidadPastillas": "Ej. 2",
 
     "labelCantidadUnidadesCaja": "Cantidad de unidades por caja: ",
@@ -126,7 +126,7 @@
 
     "labelFechaFinalizacion": "Fecha de finalización del medicamento: ",
 
-    
+    "frecuenciaDosis": "Frecuencia de la dosis: ",
     "cada8Hrs": "Cada 8 horas",
     "cada6Hrs": "Cada 6 horas",
     "cada10Hrs": "Cada 10 horas",
