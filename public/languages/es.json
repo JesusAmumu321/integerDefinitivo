@@ -53,6 +53,12 @@
     "textoAlertaErrorAlRegistrarse": "Por favor, intente nuevamente."
   },
 
+  "mensajesErrorRegistro": {
+    "contrasenaDistinta": "Las dos contraseñas deben de coincidir.",
+    "errorServidor": "Error en el servidor. Por favor, intente más tarde.",
+    "camposVacios": "Por favor, complete todos los campos."
+  },
+
   "inicioSesionPagina": {
     "ladoDerecho": "Su compañero de salud",
 
@@ -75,6 +81,13 @@
     "textoAlertaElseResponseOk": "",
     "alertaCatchInicioSesion": "Error al inicio de sesión. Por favor, intente nuevamente.",
     "textoAlertaCatchInicioSesion": ""
+  },
+
+  "mensajesErrorLogin": {
+    "usuarioNoEncontrado": "Usuario no encontrado",
+    "contrasenaIncorrecta": "Contraseña incorrecta",
+    "errorServidor": "Error en el servidor. Por favor, intente más tarde.",
+    "camposVacios": "Por favor, complete todos los campos."
   },
 
   "textosNavPaginas": {

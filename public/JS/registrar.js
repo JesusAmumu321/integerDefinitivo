@@ -1,11 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Agregar el event listener al formulario de registro
   const form = document.getElementById("registroForm");
   if (form) {
     form.addEventListener("submit", handleRegistro);
+  } else {
+    console.error("No se encontró el formulario de registro");
   }
 });
 
-async function handleRegistro(event) {
+export async function handleRegistro(event) {
   event.preventDefault();
 
   const usuario = document.getElementById("usuario").value;
@@ -15,10 +18,23 @@ async function handleRegistro(event) {
     "contrasena_confirmada"
   ).value;
 
+  if (!usuario || !correo || !contrasena || !confirmarContrasena) {
+    Swal.fire({
+      icon: "warning",
+      title:
+        window.translations.errorMessagesRegistro.camposVacios ||
+        "Por favor, complete todos los campos.",
+      allowOutsideClick: false,
+    });
+    return;
+  }
+
   if (contrasena !== confirmarContrasena) {
     Swal.fire({
       icon: "warning",
-      title: "Las contraseñas no coinciden. Por favor, intente nuevamente.",
+      title:
+        window.translations.registroTexts.alertaContraseñaDistinta ||
+        "Las contraseñas no coinciden. Por favor, intente nuevamente.",
       allowOutsideClick: false,
     });
     return;
@@ -37,14 +53,21 @@ async function handleRegistro(event) {
     const checkEmailData = await responseEmail.json();
 
     if (!responseEmail.ok) {
-      throw new Error(checkEmailData.mensaje || "Error al verificar el correo");
+      throw new Error(
+        checkEmailData.mensaje ||
+          window.translations.errorMessagesRegistro.errorServidor
+      );
     }
 
     if (checkEmailData.existe) {
       Swal.fire({
         icon: "error",
-        title: "El correo ya está registrado",
-        text: "Por favor, utilice otro correo electrónico.",
+        title:
+          window.translations.registroTexts.alertaTituloCorreoRegistrado ||
+          "El correo ya está registrado",
+        text:
+          window.translations.registroTexts.textAlertaTituloCorreoRegistrado ||
+          "Por favor, utilice otro correo electrónico.",
         allowOutsideClick: false,
       });
       return;
@@ -64,7 +87,9 @@ async function handleRegistro(event) {
     if (responseRegistro.ok) {
       Swal.fire({
         icon: "success",
-        title: "Registro exitoso, redirigiendo...",
+        title:
+          window.translations.registroTexts.alertaRegistroExitoso ||
+          "Registro exitoso, redirigiendo...",
         showConfirmButton: false,
         timer: 1500,
         allowOutsideClick: false,
@@ -74,14 +99,22 @@ async function handleRegistro(event) {
         window.location.href = "../HTML/login.html";
       });
     } else {
-      throw new Error(dataRegistro.mensaje || "Error al registrarse");
+      throw new Error(
+        dataRegistro.mensaje ||
+          window.translations.errorMessagesRegistro.errorServidor
+      );
     }
   } catch (error) {
     console.error("Error durante el proceso de registro:", error);
     Swal.fire({
       icon: "error",
-      title: "Error al registrarse",
-      text: error.message || "Por favor, intente nuevamente.",
+      title:
+        window.translations.registroTexts.alertaErrorAlRegistrarse ||
+        "Error al registrarse",
+      text:
+        error.message ||
+        window.translations.registroTexts.textoAlertaErrorAlRegistrarse ||
+        "Por favor, intente nuevamente.",
       allowOutsideClick: false,
     });
   }

@@ -53,6 +53,12 @@
     "textoAlertaErrorAlRegistrarse": "Please try again."
   },
 
+  "mensajesErrorRegistro": {
+    "contrasenaDistinta": "The password must be the same.",
+    "errorServidor": "Server error, try again later.",
+    "camposVacios": "Please, fill all the camps."
+  },
+
   "inicioSesionPagina": {
     "ladoDerecho": "Your health companion",
 
@@ -74,7 +80,14 @@
     "alertaElseResponseOk": "Login error",
     "textoAlertaElseResponseOk": "",
     "alertaCatchInicioSesion": "Login error. Please try again.",
-    "textoAlertaCatchInicioSesion": ""
+    "textoAlertaCatchInicioSesion": "Plae"
+  },
+
+  "mensajesErrorLogin": {
+    "usuarioNoEncontrado": "User not found.",
+    "contrasenaIncorrecta": "Password wrong.",
+    "errorServidor": "Server error, try again later.",
+    "camposVacios": "Please, fill all the camps."
   },
 
   "textosNavPaginas": {
