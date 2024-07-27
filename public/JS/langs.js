@@ -8,6 +8,17 @@ document.addEventListener("DOMContentLoaded", () => {
   let indexActual = 0;
   let textos = [];
   let gifs = [];
+  let alertTexts = {};
+  let errorMessages = {};
+  let registroTexts = {};
+  let loginTexts = {};
+
+  window.translations = {
+    alertTexts: {},
+    errorMessages: {},
+    registroTexts: {},
+    errorMessagesRegistro: {},
+  };
 
   const changeLanguage = async (language) => {
     try {
@@ -16,6 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // actualiza los textos y botones
       const textsToChange = document.querySelectorAll("[data-section]");
+      // y este es 1a las alertas
+      window.translations.alertTexts = texts.alertasInicioSesion;
+      window.translations.errorMessages = texts.mensajesErrorLogin;
+      window.translations.registroTexts = texts.alertasRegistro;
+      window.translations.errorMessagesRegistro = texts.mensajesErrorRegistro;
 
       textsToChange.forEach((textToChange) => {
         const section = textToChange.dataset.section;
@@ -176,8 +192,4 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // esto es para el calendaroi
-
-
-
-
 });

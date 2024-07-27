@@ -1,15 +1,15 @@
-// Función para verificar la sesión
-async function verificarSesion() {
-  try {
-    const response = await fetch("/api/verificar-sesion");
-    const data = await response.json();
-    if (data.autenticado) {
-      window.location.href = "../HTML/agregarMed.html"; // Redirigir si la sesión es válida
-    }
-  } catch (error) {
-    console.error("Error al verificar la sesión:", error);
-  }
-}
+// // Función para verificar la sesión
+// async function verificarSesion() {
+//   try {
+//     const response = await fetch("/api/verificar-sesion");
+//     const data = await response.json();
+//     if (data.autenticado) {
+//       window.location.href = "../HTML/agregarMed.html"; // Redirigir si la sesión es válida
+//     }
+//   } catch (error) {
+//     console.error("Error al verificar la sesión:", error);
+//   }
+// }
 
 // funcion para el inicio de sesión
 async function handleLogin(event) {
@@ -17,6 +17,17 @@ async function handleLogin(event) {
 
   const correo = document.getElementById("correo").value;
   const contrasena = document.getElementById("contrasena").value;
+
+  if (!correo || !contrasena) {
+    Swal.fire({
+      icon: "warning",
+      title:
+        window.translations.errorMessages.camposVacios ||
+        "Por favor, complete todos los campos.",
+      allowOutsideClick: false,
+    });
+    return;
+  }
 
   try {
     const response = await fetch("/api/iniciar", {
@@ -32,7 +43,9 @@ async function handleLogin(event) {
     if (response.ok) {
       Swal.fire({
         icon: "success",
-        title: "Inicio de sesión exitoso, redirigiendo...",
+        title:
+          window.translations.alertTexts.alertaInicioExitoso ||
+          "Inicio de sesión exitoso, redirigiendo...",
         showConfirmButton: false,
         timer: 1500,
         allowOutsideClick: false,
@@ -42,10 +55,26 @@ async function handleLogin(event) {
         window.location.href = "../HTML/agregarMed.html";
       });
     } else {
+      let errorMessage =
+        window.translations.errorMessages.errorServidor ||
+        "Error en el servidor. Por favor, intente más tarde.";
+
+      if (data.mensaje === "Usuario no encontrado") {
+        errorMessage =
+          window.translations.errorMessages.usuarioNoEncontrado ||
+          "Usuario no encontrado";
+      } else if (data.mensaje === "Contraseña incorrecta") {
+        errorMessage =
+          window.translations.errorMessages.contrasenaIncorrecta ||
+          "Contraseña incorrecta";
+      }
+
       Swal.fire({
         icon: "error",
-        title: "Error al inicio de sesión",
-        text: data.mensaje,
+        title:
+          window.translations.alertTexts.alertaElseResponseOk ||
+          "Error al iniciar sesión",
+        text: errorMessage,
         allowOutsideClick: false,
       });
     }
@@ -53,8 +82,12 @@ async function handleLogin(event) {
     console.error("Error durante el proceso de inicio de sesión.", error);
     Swal.fire({
       icon: "error",
-      title: "Error al inicio de sesión. Por favor, intente nuevamente.",
-      text: error.message,
+      title:
+        window.translations.alertTexts.alertaCatchInicioSesion ||
+        "Error al iniciar sesión. Por favor, intente nuevamente.",
+      text:
+        window.translations.errorMessages.errorServidor ||
+        "Error en el servidor. Por favor, intente más tarde.",
       allowOutsideClick: false,
     });
   }
@@ -91,9 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("returningUserMessage");
   }
 
-  // Verificar sesión
-  verificarSesion();
-
+  
   // Agregar event listener al formulario de login
   const form = document.getElementById("loginForm");
   if (form) {
