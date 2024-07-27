@@ -207,3 +207,42 @@ app.get("/api/calendario", (req, res) => {
     }
   });
 });
+
+
+app.post("/api/agregar-contacto", async (req, res) => {
+  const { usuario, correo, razon_contacto, detalles, como_nos_ubico } = req.body;
+
+  // Verificar campos obligatorios
+  if (!usuario || !correo || !razon_contacto || !detalles || !como_nos_ubico) {
+    return res.status(400).json({ success: false, message: "Faltan campos obligatorios" });
+  }
+
+  try {
+    const db = await connect();
+    
+    // Primero, intentamos obtener el id_usuario basado en el correo
+    const [userRows] = await db.execute("SELECT id_usuario FROM usuarios WHERE correo = ?", [correo]);
+    
+    let id_usuario = null;
+    if (userRows.length > 0) {
+      id_usuario = userRows[0].id_usuario;
+    }
+
+    // Insertamos el contacto
+    const [result] = await db.execute(
+      "INSERT INTO contactos (id_usuario, correo, razon_contacto, detalles, como_nos_ubico) VALUES (?, ?, ?, ?, ?)",
+      [id_usuario, correo, razon_contacto, detalles, como_nos_ubico]
+    );
+
+    await db.end();
+
+    res.status(200).json({ success: true, message: "Contacto registrado con éxito" });
+  } catch (error) {
+    console.error("Error al insertar contacto:", error);
+    res.status(500).json({
+      success: false,
+      message: "Error al registrar contacto",
+      error: error.message,
+    });
+  }
+});
