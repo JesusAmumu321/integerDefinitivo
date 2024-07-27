@@ -540,3 +540,35 @@
     padding: 20px;
   }
 }
+
+.evento{
+  display: flex;
+  flex-direction: column;
+}
+
+.eventos .evento {
+  padding: 10px 20px;
+}
+
+.boton-contenedor{
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.treminar-toma-btn {
+  white-space: nowrap;
+  background-color: #ff4d4d;
+  color: var(--primary-clr);
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  color: white;
+}
+
+.treminar-toma-btn:hover {
+  background-color: var(--primary-clr);
+  color: white;
+  background-color: #ff0000;
+}

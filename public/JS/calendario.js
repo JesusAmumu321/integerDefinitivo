@@ -226,23 +226,28 @@ function obtenerDiaActivo(fecha) {
 
 function actualizarEventos(fecha) {
   let eventos = "";
-  eventosArr.forEach((eventoDia) => {
+  eventosArr.forEach((eventoDia, indexDia) => {
     if (
       fecha === eventoDia.dia &&
       mes + 1 === eventoDia.mes &&
       año === eventoDia.año
     ) {
-      eventoDia.eventos.forEach((evento) => {
-        eventos += 
-  `<div class="evento">
-    <div class="titulo">
-      <i class="fas fa-circle"></i>
-      <h3 class="titulo-evento">${evento.titulo}</h3>
-    </div>
-    <div class="hora-evento">
-      <span class="hora-evento">${evento.tiempo}</span>
-    </div>
-  </div>`;
+      eventoDia.eventos.forEach((evento, indexEvento) => {
+        eventos += `
+          <div class="evento">
+            <div class="evento-contenido">
+              <div class="titulo">
+                <i class="fas fa-circle"></i>
+                <h3 class="titulo-evento">${evento.titulo}</h3>
+              </div>
+              <div class="hora-evento">
+                <span>${evento.tiempo}</span>
+              </div>
+            </div>
+            <div class="boton-contenedor">
+            <button class="treminar-toma-btn" onclick="borrarEvento(${indexDia}, ${indexEvento})">Borrar evento</button>
+            </div>
+          </div>`;
       });
     }
   });
@@ -252,6 +257,38 @@ function actualizarEventos(fecha) {
   }
   eventosContenedor.innerHTML = eventos;
   saveEvents();
+}
+
+function borrarEvento(indexDia, indexEvento) {
+  let eventoABorrar = eventosArr[indexDia].eventos[indexEvento];
+  
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: `¿Quieres borrar el evento "${eventoABorrar.titulo}" a las ${eventoABorrar.tiempo}?`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, borrarlo',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      eventosArr[indexDia].eventos.splice(indexEvento, 1);
+      
+      if (eventosArr[indexDia].eventos.length === 0) {
+        eventosArr.splice(indexDia, 1);
+      }
+      
+      saveEvents();
+      iniciarCalendario();
+      
+      Swal.fire(
+        '¡Borrado!',
+        'El evento ha sido eliminado.',
+        'success'
+      );
+    }
+  });
 }
 
 function saveEvents() {
@@ -267,15 +304,39 @@ function getEvents() {
 
 function borrarEventosAutomaticos() {
   console.log("Función borrarEventosAutomaticos llamada");
-  eventosArr = eventosArr.filter(
-    (evento) => !evento.eventos.some((e) => e.esAutomatico)
-  );
+  
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: '¿Quieres borrar todos los eventos?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, borrarlos todos',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const cantidadAntes = eventosArr.length;
+      
+      eventosArr = eventosArr.filter(
+        (evento) => !evento.eventos.some((e) => e.esAutomatico)
+      );
 
-  saveEvents();
+      const cantidadDespues = eventosArr.length;
+      const eventosBorrados = cantidadAntes - cantidadDespues;
 
-  iniciarCalendario();
+      saveEvents();
+      iniciarCalendario();
 
-  console.log("Todos los eventos automáticos han sido borrados");
+      Swal.fire(
+        '¡Borrados!',
+        `Se han eliminado ${eventosBorrados} eventos automáticos.`,
+        'success'
+      );
+
+      console.log("Todos los eventos automáticos han sido borrados");
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
