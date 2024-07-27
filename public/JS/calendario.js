@@ -322,7 +322,8 @@ function actualizarEventos(fecha) {
   });
 
   if (eventos === "") {
-    eventos = '<div class="no-evento"><h3>Sin eventos</h3></div>';
+    eventos =
+      '<div class="no-evento"><h3 >Sin eventos</h3></div>';
   }
   eventosContenedor.innerHTML = eventos;
   saveEvents();

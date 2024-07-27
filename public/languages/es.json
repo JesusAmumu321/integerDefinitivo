@@ -1,0 +1,222 @@
+{
+  "headerMain": {
+    "idioma": "Idioma",
+    "contactenos": "Contáctenos",
+    "utch": "Utch",
+    "registrese": "Registrese",
+    "inicieSesion": "Inicie Sesión"
+  },
+
+  "carrusel": {
+    "textos": [
+      "Obtenga un mejor monitoreo de sus medicamentos.",
+      "Agregue los medicamentos que desee.",
+      "Obtenga un calendario para su medicación.",
+      "Descargue su calendario en cualquier momento."
+    ],
+    "gifs": [
+      "url_del_gif_1.gif",
+      "url_del_gif_2.gif",
+      "url_del_gif_3.gif",
+      "url_del_gif_4.gif"
+    ]
+  },
+
+  "registroPagina": {
+    "ladoDerecho": "Su compañero de salud",
+
+    "registro": "Registro",
+    "yaTieneCuenta": "¿Ya tiene una cuenta? ",
+    "inicieSesion": "Inicie sesión",
+
+    "labelNombreUsuario": "Nombre de usuario: ",
+    "inputNombreUsuario": "Por favor, ingrese su nombre de usuario.",
+
+    "labelCorreo": "Dirección de correo electrónico: ",
+    "inputCorreo": "Introduzca su dirección de correo electrónico.",
+
+    "labelContrasena": "Cree su contraseña: ",
+    "inputContrasena": "Mínimo 8 caracteres.",
+
+    "labelContrasenaConfirmada": "Confirme su contraseña: ",
+    "inputContrasenaConfirmada": "Las contraseñas deben de coincidir.",
+
+    "botonRegistro": "Regístrese"
+  },
+
+  "alertasRegistro": {
+    "alertaContraseñaDistinta": "Las contraseñas no coinciden. Por favor, intente nuevamente.",
+    "alertaTituloCorreoRegistrado": "El correo ya está registrado",
+    "textAlertaTituloCorreoRegistrado": "Por favor, utilice otro correo electrónico.",
+    "alertaRegistroExitoso": "Registro exitoso, redirigiendo...",
+    "alertaErrorAlRegistrarse": "Error al registrarse",
+    "textoAlertaErrorAlRegistrarse": "Por favor, intente nuevamente."
+  },
+
+  "mensajesErrorRegistro": {
+    "contrasenaDistinta": "Las dos contraseñas deben de coincidir.",
+    "errorServidor": "Error en el servidor. Por favor, intente más tarde.",
+    "camposVacios": "Por favor, complete todos los campos."
+  },
+
+  "inicioSesionPagina": {
+    "ladoDerecho": "Su compañero de salud",
+
+    "bienvenido": "¡Bienvenido de nuevo!",
+    "noTieneCuenta": "¿No tiene una cuenta? ",
+    "registreseAqui": "Regístrese aquí",
+
+    "labelCorreo": "Dirección de correo electrónico: ",
+    "inputCorreo": "Ingrese su dirección de correo electrónico.",
+
+    "labelContrasena": "Contraseña: ",
+    "inputContrasena": "Ingrese su contraseña.",
+
+    "botonInicioSesion": "Inicie sesión"
+  },
+
+  "alertasInicioSesion": {
+    "alertaInicioExitoso": "Inicio de sesión exitoso, redirigiendo...",
+    "alertaElseResponseOk": "Error al inicio de sesión",
+    "textoAlertaElseResponseOk": "",
+    "alertaCatchInicioSesion": "Error al inicio de sesión. Por favor, intente nuevamente.",
+    "textoAlertaCatchInicioSesion": ""
+  },
+
+  "mensajesErrorLogin": {
+    "usuarioNoEncontrado": "Usuario no encontrado",
+    "contrasenaIncorrecta": "Contraseña incorrecta",
+    "errorServidor": "Error en el servidor. Por favor, intente más tarde.",
+    "camposVacios": "Por favor, complete todos los campos."
+  },
+
+  "textosNavPaginas": {
+    "agregarMedicamento": "Agregar Medicamento",
+    "susMedicamentos": "Sus Medicamentos",
+    "calendario": "Calendario"
+  },
+
+  "seccionAnadaMedicamento": {
+    "h2": "Añada un medicamento",
+    "p": "Para añadir un medicamento, asegúrese de completar correctamente todos los campos."
+  },
+
+  "formularioAnadirMedicamento": {
+    "labelPresentacionMedicamento": "Presentación del medicamento: ",
+    "input1PresentacionMed": "Seleccione",
+    "input2PresentacionMed": "Pastillas",
+    "input3PresentacionMed": "Líquido",
+
+    "labelFrecuenciaDosis": "Frecuencia de la dosis: (en horas) ",
+    "placeHolderFrecuenciaDosis": "Ej. 8.",
+
+    "labelNombreMedicamento": "Nombre del medicamento o suplemento: ",
+    "placeHolderNombreMedicamento": "Ej. Paracetamol.",
+
+    "labelCantidadPastillas": "Cantidad de pastillas por dosis: ",
+    "placeHolderCantidadPastillas": "Ej. 2",
+
+    "labelCantidadUnidadesCaja": "Cantidad de unidades por caja: ",
+    "placeHolderCantidadUnidadesCaja": "Ej. 10",
+
+    "labelCantidadCajasDisponibles": "Cantidad de cajas disponibles: ",
+    "placeHolderCantidadCajasDisponibles": "Ej. 3",
+
+    "labelCaducidadMedicamento": "Fecha de caducidad del medicamento: ",
+
+    "labelFechaFinalizacion": "Fecha de finalización del medicamento: ",
+
+    "frecuenciaDosis": "Frecuencia de la dosis: ",
+    "cada8Hrs": "Cada 8 horas",
+    "cada6Hrs": "Cada 6 horas",
+    "cada10Hrs": "Cada 10 horas",
+    "cada12Hrs": "Cada 12 horas",
+    "cada24Hrs": "Cada 24 horas",
+
+    "botonAgregar": "Agregar"
+
+  },
+
+  "seccionVisualiceSusMedicamentos": {
+    "h2": "Visualice sus Medicamentos",
+    "p": "Aquí puede ver todos los medicamentos que ha agregado."
+  },
+
+  "headersVisualiceSusMedicamentos": {
+    "medicamento": "Medicamento",
+    "caducidad": "Caducidad",
+    "cantidadCaja": "Cantidad de la caja",
+    "dosis": "Dosis",
+    "proxConsumo": "Próximo consumo",
+    "finConsumo": "Fin de consumo"
+  },
+
+  "seccionConsulteCalendario": {
+    "h2": "Consulte su calendario",
+    "p": "Consulte sus proximas tomas."
+  },
+
+  "divCalendario": {
+    "meses": {
+      "1": "Enero",
+      "2": "Febrero",
+      "3": "Marzo",
+      "4": "Abril",
+      "5": "Mayo",
+      "6": "Junio",
+      "7": "Julio",
+      "8": "Agosto",
+      "9": "Septiembre",
+      "10": "Octubre",
+      "11": "Noviembre",
+      "12": "Diciembre"
+    },
+    "diasSemana": {
+      "1": "Lunes",
+      "2": "Martes",
+      "3": "Miércoles",
+      "4": "Jueves",
+      "5": "Viernes",
+      "6": "Sábado",
+      "7": "Domingo"
+    },
+   
+
+    "irCalendario": "Ir",
+
+    "sinEventos": "Sin eventos",
+
+    "botonHoy": "Hoy",
+
+    "botonBorrarEventosCa": "Borrar todos los eventos"
+  },
+
+  "contactenosForm": {
+    "ladoDerecho": "Su compañero de salud",
+
+    "contactenosHeader": "Contáctenos",
+    "contactenosParrafo": "Todos los campos son obligatorios",
+
+    "labelNombreUsuario": "Usuario: ",
+    "inputNombreUsuario": "Ingrese su usuario.",
+
+    "labelCorreo": "Dirección de correo electrónico: ",
+    "inputCorreo": "Ingrese su dirección de correo electrónico.",
+
+    "razonContactoLabel": "Razón del contacto: ",
+    "input1Contacto": "Sugerencia",
+    "input2Contacto": "Duda",
+    "input3Contacto": "Aclaración",
+
+    "labelDetallesContactenos": "Detalles del contacto: ",
+    "placeHolderDetallesContactenos": "Escriba aquí los detalles de su contacto.",
+
+    "labelComoNosUbico": "¿Cómo nos ubicó? ",
+    "input1ComoNosUbico": "Seleccione",
+    "input2ComoNosUbico": "Recomendación del Hospital",
+    "input3ComoNosUbico": "Publicidad",
+    "input4ComoNosUbico": "Conocidos",
+
+    "botonComoNosUbico": "Siguiente"
+  }
+}

@@ -105,6 +105,9 @@ function inicializarFormularioMedicamentos() {
         const data = await response.json();
 
         if (data.success) {
+
+          generarEventosAutomaticosParaMedicamento(medicamento);
+          
           Swal.fire({
             icon: "success",
             title: "Se agregó el medicamento de manera correcta.",
@@ -132,6 +135,12 @@ function inicializarFormularioMedicamentos() {
     });
 }
 
+function generarEventosAutomaticosParaMedicamento(medicamento) {
+  const titulo = medicamento.nombreMed;
+  const intervaloHoras = parseInt(medicamento.frecuenciaToma);
+  const fechaFin = medicamento.ultimaToma;
+  generarEventosAutomaticos(titulo, intervaloHoras, fechaFin);
+}
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", function () {
