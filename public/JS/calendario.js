@@ -34,7 +34,6 @@ let eventosArr = [];
 
 function iniciarCalendario() {
   getEvents();
-  console.log("Eventos disponibles al iniciar calendario:", eventosArr);
   const primerDia = new Date(año, mes, 1);
   const ultimoDia = new Date(año, mes + 1, 0);
   const ultimoDiaPrev = new Date(año, mes, 0);
@@ -62,10 +61,6 @@ function iniciarCalendario() {
         evento = true;
       }
     });
-  
-    if (evento) {
-      console.log(`Día con evento: ${i}`);
-    }
 
     if (
       i === hoy.getDate() &&
@@ -130,9 +125,6 @@ function generarEventosAutomaticos(titulo, intervaloHoras, fechaFin, eventosArr,
   const fechaFinal = new Date(fechaFin);
   fechaFinal.setHours(23, 59, 59, 999);
 
-  console.log("Fecha inicial:", fechaActual);
-  console.log("Fecha final:", fechaFinal);
-
   const horarios = {
       8: [7, 15, 23],  // 7:00, 15:00, 23:00
       6: [8, 14, 20],  // 8:00, 14:00, 20:00
@@ -174,7 +166,6 @@ function generarEventosAutomaticos(titulo, intervaloHoras, fechaFin, eventosArr,
           };
 
           eventosArr.push(evento);
-          console.log("Evento agregado:", evento);
       }
 
       // Encontrar la próxima hora válida
@@ -186,8 +177,6 @@ function generarEventosAutomaticos(titulo, intervaloHoras, fechaFin, eventosArr,
       }
       fechaActual = setHora(fechaActual, proximaHora);
   }
-
-  console.log("Eventos generados:", eventosArr);
 
   saveEvents();
   iniciarCalendario();
@@ -226,11 +215,8 @@ inicializarGeneracionDeEventos();
 function formatearHora(fecha) {
   let horas = fecha.getHours();
   let minutos = fecha.getMinutes();
-  const ampm = horas >= 12 ? "PM" : "AM";
-  horas = horas % 12;
-  horas = horas ? horas : 12;
   minutos = minutos < 10 ? "0" + minutos : minutos;
-  return horas + ":" + minutos + ' ' + ampm;
+  return horas + ":" + minutos;
 }
 
 function mesAnterior() {
@@ -308,8 +294,6 @@ function obtenerDiaActivo(fecha) {
 }
 
 function actualizarEventos(fecha) {
-  console.log(`Actualizando eventos para el día ${fecha}`);
-  console.log('Eventos disponibles:', eventosArr);
   let eventos = "";
   eventosArr.forEach((eventoDia, indexDia) => {
     if (
@@ -378,7 +362,6 @@ function borrarEvento(indexDia, indexEvento) {
 
 function saveEvents() {
   localStorage.setItem("events", JSON.stringify(eventosArr));
-  console.log("Eventos guardados:", eventosArr);
 }
 
 function getEvents() {
@@ -388,11 +371,9 @@ function getEvents() {
   } else {
     eventosArr = JSON.parse(storedEvents);
   }
-  console.log("Eventos cargados:", eventosArr);
 }
 
 function borrarEventosAutomaticos() {
-  console.log("Función borrarEventosAutomaticos llamada");
   
   Swal.fire({
     title: '¿Estás seguro?',
@@ -419,11 +400,9 @@ function borrarEventosAutomaticos() {
 
       Swal.fire(
         '¡Borrados!',
-        `Se han eliminado ${eventosBorrados} eventos automáticos.`,
+        `Se han eliminado ${eventosBorrados} eventos.`,
         'success'
       );
-
-      console.log("Todos los eventos automáticos han sido borrados");
     }
   });
 }
