@@ -34,6 +34,7 @@ let eventosArr = [];
 
 function iniciarCalendario() {
   getEvents();
+  console.log("Eventos disponibles al iniciar calendario:", eventosArr);
   const primerDia = new Date(año, mes, 1);
   const ultimoDia = new Date(año, mes + 1, 0);
   const ultimoDiaPrev = new Date(año, mes, 0);
@@ -61,6 +62,10 @@ function iniciarCalendario() {
         evento = true;
       }
     });
+  
+    if (evento) {
+      console.log(`Día con evento: ${i}`);
+    }
 
     if (
       i === hoy.getDate() &&
@@ -73,7 +78,7 @@ function iniciarCalendario() {
 
       diasHtml += `<div class="dia siempre activo ${
         evento ? "evento" : ""
-      }">${i}</div>`;
+      }">${i}</div>`;    
     } else {
       diasHtml += `<div class="dia ${evento ? "evento" : ""}">${i}</div>`;
     }
@@ -87,62 +92,136 @@ function iniciarCalendario() {
   agregarEscuchador();
 }
 
-window.generarEventosAutomaticos = function generarEventosAutomaticos(
-  titulo,
-  intervaloHoras,
-  fechaFin
-) {
-  // Obtener la hora actual al momento de agregar el medicamento
+// Función para formatear la hora en formato 24 horas
+function formatearHora(fecha) {
+  if (!(fecha instanceof Date) || isNaN(fecha)) {
+      return "N/A";
+  }
+  const hora = fecha.getHours().toString().padStart(2, '0');
+  const minutos = fecha.getMinutes().toString().padStart(2, '0');
+  return `${hora}:${minutos}`;
+}
+
+// Función para establecer la hora en una fecha
+function setHora(fecha, hora) {
+  return new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate(), hora, 0, 0);
+}
+
+// Función para encontrar la próxima hora válida desde la fecha actual
+function encontrarProximaHoraValida(fecha, horarios) {
+  const horaActual = fecha.getHours();
+  for (let hora of horarios) {
+      if (hora > horaActual || (hora === horaActual && fecha.getMinutes() === 0)) {
+          return setHora(fecha, hora);
+      }
+  }
+  // Si no encontramos una hora válida hoy, ir al primer horario del día siguiente
+  return setHora(new Date(fecha.getTime() + 24 * 60 * 60 * 1000), horarios[0]);
+}
+
+// Función para generar eventos automáticos
+function generarEventosAutomaticos(titulo, intervaloHoras, fechaFin, eventosArr, saveEvents, iniciarCalendario) {
   let fechaActual = new Date();
 
-  // Establecer fechaFin como un objeto Date si es una cadena
   if (typeof fechaFin === "string") {
-    fechaFin = new Date(fechaFin);
+      fechaFin = new Date(fechaFin);
   }
 
-  // Configurar la hora de fin del día de fechaFin
   const fechaFinal = new Date(fechaFin);
   fechaFinal.setHours(23, 59, 59, 999);
 
-  // Generar eventos hasta la fecha de fin
-  while (fechaActual <= fechaFinal) {
-    const eventoExistente = eventosArr.find(
-      (evento) =>
-        evento.dia === fechaActual.getDate() &&
-        evento.mes === fechaActual.getMonth() + 1 &&
-        evento.año === fechaActual.getFullYear() &&
-        evento.eventos.some(
-          (e) => e.titulo === titulo && e.tiempo === formatearHora(fechaActual)
-        )
-    );
+  console.log("Fecha inicial:", fechaActual);
+  console.log("Fecha final:", fechaFinal);
 
-    if (!eventoExistente) {
-      const evento = {
-        dia: fechaActual.getDate(),
-        mes: fechaActual.getMonth() + 1,
-        año: fechaActual.getFullYear(),
-        eventos: [
-          {
-            titulo: titulo,
-            tiempo: formatearHora(fechaActual),
-            esAutomatico: true,
-          },
-        ],
-      };
+  const horarios = {
+      8: [7, 15, 23],  // 7:00, 15:00, 23:00
+      6: [8, 14, 20],  // 8:00, 14:00, 20:00
+      12: [8, 20],     // 8:00, 20:00
+      24: [8],         // 8:00
+      10: [8, 18],     // 8:00, 18:00
+  }[intervaloHoras];
 
-      eventosArr.push(evento);
-    }
-
-    // Incrementar fechaActual por el intervalo de horas especificado
-    fechaActual = new Date(
-      fechaActual.getTime() + intervaloHoras * 60 * 60 * 1000
-    );
+  if (!horarios) {
+      console.error("Intervalo de horas no soportado");
+      return;
   }
 
-  // Guardar eventos e iniciar calendario
+  fechaActual = encontrarProximaHoraValida(fechaActual, horarios);
+
+  while (fechaActual <= fechaFinal) {
+      const eventoExistente = eventosArr.find(
+          (evento) =>
+              evento.dia === fechaActual.getDate() &&
+              evento.mes === fechaActual.getMonth() + 1 &&
+              evento.año === fechaActual.getFullYear() &&
+              evento.eventos.some(
+                  (e) => e.titulo === titulo && e.tiempo === formatearHora(fechaActual)
+              )
+      );
+
+      if (!eventoExistente) {
+          const evento = {
+              dia: fechaActual.getDate(),
+              mes: fechaActual.getMonth() + 1,
+              año: fechaActual.getFullYear(),
+              eventos: [
+                  {
+                      titulo: titulo,
+                      tiempo: formatearHora(fechaActual),
+                      esAutomatico: true,
+                  },
+              ],
+          };
+
+          eventosArr.push(evento);
+          console.log("Evento agregado:", evento);
+      }
+
+      // Encontrar la próxima hora válida
+      let proximaHora = horarios[(horarios.indexOf(fechaActual.getHours()) + 1) % horarios.length];
+
+      if (proximaHora <= fechaActual.getHours()) {
+          // Si la próxima hora es menor o igual, significa que pasamos al día siguiente
+          fechaActual = new Date(fechaActual.getTime() + 24 * 60 * 60 * 1000);
+      }
+      fechaActual = setHora(fechaActual, proximaHora);
+  }
+
+  console.log("Eventos generados:", eventosArr);
+
   saveEvents();
   iniciarCalendario();
-};
+}
+
+// Función para obtener los datos de la API
+async function obtenerDatosDeAPI() {
+  try {
+      const response = await fetch('/getEventosMedicamentos');
+      const medicamentos = await response.json();
+      return medicamentos;
+  } catch (error) {
+      console.error('Error al obtener datos de la API:', error);
+      return [];
+  }
+}
+
+async function inicializarGeneracionDeEventos() {
+  const medicamentos = await obtenerDatosDeAPI();
+
+  // Usar el eventosArr global en lugar de crear uno nuevo
+  eventosArr = [];
+
+  medicamentos.forEach(med => {
+    const { nombreMed, ultimaToma, frecuenciaToma } = med;
+    generarEventosAutomaticos(nombreMed, frecuenciaToma, ultimaToma, eventosArr, saveEvents, iniciarCalendario);
+  });
+
+  // Llamar a iniciarCalendario después de generar todos los eventos
+  iniciarCalendario();
+}
+
+// Llamada para iniciar la generación de eventos
+inicializarGeneracionDeEventos();
 
 function formatearHora(fecha) {
   let horas = fecha.getHours();
@@ -151,7 +230,7 @@ function formatearHora(fecha) {
   horas = horas % 12;
   horas = horas ? horas : 12;
   minutos = minutos < 10 ? "0" + minutos : minutos;
-  return horas + ":" + minutos + " " + ampm;
+  return horas + ":" + minutos + ' ' + ampm;
 }
 
 function mesAnterior() {
@@ -193,19 +272,7 @@ function gotoDate() {
       return;
     }
   }
-  Swal.fire({
-    icon: "warning",
-    title: "Fecha Inválida.",
-    showConfirmButton: false,
-    timer: 1500,
-    /*
-    Estos tres de abajo sirven para que no se pueda hacer clic afuera de la alerta
-    para quitarla, al igual q en con el escape o con el enter y ya
-    */
-    allowOutsideClick: false,
-    allowEscapeKey: false,
-    allowEnterKey: false,
-  });
+  alert("fecha inválida");
 }
 
 function agregarEscuchador() {
@@ -237,28 +304,35 @@ function obtenerDiaActivo(fecha) {
   const nombreDia = dia.toLocaleDateString("es-ES", opciones);
   diaEvento.innerHTML = nombreDia;
   fechaEvento.innerHTML = fecha + " " + meses[mes] + " " + año;
+  actualizarEventos(fecha);
 }
 
 function actualizarEventos(fecha) {
+  console.log(`Actualizando eventos para el día ${fecha}`);
+  console.log('Eventos disponibles:', eventosArr);
   let eventos = "";
-  eventosArr.forEach((eventoDia) => {
+  eventosArr.forEach((eventoDia, indexDia) => {
     if (
       fecha === eventoDia.dia &&
       mes + 1 === eventoDia.mes &&
       año === eventoDia.año
     ) {
-      eventoDia.eventos.forEach((evento) => {
+      eventoDia.eventos.forEach((evento, indexEvento) => {
         eventos += `
-  <div class="evento">
-    <div class="titulo">
-      <i class="fas fa-circle"></i>
-      <h3 class="titulo-evento">${evento.titulo}</h3>
-    </div>
-    <div class="hora-evento">
-      <span class="hora-evento">${evento.tiempo}</span>
-    </div>
-  </div>
-`;
+          <div class="evento">
+            <div class="evento-contenido">
+              <div class="titulo">
+                <i class="fas fa-circle"></i>
+                <h3 class="titulo-evento">${evento.titulo}</h3>
+              </div>
+              <div class="hora-evento">
+                <span>${evento.tiempo}</span>
+              </div>
+            </div>
+            <div class="boton-contenedor">
+            <button class="treminar-toma-btn" onclick="borrarEvento(${indexDia}, ${indexEvento})">Borrar evento</button>
+            </div>
+          </div>`;
       });
     }
   });
@@ -270,28 +344,91 @@ function actualizarEventos(fecha) {
   saveEvents();
 }
 
+function borrarEvento(indexDia, indexEvento) {
+  let eventoABorrar = eventosArr[indexDia].eventos[indexEvento];
+  
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: `¿Quieres borrar el evento "${eventoABorrar.titulo}" a las ${eventoABorrar.tiempo}?`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, borrarlo',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      eventosArr[indexDia].eventos.splice(indexEvento, 1);
+      
+      if (eventosArr[indexDia].eventos.length === 0) {
+        eventosArr.splice(indexDia, 1);
+      }
+      
+      saveEvents();
+      iniciarCalendario();
+      
+      Swal.fire(
+        '¡Borrado!',
+        'El evento ha sido eliminado.',
+        'success'
+      );
+    }
+  });
+}
+
 function saveEvents() {
   localStorage.setItem("events", JSON.stringify(eventosArr));
+  console.log("Eventos guardados:", eventosArr);
 }
 
 function getEvents() {
-  if (localStorage.getItem("events") === null) {
-    return;
+  const storedEvents = localStorage.getItem("events");
+  if (storedEvents === null || storedEvents === "[]") {
+    eventosArr = [];
+  } else {
+    eventosArr = JSON.parse(storedEvents);
   }
-  eventosArr = JSON.parse(localStorage.getItem("events"));
+  console.log("Eventos cargados:", eventosArr);
 }
 
 function borrarEventosAutomaticos() {
   console.log("Función borrarEventosAutomaticos llamada");
-  eventosArr = eventosArr.filter(
-    (evento) => !evento.eventos.some((e) => e.esAutomatico)
-  );
+  
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: '¿Quieres borrar todos los eventos?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, borrarlos todos',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const cantidadAntes = eventosArr.length;
+      
+      eventosArr = eventosArr.filter(
+        (evento) => !evento.eventos.some((e) => e.esAutomatico)
+      );
 
-  saveEvents();
+      const cantidadDespues = eventosArr.length;
+      const eventosBorrados = cantidadAntes - cantidadDespues;
 
-  iniciarCalendario();
+      saveEvents();
+      iniciarCalendario();
 
-  console.log("Todos los eventos automáticos han sido borrados");
+      Swal.fire(
+        '¡Borrados!',
+        `Se han eliminado ${eventosBorrados} eventos automáticos.`,
+        'success'
+      );
+
+      console.log("Todos los eventos automáticos han sido borrados");
+    }
+  });
 }
 
-iniciarCalendario();
+document.addEventListener('DOMContentLoaded', function() {
+  iniciarCalendario();
+  inicializarGeneracionDeEventos();
+});
