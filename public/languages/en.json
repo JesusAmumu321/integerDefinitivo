@@ -1,0 +1,199 @@
+{
+  "headerMain": {
+    "idioma": "Language",
+    "contactenos": "Contact Us",
+    "utch": "Utch",
+    "registrese": "Register",
+    "inicieSesion": "Log In"
+  },
+
+  "carrusel": {
+    "textos": [
+      "Get better monitoring of your medications.",
+      "Add the medications you want.",
+      "Get a schedule for your medication.",
+      "Download your schedule at any time."
+    ],
+    "gifs": [
+      "url_del_gif_1.gif",
+      "url_del_gif_2.gif",
+      "url_del_gif_3.gif",
+      "url_del_gif_4.gif"
+    ]
+  },
+
+  "registroPagina": {
+    "ladoDerecho": "Your health companion",
+
+    "registro": "Sign Up",
+    "yaTieneCuenta": "Already have an account? ",
+    "inicieSesion": "Log in",
+
+    "labelNombreUsuario": "Username: ",
+    "inputNombreUsuario": "Please enter your username.",
+
+    "labelCorreo": "Email address: ",
+    "inputCorreo": "Please enter your email address.",
+
+    "labelContrasena": "Create your password: ",
+    "inputContrasena": "At least 8 characters.",
+
+    "labelContrasenaConfirmada": "Confirm your password: ",
+    "inputContrasenaConfirmada": "Passwords must match.",
+
+    "botonRegistro": "Sign Up"
+  },
+
+  "alertasRegistro": {
+    "alertaContraseñaDistinta": "Passwords do not match. Please try again.",
+    "alertaTituloCorreoRegistrado": "Email already registered",
+    "textAlertaTituloCorreoRegistrado": "Please use another email address.",
+    "alertaRegistroExitoso": "Registration successful, redirecting...",
+    "alertaErrorAlRegistrarse": "Error registering",
+    "textoAlertaErrorAlRegistrarse": "Please try again."
+  },
+
+  "inicioSesionPagina": {
+    "ladoDerecho": "Your health companion",
+
+    "bienvenido": "Welcome back!",
+    "noTieneCuenta": "Don't have an account? ",
+    "registreseAqui": "Sign up here",
+
+    "labelCorreo": "Email address: ",
+    "inputCorreo": "Please enter your email address.",
+
+    "labelContrasena": "Password: ",
+    "inputContrasena": "Please enter your password.",
+
+    "botonInicioSesion": "Log In"
+  },
+
+  "alertasInicioSesion": {
+    "alertaInicioExitoso": "Login successful, redirecting...",
+    "alertaElseResponseOk": "Login error",
+    "textoAlertaElseResponseOk": "",
+    "alertaCatchInicioSesion": "Login error. Please try again.",
+    "textoAlertaCatchInicioSesion": ""
+  },
+
+  "textosNavPaginas": {
+    "agregarMedicamento": "Add Medication",
+    "susMedicamentos": "Your Medications",
+    "calendario": "Calendar"
+  },
+
+  "seccionAnadaMedicamento": {
+    "h2": "Add a medication",
+    "p": "To add a medication, make sure to correctly complete all fields."
+  },
+
+  "formularioAnadirMedicamento": {
+    "labelPresentacionMedicamento": "Medication form:",
+    "input1PresentacionMed": "Select",
+    "input2PresentacionMed": "Pills",
+    "input3PresentacionMed": "Liquid",
+
+    "labelFrecuenciaDosis": "Dose frequency: (in hours)",
+    "placeHolderFrecuenciaDosis": "Example: 8.",
+
+    "labelNombreMedicamento": "Medication or supplement name:",
+    "placeHolderNombreMedicamento": "Example: Paracetamol.",
+
+    "labelCantidadPastillas": "Number of pills per dose:",
+    "placeHolderCantidadPastillas": "Example: 2",
+
+    "labelCantidadUnidadesCaja": "Number of units per box:",
+    "placeHolderCantidadUnidadesCaja": "Example: 10",
+
+    "labelCantidadCajasDisponibles": "Number of available boxes:",
+    "placeHolderCantidadCajasDisponibles": "Example: 3",
+
+    "labelCaducidadMedicamento": "Medication expiration date:",
+
+    "labelFechaFinalizacion": "Medication end date:",
+
+    "botonAgregar": "Add medication"
+  },
+
+  "seccionVisualiceSusMedicamentos": {
+    "h2": "View your Medications",
+    "p": "Here you can see all the medications you have added."
+  },
+
+  "headersVisualiceSusMedicamentos": {
+    "medicamento": "Medication",
+    "caducidad": "Expiration",
+    "cantidadCaja": "Box quantity",
+    "dosis": "Dose",
+    "proxConsumo": "Next intake",
+    "finConsumo": "End of intake"
+  },
+
+  "seccionConsulteCalendario": {
+    "h2": "Check your calendar",
+    "p": "Check your upcoming doses."
+  },
+
+  "divCalendario": {
+    "meses": {
+      "1": "January",
+      "2": "February",
+      "3": "March",
+      "4": "April",
+      "5": "May",
+      "6": "June",
+      "7": "July",
+      "8": "August",
+      "9": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December"
+    },
+    "diasSemana": {
+      "1": "Monday",
+      "2": "Tuesday",
+      "3": "Wednesday",
+      "4": "Thursday",
+      "5": "Friday",
+      "6": "Saturday",
+      "7": "Sunday"
+    },
+
+    "irCalendario": "Go to date",
+
+    "sinEventos": "No events",
+
+    "botonHoy": "Today",
+
+    "botonBorrarEventosCa": "Delete all events"
+  },
+
+  "contactenosForm": {
+    "ladoDerecho": "Your health companion",
+
+    "contactenosHeader": "Contact us",
+
+    "labelNombreUsuario": "Username: ",
+    "inputNombreUsuario": "Please enter your username.",
+
+    "labelCorreo": "Email address: ",
+    "inputCorreo": "Please enter your email address.",
+
+    "razonContactoLabel": "Reason for contact: ",
+    "input1Contacto": "Suggestion",
+    "input2Contacto": "Question",
+    "input3Contacto": "Clarification",
+
+    "labelDetallesContactenos": "Contact details: ",
+    "placeHolderDetallesContactenos": "Enter the details of your contact here.",
+
+    "labelComoNosUbico": "How did you find us? ",
+    "input1ComoNosUbico": "Select",
+    "input2ComoNosUbico": "Hospital recommendation",
+    "input3ComoNosUbico": "Advertising",
+    "input4ComoNosUbico": "Acquaintances",
+
+    "botonComoNosUbico": "Next"
+  }
+}

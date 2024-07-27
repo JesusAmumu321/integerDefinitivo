@@ -11,7 +11,7 @@ async function verificarSesion() {
   }
 }
 
-// Función para manejar el inicio de sesión
+// funcion para el inicio de sesión
 async function handleLogin(event) {
   event.preventDefault();
 
