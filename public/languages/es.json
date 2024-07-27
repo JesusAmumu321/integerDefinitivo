@@ -126,6 +126,13 @@
 
     "labelFechaFinalizacion": "Fecha de finalización del medicamento: ",
 
+    
+    "cada8Hrs": "Cada 8 horas",
+    "cada6Hrs": "Cada 6 horas",
+    "cada10Hrs": "Cada 10 horas",
+    "cada12Hrs": "Cada 12 horas",
+    "cada24Hrs": "Cada 24 horas",
+
     "botonAgregar": "Agregar"
 
   },

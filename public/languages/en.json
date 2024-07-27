@@ -126,6 +126,13 @@
 
     "labelFechaFinalizacion": "Medication end date:",
 
+    "cada8Hrs": "Every 8 hours",
+    "cada6Hrs": "Every 6 hours",
+    "cada10Hrs": "Every 10 hours",
+    "cada12Hrs": "Every 12 hours",
+    "cada24Hrs": "Every 24 Hours",
+
+
     "botonAgregar": "Add medication"
   },
 
