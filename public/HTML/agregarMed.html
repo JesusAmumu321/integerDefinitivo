@@ -83,13 +83,27 @@
             <option value="ml">Líquido</option>
           </select>
         </div>
-
+<!-- 
         <div class="flex flex-col">
           <label for="frecuenciaToma" class="mb-1 text-m font-medium">
             Frecuencia de la dosis: (en horas)<span class="text-red-500"> *</span>
           </label>
           <input type="number" name="frecuenciaToma" id="frecuenciaToma" required placeholder="Ej. 8." min="1" step="1"
             class="numero-positivo w-full px-1.5 h-12 py-2 text-base md:text-l border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black transition duration-300 ease-in-out transform hover:scale-105">
+        </div> -->
+
+        <div class="flex flex-col">
+          <label for="frecuenciaToma" class="mb-1 text-m font-medium">
+            Frecuencia de la dosis: <span class="text-red-500">*</span>
+          </label>
+          <select name="frecuenciaToma" id="frecuenciaToma" required
+          class="w-full h-12 bg-white border border-gray-300 rounded-md px-3 pr-8 text-s focus:outline-none focus:ring-2 focus:ring-black transition duration-300 ease-in-out transform hover:scale-105">
+          <option value="8" selected>Cada 8 horas</option>
+          <option value="6">Cada 6 horas</option>
+          <option value="10">Cada 10 horas</option>
+          <option value="12">Cada 12 horas</option>
+          <option value="24">Cada 24 horas</option>
+        </select>
         </div>
 
         <div class="flex flex-col">
