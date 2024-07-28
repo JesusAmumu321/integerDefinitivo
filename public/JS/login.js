@@ -41,6 +41,7 @@ async function handleLogin(event) {
     const data = await response.json();
 
     if (response.ok) {
+      localStorage.setItem('userId', data.userId);
       Swal.fire({
         icon: "success",
         title:
