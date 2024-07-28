@@ -176,6 +176,7 @@ app.post("/api/agregar-medicamento", async (req, res) => {
       });
   }
 });
+
 app.get("/getMedicamentos", async (req, res) => {
   try {
     console.log("Intentando obtener medicamentos");
@@ -200,12 +201,27 @@ app.get("/getMedicamentos", async (req, res) => {
   }
 });
 
-app.get("/api/calendario", (req, res) => {
-  res.sendFile(join(__dirname, "../public/HTML/calendario.html"), (err) => {
-    if (err) {
-      console.error("error encontrando el archivo:", err);
-      res.status(500).end();
-    }
-  });
-});
+app.get("/getEventosMedicamentos", async (req, res) => {
+  try {
+    const db = await connect();
+    const [rows] = await db.execute(`
+      SELECT 
+        nombreMed, 
+        ultimaToma, 
+        frecuenciaToma
+      FROM medicamento
+    `);
+    await db.end();
 
+    const medicamentos = rows.map(med => ({
+      nombreMed: med.nombreMed,
+      ultimaToma: med.ultimaToma,
+      frecuenciaToma: parseInt(med.frecuenciaToma)
+    }));
+
+    res.json(medicamentos);
+  } catch (error) {
+    console.error("Error al obtener medicamentos:", error);
+    res.status(500).json({ message: "Error al obtener medicamentos", error: error.message });
+  }
+});

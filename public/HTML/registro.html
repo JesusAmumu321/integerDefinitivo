@@ -11,6 +11,7 @@
 
   <script type="module" src="../JS/main.js"></script>
   <script type="module" src="../JS/registrar.js"></script>
+  <script src="../JS/langs.js"></script>
 
   <script>
     tailwind.config = {
@@ -37,7 +38,7 @@
         <img src="../assets/LOGO_VECTORIZADOsvg.svg" class="h-32 w-32 rounded-full object-cover shadow-lg mb-4" />
         <div class="text-white text-center">
           <h1 class="text-3xl md:text-5xl font-bold mb-2">Med & Track</h1>
-          <p class="text-lg md:text-xl">Su compañero de salud</p>
+          <p data-section="registroPagina" data-value="ladoDerecho" class="text-lg md:text-xl">Su compañero de salud</p>
         </div>
       </div>
     </div>
@@ -45,52 +46,52 @@
     <!-- Sección derecha (formulario) -->
     <div class="w-full md:w-1/2 bg-custom-form p-6 md:p-8 lg:p-12 flex flex-col justify-center">
       <div>
-        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 md:mb-8">
-          Registro
-        </h2>
-        <p class="mb-8 text-base md:text-lg lg:text-xl">
+        <h2 data-section="registroPagina" data-value="registro"
+          class="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 md:mb-8">Registro</h2>
+        <p data-section="registroPagina" data-value="yaTieneCuenta" class="mb-8 text-base md:text-lg lg:text-xl">
           ¿Ya tiene una cuenta?
-          <a href="../HTML/login.html"
-            class="text-blue-600 font-roboto italic hover:not-italic hover:text-black hover:ease-in-out hover:duration-300">Inicie
-            sesión</a>
+          <a href="../HTML/login.html" data-section="registroPagina" data-value="inicieSesion"
+            class="text-blue-600 font-roboto italic hover:not-italic hover:text-black hover:ease-in-out hover:duration-300">
+            Inicie sesión
+          </a>
         </p>
       </div>
 
       <form class="space-y-4 md:space-y-6" id="registroForm">
         <div>
-          <label for="usuario" class="block text-lg md:text-xl font-medium text-gray-700 mb-1">
+          <label data-section="registroPagina" data-value="labelNombreUsuario" for="usuario"
+            class="block text-lg md:text-xl font-medium text-gray-700 mb-1">
             Nombre de usuario <span class="text-red-500">*</span>
           </label>
           <input type="text" name="usuario" id="usuario" required minlength="5"
-            placeholder="Por favor, ingrese su nombre de usuario."
             class="w-full px-3 py-2 text-base md:text-lg border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black transition duration-300 ease-in-out transform hover:scale-105" />
         </div>
 
         <div>
-          <label for="email" class="block text-lg md:text-xl font-medium text-gray-700 mb-1">
+          <label data-section="registroPagina" data-value="labelCorreo" for="email"
+            class="block text-lg md:text-xl font-medium text-gray-700 mb-1">
             Dirección de correo electrónico
             <span class="text-red-500">*</span>
           </label>
           <input type="email" name="email" id="email" required
-            placeholder="Introduzca su dirección de correo electrónico."
             class="w-full px-3 py-2 text-base md:text-lg border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black transition duration-300 ease-in-out transform hover:scale-105" />
         </div>
 
         <div>
-          <label for="contrasena" class="block text-lg md:text-xl font-medium text-gray-700 mb-1">
+          <label data-section="registroPagina" data-value="labelContrasena" for="contrasena"
+            class="block text-lg md:text-xl font-medium text-gray-700 mb-1">
             Cree su contraseña <span class="text-red-500">*</span>
           </label>
-          <input type="password" name="password" id="contrasena" required placeholder="Mínimo 8 caracteres."
-            minlength="8"
+          <input type="password" name="password" id="contrasena" required minlength="8"
             class="w-full px-3 py-2 text-base md:text-lg border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black transition duration-300 ease-in-out transform hover:scale-105" />
         </div>
 
         <div>
-          <label for="contrasena_confirmada" class="block text-lg md:text-xl font-medium text-gray-700 mb-1">
+          <label data-section="registroPagina" data-value="labelContrasenaConfirmada" for="contrasena_confirmada"
+            class="block text-lg md:text-xl font-medium text-gray-700 mb-1">
             Confirme su contraseña <span class="text-red-500">*</span>
           </label>
           <input type="password" name="confirm_password" id="contrasena_confirmada" required minlength="8"
-            placeholder="Las contraseñas deben coincidir."
             class="w-full px-3 py-2 text-base md:text-lg border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black transition duration-300 ease-in-out transform hover:scale-105" />
         </div>
 
@@ -99,7 +100,8 @@
             class="w-full sm:w-auto relative inline-flex items-center justify-center px-6 py-2 overflow-hidden rounded-lg group bg-black text-white hover:text-white text-s mx-1 sm:mx-2 transition duration-300 ease-in-out transform hover:scale-105">
             <span
               class="absolute inset-0 w-full h-full transition-all duration-300 ease-out bg-gray-700 rounded-lg opacity-0 group-hover:opacity-100"></span>
-            <span class="relative transition-colors duration-200 ease-in-out z-10">
+            <span data-section="registroPagina" data-value="botonRegistro"
+              class="relative transition-colors duration-200 ease-in-out z-10">
               Regístrese
             </span>
           </button>
