@@ -106,7 +106,8 @@ app.post("/api/iniciar", async (req, res) => {
     if (rows.length > 0) {
       const user = rows[0];
       if (user.contrasena === contrasena) {
-        res.json({ autenticado: true, mensaje: "Inicio de sesión exitoso" });
+        const userId = await obtenerUserId(correo);
+        res.json({ autenticado: true, mensaje: "Inicio de sesión exitoso", userId });
       } else {
         res
           .status(400)
@@ -207,3 +208,4 @@ app.get("/api/calendario", (req, res) => {
     }
   });
 });
+

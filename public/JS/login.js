@@ -108,3 +108,20 @@ const originalFetch = window.fetch;
 window.fetch = function () {
   return originalFetch.apply(this, arguments).then(handleSessionExpiration);
 };
+
+async function obtenerUserId(correo) {
+  try {
+    const db = await connect();
+    const [result] = await db.execute("SELECT id FROM usuarios WHERE correo = ?", [correo]);
+    await db.end();
+    
+    if (result.length > 0) {
+      return result[0].id;
+    } else {
+      throw new Error("No se encontró ningún usuario con ese correo.");
+    }
+  } catch (error) {
+    console.error(error.message);
+    throw error; // Vuelve a lanzar el error para que pueda ser manejado por el código que llama a esta función
+  }
+}
