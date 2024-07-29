@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", function () {
+  inicializarFormularioMedicamentos();
+});
+
 function inicializarFormularioMedicamentos() {
   const tipoMedicamento = document.getElementById("tipo_medicamento");
   const cantidadDosisLabel = document.getElementById("cantidadDosisLabel");
@@ -59,6 +63,18 @@ function inicializarFormularioMedicamentos() {
     .addEventListener("click", async function (e) {
       e.preventDefault();
 
+      const userId = localStorage.getItem("userId");
+
+      if (!userId) {
+        Swal.fire({
+          icon: "error",
+          title: "Error de autenticación",
+          text: "Por favor, inicie sesión nuevamente.",
+          allowOutsideClick: false,
+        });
+        return;
+      }
+
       const medicamento = {
         tipo_medicamento: document.getElementById("tipo_medicamento").value,
         frecuenciaToma: document.getElementById("frecuenciaToma").value,
@@ -73,17 +89,15 @@ function inicializarFormularioMedicamentos() {
       // Validación de campos obligatorios
       const camposObligatorios = [
         "tipo_medicamento",
-        "frecuenciaToma",
         "nombreMed",
         "cantidadDosis",
-        "cantidadUnaCaja",
-        "cantidadCajas",
       ];
+
       const camposFaltantes = camposObligatorios.filter(
         (campo) => !medicamento[campo]
       );
 
-      if (camposFaltantes.length < 0) {
+      if (camposFaltantes.length > 0) {
         Swal.fire({
           icon: "error",
           title: "Campos obligatorios faltantes",
@@ -97,8 +111,8 @@ function inicializarFormularioMedicamentos() {
         const response = await fetch("/api/agregar-medicamento", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
-            "user-id": userId,
+            "content-type": "application/json",
+            "user-Id": userId,
           },
           body: JSON.stringify(medicamento),
         });
@@ -132,8 +146,3 @@ function inicializarFormularioMedicamentos() {
       }
     });
 }
-
-// Inicializar cuando el DOM esté listo
-document.addEventListener("DOMContentLoaded", function () {
-  inicializarFormularioMedicamentos();
-});

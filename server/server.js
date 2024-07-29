@@ -124,13 +124,11 @@ app.post("/api/iniciar", async (req, res) => {
     }
   } catch (error) {
     console.error("Error al iniciar sesión:", error);
-    res
-      .status(500)
-      .json({
-        autenticado: false,
-        mensaje: "Error al iniciar sesión",
-        error: error.message,
-      });
+    res.status(500).json({
+      autenticado: false,
+      mensaje: "Error al iniciar sesión",
+      error: error.message,
+    });
   }
 });
 
@@ -155,6 +153,7 @@ async function obtenerUserId(correo) {
 }
 
 app.post("/api/agregar-medicamento", async (req, res) => {
+  const userId = req.headers["user-id"];
   const {
     tipo_medicamento,
     frecuenciaToma,
@@ -166,8 +165,7 @@ app.post("/api/agregar-medicamento", async (req, res) => {
     ultimaToma,
   } = req.body;
 
-  // Verificar campos obligatorios
-  if (!tipo_medicamento || !nombreMed || !cantidadDosis) {
+  if (!tipo_medicamento || !nombreMed || !cantidadDosis || !userId) {
     return res
       .status(400)
       .json({ success: false, message: "Faltan campos obligatorios" });
@@ -176,7 +174,7 @@ app.post("/api/agregar-medicamento", async (req, res) => {
   try {
     const db = await connect();
     const [result] = await db.execute(
-      "INSERT INTO medicamento (tipo_medicamento, frecuenciaToma, nombreMed, cantidadDosis, cantidadUnaCaja, cantidadCajas, caducidadMed, ultimaToma,Pk_Usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO medicamento (tipo_medicamento, frecuenciaToma, nombreMed, cantidadDosis, cantidadUnaCaja, cantidadCajas, caducidadMed, ultimaToma, Pk_Usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [
         tipo_medicamento,
         frecuenciaToma || null,

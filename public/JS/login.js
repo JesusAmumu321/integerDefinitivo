@@ -18,7 +18,7 @@ async function handleLogin(event) {
   const correo = document.getElementById("correo").value.trim();
   const contrasena = document.getElementById("contrasena").value;
 
-  // Validación básica del lado del cliente
+  // validacion basica del cilente
   if (!correo || !contrasena) {
     Swal.fire({
       icon: "warning",
@@ -29,7 +29,7 @@ async function handleLogin(event) {
     return;
   }
 
-  // Validación simple de formato de correo electrónico
+  // validacion simple para correo
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(correo)) {
     Swal.fire({
