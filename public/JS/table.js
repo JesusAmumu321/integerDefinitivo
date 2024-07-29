@@ -95,8 +95,17 @@ function calcularProximaToma(fechaFinalStr, intervaloHoras) {
     return fechasCalculadas;
 }
 
+const userId = localStorage.getItem('userId');
+  if (!userId) {
+    console.error('No se encontró el userId en localStorage');
+    return;
+  }
 
-  fetch("/getMedicamentos")
+  fetch("/getMedicamentos", {
+    headers: {
+      'user-id': userId
+    }
+})
     .then((response) => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
