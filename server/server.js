@@ -107,7 +107,11 @@ app.post("/api/iniciar", async (req, res) => {
       const user = rows[0];
       if (user.contrasena === contrasena) {
         const userId = await obtenerUserId(correo);
-        res.json({ autenticado: true, mensaje: "Inicio de sesión exitoso", userId });
+        res.json({
+          autenticado: true,
+          mensaje: "Inicio de sesión exitoso",
+          userId,
+        });
       } else {
         res
           .status(400)
@@ -158,7 +162,7 @@ app.post("/api/agregar-medicamento", async (req, res) => {
         cantidadCajas || null,
         caducidadMed || null,
         ultimaToma || null,
-        userId
+        userId,
       ]
     );
     await db.end();
@@ -168,23 +172,22 @@ app.post("/api/agregar-medicamento", async (req, res) => {
       .json({ success: true, message: "Medicamento agregado con éxito" });
   } catch (error) {
     console.error("Error al insertar medicamento:", error);
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Error al agregar medicamento",
-        error: error.message,
-      });
+    res.status(500).json({
+      success: false,
+      message: "Error al agregar medicamento",
+      error: error.message,
+    });
   }
 });
 
 app.get("/getMedicamentos", async (req, res) => {
-  const userId = req.headers['user-id'];
+  const userId = req.headers["user-id"];
   try {
     console.log("Intentando obtener medicamentos");
     const db = await connect();
     console.log("Conexión a la base de datos establecida");
-    const [rows] = await db.execute(`
+    const [rows] = await db.execute(
+      `
       SELECT 
         nombreMed, 
         caducidadMed, 
@@ -194,38 +197,47 @@ app.get("/getMedicamentos", async (req, res) => {
         frecuenciaToma
       FROM medicamento
       Where Id_Usuario = ?
-    `, [userId]);
+    `,
+      [userId]
+    );
 
     await db.end();
     res.json(rows);
   } catch (error) {
     console.error("Error detallado al obtener medicamentos:", error);
-    res.status(500).json({ message: "Error al obtener medicamentos", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error al obtener medicamentos", error: error.message });
   }
 });
 
 app.get("/getEventosMedicamentos", async (req, res) => {
   try {
     const db = await connect();
-    const [rows] = await db.execute(`
+    const [rows] = await db.execute(
+      `
       SELECT 
         nombreMed, 
         ultimaToma, 
         frecuenciaToma
       FROM medicamento
       Where Id_Usuario = ?
-    `, [userId]);
+    `,
+      [userId]
+    );
     await db.end();
 
-    const medicamentos = rows.map(med => ({
+    const medicamentos = rows.map((med) => ({
       nombreMed: med.nombreMed,
       ultimaToma: med.ultimaToma,
-      frecuenciaToma: parseInt(med.frecuenciaToma)
+      frecuenciaToma: parseInt(med.frecuenciaToma),
     }));
 
     res.json(medicamentos);
   } catch (error) {
     console.error("Error al obtener medicamentos:", error);
-    res.status(500).json({ message: "Error al obtener medicamentos", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error al obtener medicamentos", error: error.message });
   }
 });
