@@ -98,7 +98,7 @@ function inicializarFormularioMedicamentos() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            'user-id': userId
+            "user-id": userId,
           },
           body: JSON.stringify(medicamento),
         });

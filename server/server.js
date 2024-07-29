@@ -100,11 +100,11 @@ app.post("/api/iniciar", async (req, res) => {
     const [rows] = await db.execute("SELECT * FROM usuarios WHERE correo = ?", [
       correo,
     ]);
-
     await db.end();
 
     if (rows.length > 0) {
       const user = rows[0];
+
       if (user.contrasena === contrasena) {
         const userId = await obtenerUserId(correo);
         res.json({
@@ -126,9 +126,33 @@ app.post("/api/iniciar", async (req, res) => {
     console.error("Error al iniciar sesión:", error);
     res
       .status(500)
-      .json({ autenticado: false, mensaje: "Error al iniciar sesión" });
+      .json({
+        autenticado: false,
+        mensaje: "Error al iniciar sesión",
+        error: error.message,
+      });
   }
 });
+
+async function obtenerUserId(correo) {
+  try {
+    const db = await connect();
+    const [rows] = await db.execute(
+      "SELECT id_usuario FROM usuarios WHERE correo = ?",
+      [correo]
+    );
+    await db.end();
+
+    if (rows.length > 0) {
+      return rows[0].id_usuario;
+    } else {
+      throw new Error("No se encontró ningún usuario con ese correo.");
+    }
+  } catch (error) {
+    console.error("Error al obtener el ID del usuario:", error);
+    throw error;
+  }
+}
 
 app.post("/api/agregar-medicamento", async (req, res) => {
   const {
@@ -152,7 +176,7 @@ app.post("/api/agregar-medicamento", async (req, res) => {
   try {
     const db = await connect();
     const [result] = await db.execute(
-      "INSERT INTO medicamento (tipo_medicamento, frecuenciaToma, nombreMed, cantidadDosis, cantidadUnaCaja, cantidadCajas, caducidadMed, ultimaToma,Id_Usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO medicamento (tipo_medicamento, frecuenciaToma, nombreMed, cantidadDosis, cantidadUnaCaja, cantidadCajas, caducidadMed, ultimaToma,Pk_Usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
       [
         tipo_medicamento,
         frecuenciaToma || null,
@@ -196,7 +220,7 @@ app.get("/getMedicamentos", async (req, res) => {
         ultimaToma, 
         frecuenciaToma
       FROM medicamento
-      Where Id_Usuario = ?
+      Where Pk_Usuario = ?
     `,
       [userId]
     );
@@ -222,11 +246,10 @@ app.get("/getEventosMedicamentos", async (req, res) => {
         ultimaToma, 
         frecuenciaToma
       FROM medicamento
-      Where Id_Usuario = ?
+      Where Pk_Usuario = ?
     `,
       [userId]
     );
-
     await db.end();
 
     const medicamentos = rows.map((med) => ({
