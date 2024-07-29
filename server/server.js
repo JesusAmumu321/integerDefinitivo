@@ -212,6 +212,7 @@ app.get("/getMedicamentos", async (req, res) => {
 });
 
 app.get("/getEventosMedicamentos", async (req, res) => {
+  const userId = req.headers["user-id"];
   try {
     const db = await connect();
     const [rows] = await db.execute(
@@ -225,6 +226,7 @@ app.get("/getEventosMedicamentos", async (req, res) => {
     `,
       [userId]
     );
+
     await db.end();
 
     const medicamentos = rows.map((med) => ({
