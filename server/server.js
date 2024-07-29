@@ -106,7 +106,8 @@ app.post("/api/iniciar", async (req, res) => {
     if (rows.length > 0) {
       const user = rows[0];
       if (user.contrasena === contrasena) {
-        res.json({ autenticado: true, mensaje: "Inicio de sesión exitoso" });
+        const userId = await obtenerUserId(correo);
+        res.json({ autenticado: true, mensaje: "Inicio de sesión exitoso", userId });
       } else {
         res
           .status(400)
@@ -147,7 +148,7 @@ app.post("/api/agregar-medicamento", async (req, res) => {
   try {
     const db = await connect();
     const [result] = await db.execute(
-      "INSERT INTO medicamento (tipo_medicamento, frecuenciaToma, nombreMed, cantidadDosis, cantidadUnaCaja, cantidadCajas, caducidadMed, ultimaToma) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO medicamento (tipo_medicamento, frecuenciaToma, nombreMed, cantidadDosis, cantidadUnaCaja, cantidadCajas, caducidadMed, ultimaToma,Id_Usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
       [
         tipo_medicamento,
         frecuenciaToma || null,
@@ -157,6 +158,7 @@ app.post("/api/agregar-medicamento", async (req, res) => {
         cantidadCajas || null,
         caducidadMed || null,
         ultimaToma || null,
+        userId
       ]
     );
     await db.end();
@@ -177,6 +179,7 @@ app.post("/api/agregar-medicamento", async (req, res) => {
 });
 
 app.get("/getMedicamentos", async (req, res) => {
+  const userId = req.headers['user-id'];
   try {
     console.log("Intentando obtener medicamentos");
     const db = await connect();
@@ -190,7 +193,8 @@ app.get("/getMedicamentos", async (req, res) => {
         ultimaToma, 
         frecuenciaToma
       FROM medicamento
-    `);
+      Where Id_Usuario = ?
+    `, [userId]);
 
     await db.end();
     res.json(rows);
@@ -209,7 +213,8 @@ app.get("/getEventosMedicamentos", async (req, res) => {
         ultimaToma, 
         frecuenciaToma
       FROM medicamento
-    `);
+      Where Id_Usuario = ?
+    `, [userId]);
     await db.end();
 
     const medicamentos = rows.map(med => ({
