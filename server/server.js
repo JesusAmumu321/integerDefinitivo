@@ -100,14 +100,18 @@ app.post("/api/iniciar", async (req, res) => {
     const [rows] = await db.execute("SELECT * FROM usuarios WHERE correo = ?", [
       correo,
     ]);
-
     await db.end();
 
     if (rows.length > 0) {
       const user = rows[0];
+
       if (user.contrasena === contrasena) {
         const userId = await obtenerUserId(correo);
-        res.json({ autenticado: true, mensaje: "Inicio de sesión exitoso", userId });
+        res.json({
+          autenticado: true,
+          mensaje: "Inicio de sesión exitoso",
+          userId,
+        });
       } else {
         res
           .status(400)
@@ -120,13 +124,36 @@ app.post("/api/iniciar", async (req, res) => {
     }
   } catch (error) {
     console.error("Error al iniciar sesión:", error);
-    res
-      .status(500)
-      .json({ autenticado: false, mensaje: "Error al iniciar sesión" });
+    res.status(500).json({
+      autenticado: false,
+      mensaje: "Error al iniciar sesión",
+      error: error.message,
+    });
   }
 });
 
+async function obtenerUserId(correo) {
+  try {
+    const db = await connect();
+    const [rows] = await db.execute(
+      "SELECT id_usuario FROM usuarios WHERE correo = ?",
+      [correo]
+    );
+    await db.end();
+
+    if (rows.length > 0) {
+      return rows[0].id_usuario;
+    } else {
+      throw new Error("No se encontró ningún usuario con ese correo.");
+    }
+  } catch (error) {
+    console.error("Error al obtener el ID del usuario:", error);
+    throw error;
+  }
+}
+
 app.post("/api/agregar-medicamento", async (req, res) => {
+  const userId = req.headers["user-id"];
   const {
     tipo_medicamento,
     frecuenciaToma,
@@ -138,8 +165,7 @@ app.post("/api/agregar-medicamento", async (req, res) => {
     ultimaToma,
   } = req.body;
 
-  // Verificar campos obligatorios
-  if (!tipo_medicamento || !nombreMed || !cantidadDosis) {
+  if (!tipo_medicamento || !nombreMed || !cantidadDosis || !userId) {
     return res
       .status(400)
       .json({ success: false, message: "Faltan campos obligatorios" });
@@ -148,7 +174,7 @@ app.post("/api/agregar-medicamento", async (req, res) => {
   try {
     const db = await connect();
     const [result] = await db.execute(
-      "INSERT INTO medicamento (tipo_medicamento, frecuenciaToma, nombreMed, cantidadDosis, cantidadUnaCaja, cantidadCajas, caducidadMed, ultimaToma,Pk_Usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO medicamento (tipo_medicamento, frecuenciaToma, nombreMed, cantidadDosis, cantidadUnaCaja, cantidadCajas, caducidadMed, ultimaToma, Pk_Usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [
         tipo_medicamento,
         frecuenciaToma || null,
@@ -158,7 +184,7 @@ app.post("/api/agregar-medicamento", async (req, res) => {
         cantidadCajas || null,
         caducidadMed || null,
         ultimaToma || null,
-        userId
+        userId,
       ]
     );
     await db.end();
@@ -168,23 +194,22 @@ app.post("/api/agregar-medicamento", async (req, res) => {
       .json({ success: true, message: "Medicamento agregado con éxito" });
   } catch (error) {
     console.error("Error al insertar medicamento:", error);
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Error al agregar medicamento",
-        error: error.message,
-      });
+    res.status(500).json({
+      success: false,
+      message: "Error al agregar medicamento",
+      error: error.message,
+    });
   }
 });
 
 app.get("/getMedicamentos", async (req, res) => {
-  const userId = req.headers['user-id'];
+  const userId = req.headers["user-id"];
   try {
     console.log("Intentando obtener medicamentos");
     const db = await connect();
     console.log("Conexión a la base de datos establecida");
-    const [rows] = await db.execute(`
+    const [rows] = await db.execute(
+      `
       SELECT 
         nombreMed, 
         caducidadMed, 
@@ -194,39 +219,48 @@ app.get("/getMedicamentos", async (req, res) => {
         frecuenciaToma
       FROM medicamento
       Where Pk_Usuario = ?
-    `, [userId]);
+    `,
+      [userId]
+    );
 
     await db.end();
     res.json(rows);
   } catch (error) {
     console.error("Error detallado al obtener medicamentos:", error);
-    res.status(500).json({ message: "Error al obtener medicamentos", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error al obtener medicamentos", error: error.message });
   }
 });
 
 app.get("/getEventosMedicamentos", async (req, res) => {
-  const userId = req.headers['user-id'];
+  const userId = req.headers["user-id"];
   try {
     const db = await connect();
-    const [rows] = await db.execute(`
+    const [rows] = await db.execute(
+      `
       SELECT 
         nombreMed, 
         ultimaToma, 
         frecuenciaToma
       FROM medicamento
       Where Pk_Usuario = ?
-    `, [userId]);
+    `,
+      [userId]
+    );
     await db.end();
 
-    const medicamentos = rows.map(med => ({
+    const medicamentos = rows.map((med) => ({
       nombreMed: med.nombreMed,
       ultimaToma: med.ultimaToma,
-      frecuenciaToma: parseInt(med.frecuenciaToma)
+      frecuenciaToma: parseInt(med.frecuenciaToma),
     }));
 
     res.json(medicamentos);
   } catch (error) {
     console.error("Error al obtener medicamentos:", error);
-    res.status(500).json({ message: "Error al obtener medicamentos", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error al obtener medicamentos", error: error.message });
   }
 });
