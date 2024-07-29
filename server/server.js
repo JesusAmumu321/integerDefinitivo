@@ -148,7 +148,7 @@ app.post("/api/agregar-medicamento", async (req, res) => {
   try {
     const db = await connect();
     const [result] = await db.execute(
-      "INSERT INTO medicamento (tipo_medicamento, frecuenciaToma, nombreMed, cantidadDosis, cantidadUnaCaja, cantidadCajas, caducidadMed, ultimaToma,Id_Usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO medicamento (tipo_medicamento, frecuenciaToma, nombreMed, cantidadDosis, cantidadUnaCaja, cantidadCajas, caducidadMed, ultimaToma,Pk_Usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
       [
         tipo_medicamento,
         frecuenciaToma || null,
@@ -193,7 +193,7 @@ app.get("/getMedicamentos", async (req, res) => {
         ultimaToma, 
         frecuenciaToma
       FROM medicamento
-      Where Id_Usuario = ?
+      Where Pk_Usuario = ?
     `, [userId]);
 
     await db.end();
@@ -205,6 +205,7 @@ app.get("/getMedicamentos", async (req, res) => {
 });
 
 app.get("/getEventosMedicamentos", async (req, res) => {
+  const userId = req.headers['user-id'];
   try {
     const db = await connect();
     const [rows] = await db.execute(`
@@ -213,7 +214,7 @@ app.get("/getEventosMedicamentos", async (req, res) => {
         ultimaToma, 
         frecuenciaToma
       FROM medicamento
-      Where Id_Usuario = ?
+      Where Pk_Usuario = ?
     `, [userId]);
     await db.end();
 
