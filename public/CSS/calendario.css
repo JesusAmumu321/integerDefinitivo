@@ -440,48 +440,6 @@
   padding: 20px;
 }
 
-.borrar-eventos-btn {
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
-  padding: 15px 20px;
-  background-color: #ff4d4d;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.borrar-eventos-btn:hover {
-  background-color: #ff1a1a;
-}
-
-.borrar-eventos {
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  color: #878895;
-  border: 2px solid #878895;
-  opacity: 0.5;
-  border-radius: 50%;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-.borrar-eventos:hover {
-  opacity: 1;
-}
-
-.borrar-eventos i {
-  pointer-events: none;
-}
 
 /* test add responsivness */
 @media (max-width: 1000px) {
@@ -554,7 +512,7 @@
   flex-direction: row-reverse;
 }
 
-.treminar-toma-btn {
+.terminar-toma-btn {
   white-space: nowrap;
   background-color: #ff4d4d;
   color: var(--primary-clr);
@@ -566,8 +524,13 @@
   color: white;
 }
 
-.treminar-toma-btn:hover {
+.terminar-toma-btn:hover {
   background-color: var(--primary-clr);
   color: white;
   background-color: #ff0000;
+}
+
+.evento.terminado {
+  opacity: 0.6;
+  text-decoration: line-through;
 }
