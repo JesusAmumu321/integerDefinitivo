@@ -144,7 +144,7 @@
   "headersVisualiceSusMedicamentos": {
     "medicamento": "Medication",
     "caducidad": "Expiration",
-    "cantidadCaja": "Box quantity",
+    "cantidadCaja": "Quantity on box",
     "dosis": "Dose",
     "proxConsumo": "Next intake",
     "finConsumo": "End of intake"
