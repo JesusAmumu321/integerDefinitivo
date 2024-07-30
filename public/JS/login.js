@@ -30,7 +30,7 @@ async function handleLogin(event) {
   }
 
   // validacion simple para correo
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
   if (!emailRegex.test(correo)) {
     Swal.fire({
       icon: "error",
