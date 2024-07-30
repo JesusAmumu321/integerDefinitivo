@@ -237,31 +237,38 @@ app.get("/getEventosMedicamentos", async (req, res) => {
   const userId = req.headers["user-id"];
   try {
     const db = await connect();
-    const [rows] = await db.execute(
-      `
-      SELECT 
-        nombreMed, 
-        ultimaToma, 
-        frecuenciaToma
-      FROM medicamento
-      Where Pk_Usuario = ?
-    `,
-      [userId]
-    );
+    const [rows] = await db.execute(`
+      SELECT e.id_evento, e.titulo, e.fecha_hora, m.id_medicamento
+      FROM eventos e
+      JOIN medicamento m ON e.id_medicamento = m.id_medicamento
+      WHERE m.Pk_Usuario = ?
+      ORDER BY e.fecha_hora
+    `, [userId]);
     await db.end();
-
-    const medicamentos = rows.map((med) => ({
-      nombreMed: med.nombreMed,
-      ultimaToma: med.ultimaToma,
-      frecuenciaToma: parseInt(med.frecuenciaToma),
-    }));
-
-    res.json(medicamentos);
+    res.json(rows);
   } catch (error) {
-    console.error("Error al obtener medicamentos:", error);
-    res
-      .status(500)
-      .json({ message: "Error al obtener medicamentos", error: error.message });
+    console.error("Error al obtener eventos de medicamentos:", error);
+    res.status(500).json({ message: "Error al obtener eventos de medicamentos", error: error.message });
+  }
+});
+
+app.post("/borrarEvento", async (req, res) => {
+  const userId = req.headers["user-id"];
+  const { idEvento, idMedicamento } = req.body;
+
+  try {
+    const db = await connect();
+    await db.execute(`
+      DELETE FROM eventos 
+      WHERE id_evento = ? AND id_medicamento IN (
+        SELECT id_medicamento FROM medicamento WHERE Pk_Usuario = ?
+      )
+    `, [idEvento, userId]);
+    await db.end();
+    res.json({ success: true, message: "Evento borrado con éxito" });
+  } catch (error) {
+    console.error("Error al borrar evento:", error);
+    res.status(500).json({ success: false, message: "Error al borrar evento", error: error.message });
   }
 });
 
