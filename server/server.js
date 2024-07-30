@@ -237,18 +237,26 @@ app.get("/getEventosMedicamentos", async (req, res) => {
   const userId = req.headers["user-id"];
   try {
     const db = await connect();
-    const [rows] = await db.execute(`
+    const [rows] = await db.execute(
+      `
       SELECT e.id_evento, e.titulo, e.fecha_hora, m.id_medicamento
       FROM eventos e
       JOIN medicamento m ON e.id_medicamento = m.id_medicamento
       WHERE m.Pk_Usuario = ?
       ORDER BY e.fecha_hora
-    `, [userId]);
+    `,
+      [userId]
+    );
     await db.end();
     res.json(rows);
   } catch (error) {
     console.error("Error al obtener eventos de medicamentos:", error);
-    res.status(500).json({ message: "Error al obtener eventos de medicamentos", error: error.message });
+    res
+      .status(500)
+      .json({
+        message: "Error al obtener eventos de medicamentos",
+        error: error.message,
+      });
   }
 });
 
@@ -258,33 +266,47 @@ app.post("/borrarEvento", async (req, res) => {
 
   try {
     const db = await connect();
-    await db.execute(`
+    await db.execute(
+      `
       DELETE FROM eventos 
       WHERE id_evento = ? AND id_medicamento IN (
         SELECT id_medicamento FROM medicamento WHERE Pk_Usuario = ?
-    `, [idEvento, userId]);
+      )
+    `,
+      [idEvento, userId]
+    );
     await db.end();
     res.json({ success: true, message: "Evento borrado con éxito" });
   } catch (error) {
     console.error("Error al borrar evento:", error);
-    res.status(500).json({ success: false, message: "Error al borrar evento", error: error.message });
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "Error al borrar evento",
+        error: error.message,
+      });
   }
 });
 
-
-
 app.post("/api/agregar-contacto", async (req, res) => {
-  const { usuario, correo, razon_contacto, detalles, como_nos_ubico } = req.body;
+  const { usuario, correo, razon_contacto, detalles, como_nos_ubico } =
+    req.body;
 
   // Verificar campos obligatorios
   if (!usuario || !correo || !razon_contacto || !detalles || !como_nos_ubico) {
-    return res.status(400).json({ success: false, message: "Faltan campos obligatorios" });
+    return res
+      .status(400)
+      .json({ success: false, message: "Faltan campos obligatorios" });
   }
 
   try {
     const db = await connect();
     // Primero, intentamos obtener el id_usuario basado en el correo
-    const [userRows] = await db.execute("SELECT id_usuario FROM usuarios WHERE correo = ?", [correo]);
+    const [userRows] = await db.execute(
+      "SELECT id_usuario FROM usuarios WHERE correo = ?",
+      [correo]
+    );
     let id_usuario = null;
     if (userRows.length > 0) {
       id_usuario = userRows[0].id_usuario;
@@ -298,7 +320,9 @@ app.post("/api/agregar-contacto", async (req, res) => {
 
     await db.end();
 
-    res.status(200).json({ success: true, message: "Contacto registrado con éxito" });
+    res
+      .status(200)
+      .json({ success: true, message: "Contacto registrado con éxito" });
   } catch (error) {
     console.error("Error al insertar contacto:", error);
     res.status(500).json({

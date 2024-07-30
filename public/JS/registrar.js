@@ -29,6 +29,17 @@ export async function handleRegistro(event) {
     return;
   }
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+  if (!emailRegex.test(correo)) {
+    Swal.fire({
+      icon: "error",
+      title: "Correo inválido",
+      text: "Por favor, ingrese un correo electrónico válido.",
+      allowOutsideClick: false,
+    });
+    return;
+  }
+  
   if (contrasena !== confirmarContrasena) {
     Swal.fire({
       icon: "warning",
