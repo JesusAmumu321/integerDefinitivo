@@ -33,7 +33,6 @@ const meses = [
 let eventosArr = [];
 
 function iniciarCalendario() {
-  getEvents();
   const primerDia = new Date(año, mes, 1);
   const ultimoDia = new Date(año, mes + 1, 0);
   const ultimoDiaPrev = new Date(año, mes, 0);
@@ -52,26 +51,21 @@ function iniciarCalendario() {
 
   for (let i = 1; i <= fechaUltima; i++) {
     let evento = false;
-    eventosArr.forEach((objetoEvento) => {
-      if (
-        objetoEvento.dia === i &&
-        objetoEvento.mes === mes + 1 &&
-        objetoEvento.año === año
-      ) {
-        evento = true;
-      }
-    });
+    const eventosDia = eventosArr.find(e => e.dia === i && e.mes === mes + 1 && e.año === año);
+    if (eventosDia && eventosDia.eventos.length > 0) {
+      evento = true;
+    }
 
     if (
-      i === hoy.getDate() &&
-      año === hoy.getFullYear() &&
-      mes === hoy.getMonth()
+      i === new Date().getDate() &&
+      año === new Date().getFullYear() &&
+      mes === new Date().getMonth()
     ) {
       diaActivo = i;
       obtenerDiaActivo(i);
       actualizarEventos(i);
 
-      diasHtml += `<div class="dia siempre activo ${
+      diasHtml += `<div class="dia hoy activo ${
         evento ? "evento" : ""
       }">${i}</div>`;    
     } else {
@@ -97,120 +91,78 @@ function formatearHora(fecha) {
   return `${hora}:${minutos}`;
 }
 
-// Función para establecer la hora en una fecha
-function setHora(fecha, hora) {
-  return new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate(), hora, 0, 0);
-}
-
-// Función para encontrar la próxima hora válida desde la fecha actual
-function encontrarProximaHoraValida(fecha, horarios) {
-  const horaActual = fecha.getHours();
-  for (let hora of horarios) {
-      if (hora > horaActual || (hora === horaActual && fecha.getMinutes() === 0)) {
-          return setHora(fecha, hora);
-      }
+function obtenerUserId() {
+  const userId = localStorage.getItem('userId');
+  if (!userId) {
+    console.error('No se encontró ID de usuario. El usuario debe iniciar sesión.');
+    // Redirigir al usuario a la página de inicio de sesión si es necesario
+    // window.location.href = '/login';
+    return null;
   }
-  // Si no encontramos una hora válida hoy, ir al primer horario del día siguiente
-  return setHora(new Date(fecha.getTime() + 24 * 60 * 60 * 1000), horarios[0]);
-}
-
-// Función para generar eventos automáticos
-function generarEventosAutomaticos(titulo, intervaloHoras, fechaFin, eventosArr, saveEvents, iniciarCalendario) {
-  let fechaActual = new Date();
-
-  if (typeof fechaFin === "string") {
-      fechaFin = new Date(fechaFin);
-  }
-
-  const fechaFinal = new Date(fechaFin);
-  fechaFinal.setHours(23, 59, 59, 999);
-
-  const horarios = {
-      8: [7, 15, 23],  // 7:00, 15:00, 23:00
-      6: [8, 14, 20],  // 8:00, 14:00, 20:00
-      12: [8, 20],     // 8:00, 20:00
-      24: [8],         // 8:00
-      10: [8, 18],     // 8:00, 18:00
-  }[intervaloHoras];
-
-  if (!horarios) {
-      console.error("Intervalo de horas no soportado");
-      return;
-  }
-
-  fechaActual = encontrarProximaHoraValida(fechaActual, horarios);
-
-  while (fechaActual <= fechaFinal) {
-      const eventoExistente = eventosArr.find(
-          (evento) =>
-              evento.dia === fechaActual.getDate() &&
-              evento.mes === fechaActual.getMonth() + 1 &&
-              evento.año === fechaActual.getFullYear() &&
-              evento.eventos.some(
-                  (e) => e.titulo === titulo && e.tiempo === formatearHora(fechaActual)
-              )
-      );
-
-      if (!eventoExistente) {
-          const evento = {
-              dia: fechaActual.getDate(),
-              mes: fechaActual.getMonth() + 1,
-              año: fechaActual.getFullYear(),
-              eventos: [
-                  {
-                      titulo: titulo,
-                      tiempo: formatearHora(fechaActual),
-                      esAutomatico: true,
-                  },
-              ],
-          };
-
-          eventosArr.push(evento);
-      }
-
-      // Encontrar la próxima hora válida
-      let proximaHora = horarios[(horarios.indexOf(fechaActual.getHours()) + 1) % horarios.length];
-
-      if (proximaHora <= fechaActual.getHours()) {
-          // Si la próxima hora es menor o igual, significa que pasamos al día siguiente
-          fechaActual = new Date(fechaActual.getTime() + 24 * 60 * 60 * 1000);
-      }
-      fechaActual = setHora(fechaActual, proximaHora);
-  }
-
-  saveEvents();
-  iniciarCalendario();
-}
-
-// Función para obtener los datos de la API
-async function obtenerDatosDeAPI() {
-  try {
-      const response = await fetch('/getEventosMedicamentos');
-      const medicamentos = await response.json();
-      return medicamentos;
-  } catch (error) {
-      console.error('Error al obtener datos de la API:', error);
-      return [];
-  }
+  return userId;
 }
 
 async function inicializarGeneracionDeEventos() {
-  const medicamentos = await obtenerDatosDeAPI();
+  const userId = obtenerUserId();
+  if (!userId) {
+    console.error('No se pudo obtener el ID del usuario');
+    return;
+  }
 
-  // Usar el eventosArr global en lugar de crear uno nuevo
-  eventosArr = [];
+  try {
+    const response = await fetch('/getEventosMedicamentos', {
+      headers: {
+        'user-id': userId
+      }
+    });
 
-  medicamentos.forEach(med => {
-    const { nombreMed, ultimaToma, frecuenciaToma } = med;
-    generarEventosAutomaticos(nombreMed, frecuenciaToma, ultimaToma, eventosArr, saveEvents, iniciarCalendario);
-  });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-  // Llamar a iniciarCalendario después de generar todos los eventos
-  iniciarCalendario();
+    const eventos = await response.json();
+    console.log('Eventos recibidos:', eventos);
+
+    if (eventos.length === 0) {
+      console.log('No se recibieron eventos');
+      return;
+    }
+
+    eventosArr = eventos.map(evento => {
+      const fechaEvento = new Date(evento.fecha_hora);
+      return {
+        dia: fechaEvento.getDate(),
+        mes: fechaEvento.getMonth() + 1,
+        año: fechaEvento.getFullYear(),
+        eventos: [{
+          titulo: evento.titulo,
+          tiempo: formatearHora(fechaEvento),
+          id: evento.id_evento,
+          id_medicamento: evento.id_medicamento
+        }]
+      };
+    });
+
+    console.log('Eventos procesados:', eventosArr);
+
+    // Agrupar eventos del mismo día
+    eventosArr = eventosArr.reduce((acc, curr) => {
+      const existingEvent = acc.find(e => e.dia === curr.dia && e.mes === curr.mes && e.año === curr.año);
+      if (existingEvent) {
+        existingEvent.eventos.push(...curr.eventos);
+      } else {
+        acc.push(curr);
+      }
+      return acc;
+    }, []);
+
+    console.log('Eventos agrupados:', eventosArr);
+
+    iniciarCalendario(); // Llamar a esto aquí
+  } catch (error) {
+    console.error('Error al obtener eventos:', error);
+  }
 }
-
-// Llamada para iniciar la generación de eventos
-inicializarGeneracionDeEventos();
 
 function formatearHora(fecha) {
   let horas = fecha.getHours();
@@ -265,18 +217,34 @@ function agregarEscuchador() {
   const dias = document.querySelectorAll(".dia");
   dias.forEach((dia) => {
     dia.addEventListener("click", (e) => {
-      diaActivo = parseInt(e.target.innerHTML);
+      diaActivo = Number(e.target.textContent);
       obtenerDiaActivo(diaActivo);
       actualizarEventos(diaActivo);
 
-      dias.forEach((dia) => {
-        dia.classList.remove("activo");
+      dias.forEach((d) => {
+        d.classList.remove("activo");
       });
 
       if (e.target.classList.contains("prev-date")) {
         mesAnterior();
+        setTimeout(() => {
+          const nuevoDias = document.querySelectorAll(".dia");
+          nuevoDias.forEach((d) => {
+            if (!d.classList.contains("prev-date") && d.textContent === e.target.textContent) {
+              d.classList.add("activo");
+            }
+          });
+        }, 100);
       } else if (e.target.classList.contains("next-date")) {
         mesSiguiente();
+        setTimeout(() => {
+          const nuevoDias = document.querySelectorAll(".dia");
+          nuevoDias.forEach((d) => {
+            if (!d.classList.contains("next-date") && d.textContent === e.target.textContent) {
+              d.classList.add("activo");
+            }
+          });
+        }, 100);
       } else {
         e.target.classList.add("activo");
       }
@@ -295,120 +263,74 @@ function obtenerDiaActivo(fecha) {
 
 function actualizarEventos(fecha) {
   let eventos = "";
-  eventosArr.forEach((eventoDia, indexDia) => {
-    if (
-      fecha === eventoDia.dia &&
-      mes + 1 === eventoDia.mes &&
-      año === eventoDia.año
-    ) {
-      eventoDia.eventos.forEach((evento, indexEvento) => {
-        eventos += `
-          <div class="evento">
-            <div class="evento-contenido">
-              <div class="titulo">
-                <i class="fas fa-circle"></i>
-                <h3 class="titulo-evento">${evento.titulo}</h3>
-              </div>
-              <div class="hora-evento">
-                <span>${evento.tiempo}</span>
-              </div>
+  const eventosDia = eventosArr.find(e => e.dia === fecha && e.mes === mes + 1 && e.año === año);
+  
+  if (eventosDia) {
+    eventosDia.eventos.forEach((evento) => {
+      eventos += `
+        <div class="evento">
+          <div class="evento-contenido">
+            <div class="titulo">
+              <i class="fas fa-circle"></i>
+              <h3 class="titulo-evento">${evento.titulo}</h3>
             </div>
-            <div class="boton-contenedor">
-            <button class="treminar-toma-btn" onclick="borrarEvento(${indexDia}, ${indexEvento})">Borrar evento</button>
+            <div class="hora-evento">
+              <span>${evento.tiempo}</span>
             </div>
-          </div>`;
-      });
-    }
-  });
+          </div>
+          <div class="boton-contenedor">
+            <button class="treminar-toma-btn" onclick="borrarEvento(${evento.id}, ${evento.id_medicamento})">Borrar evento</button>
+          </div>
+        </div>`;
+    });
+  }
 
   if (eventos === "") {
-    eventos =
-      '<div class="no-evento"><h3 >Sin eventos</h3></div>';
+    eventos = '<div class="no-evento"><h3>Sin eventos</h3></div>';
   }
   eventosContenedor.innerHTML = eventos;
-  saveEvents();
 }
 
-function borrarEvento(indexDia, indexEvento) {
-  let eventoABorrar = eventosArr[indexDia].eventos[indexEvento];
-  
-  Swal.fire({
-    title: '¿Estás seguro?',
-    text: `¿Quieres borrar el evento "${eventoABorrar.titulo}" a las ${eventoABorrar.tiempo}?`,
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Sí, borrarlo',
-    cancelButtonText: 'Cancelar'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      eventosArr[indexDia].eventos.splice(indexEvento, 1);
+async function borrarEvento(idEvento, idMedicamento) {
+  try {
+    // Preguntar al usuario si realmente desea borrar el evento
+    const resultado = await Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¿Quieres borrar este evento?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, bórralo',
+      cancelButtonText: 'Cancelar'
+    });
+
+    // Si el usuario confirma, proceder con el borrado
+    if (resultado.isConfirmed) {
+      const response = await fetch('/borrarEvento', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'user-id': obtenerUserId()
+        },
+        body: JSON.stringify({ idEvento, idMedicamento })
+      });
       
-      if (eventosArr[indexDia].eventos.length === 0) {
-        eventosArr.splice(indexDia, 1);
+      if (response.ok) {
+        await Swal.fire('¡Borrado!', 'El evento ha sido eliminado.', 'success');
+        await inicializarGeneracionDeEventos(); // Recargar eventos
+      } else {
+        throw new Error('Error al borrar el evento');
       }
-      
-      saveEvents();
-      iniciarCalendario();
-      
-      Swal.fire(
-        '¡Borrado!',
-        'El evento ha sido eliminado.',
-        'success'
-      );
     }
-  });
-}
-
-function saveEvents() {
-  localStorage.setItem("events", JSON.stringify(eventosArr));
-}
-
-function getEvents() {
-  const storedEvents = localStorage.getItem("events");
-  if (storedEvents === null || storedEvents === "[]") {
-    eventosArr = [];
-  } else {
-    eventosArr = JSON.parse(storedEvents);
+  } catch (error) {
+    console.error('Error:', error);
+    await Swal.fire('Error', 'No se pudo borrar el evento', 'error');
   }
-}
-
-function borrarEventosAutomaticos() {
-  
-  Swal.fire({
-    title: '¿Estás seguro?',
-    text: '¿Quieres borrar todos los eventos?',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Sí, borrarlos todos',
-    cancelButtonText: 'Cancelar'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      const cantidadAntes = eventosArr.length;
-      
-      eventosArr = eventosArr.filter(
-        (evento) => !evento.eventos.some((e) => e.esAutomatico)
-      );
-
-      const cantidadDespues = eventosArr.length;
-      const eventosBorrados = cantidadAntes - cantidadDespues;
-
-      saveEvents();
-      iniciarCalendario();
-
-      Swal.fire(
-        '¡Borrados!',
-        `Se han eliminado ${eventosBorrados} eventos.`,
-        'success'
-      );
-    }
-  });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  iniciarCalendario();
-  inicializarGeneracionDeEventos();
+  inicializarGeneracionDeEventos().then(() => {
+    iniciarCalendario();
+  });
 });
