@@ -8,6 +8,8 @@
   <title>Med & Track - Contáctanos</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="../JS/langs.js"></script>
+  <script type="module" src="../JS/contactUs.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -45,7 +47,7 @@
         data-value="contactenosHeader">
         Contáctenos
       </h2>
-      <form class="space-y-4 md:space-y-6">
+      <form class="space-y-4 md:space-y-6" id="formularioContacto">
         <div>
           <label for="usuario" data-section="contactenosForm" data-value="labelNombreUsuario"
             class="block text-lg md:text-xl font-medium text-gray-700 mb-1">
@@ -136,7 +138,7 @@
         </div>
 
         <div class="flex flex-col items-end">
-          <button id="envioContacto" type="submit"
+          <button id="envioContacto"
             class="w-full sm:w-auto relative inline-flex items-center justify-center px-6 py-3 overflow-hidden rounded-lg group bg-black text-white hover:text-white text-base md:text-lg transition duration-300 ease-in-out transform hover:scale-105">
             <span
               class="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-700 rounded-full group-hover:w-56 group-hover:h-56"></span>
