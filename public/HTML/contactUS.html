@@ -6,6 +6,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Med & Track - Contáctanos</title>
+  <link rel="icon" href="../assets/LOGO_VECTORIZADOsvg.svg" type="image/x-icon">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="../JS/langs.js"></script>
   <script type="module" src="../JS/contactUs.js"></script>
@@ -32,8 +33,11 @@
     <!-- Sección izquierda (logo e imagen) -->
     <div class="w-full md:w-1/2 bg-cover bg-center h-64 md:h-auto relative">
       <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center p-4">
-        <img src="../assets/LOGO_VECTORIZADOsvg.svg" class="h-32 w-32 rounded-full object-cover shadow-lg mb-4" />
+        <a href="../HTML/agregarMed.html">
+          <img src="../assets/LOGO_VECTORIZADOsvg.svg" class="h-32 w-32 rounded-full object-cover shadow-lg mb-4" />
+        </a>
         <div class="text-white text-center">
+
           <h1 class="text-3xl md:text-5xl font-bold mb-2">Med & Track</h1>
           <p class="text-lg md:text-xl" data-section="contactenosForm" data-value="ladoDerecho">Su compañero de salud
           </p>
@@ -64,7 +68,7 @@
             Dirección de correo electrónico
             <span class="text-red-500">*</span>
           </label>
-          <input type="email" name="correo" id="correo" required            
+          <input type="email" name="correo" id="correo" required
             class="w-full px-3 py-2 text-base md:text-lg border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black transition duration-300 ease-in-out transform hover:scale-105" />
         </div>
         <div>

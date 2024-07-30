@@ -97,8 +97,8 @@
   },
 
   "seccionAnadaMedicamento": {
-    "h2": "Añada un medicamento",
-    "p": "Para añadir un medicamento, asegúrese de completar correctamente todos los campos."
+    "h2": "Agregue un medicamento",
+    "p": "Para agregar un medicamento, asegúrese de completar correctamente todos los campos."
   },
 
   "formularioAnadirMedicamento": {

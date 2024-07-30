@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Med & Track</title>
+  <link rel="icon" href="../assets/LOGO_VECTORIZADOsvg.svg" type="image/x-icon">
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- <script type="module" src="../JS/main.js"></script> -->
   <script type="module" src="../JS/mainPageHeader.js"></script>
@@ -97,7 +98,7 @@
                 <!-- Dropdown menu -->
                 <div id="dropdownNavbar" class="hidden bg-white z-10 divide-y divide-gray-100 rounded shadow">
 
-                  <div id="flags" class="flags py-1 flex flex-wrap" aria-labelledby="dropdownLargeButton">
+                  <div id="flags" class="flags py-1 flex flex-column" aria-labelledby="dropdownLargeButton">
 
                     <div class="flags__item" data-language="es">
                       <!-- <li> -->
@@ -105,6 +106,14 @@
                         class="langs translate text-sm hover:bg-gray-100 text-zinc-400 hover:text-gray-700 hover:italic hover:font-bold hover:rounded block px-4 py-2 ml-2">Español</button>
                       <!-- </li> -->
                     </div>
+
+
+                    <p style="cursor: default;" class="py-1">
+                      |
+                    </p>
+
+
+
 
                     <div class="flags__item" data-language="en">
                       <!-- <li style="cursor: default;" class="py-1">|</li> -->
@@ -116,22 +125,6 @@
 
                   </div>
                 </div> <!-- DIV dropdownNavbar-->
-              </li>
-
-              <li class="py-2 md:py-0">
-                <a href="../HTML/contactUS.html" data-translate-key="headerMain.contactUs"
-                  class="text-zinc-400 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-gray-500 md:hover:italic hover:font-bold md:p-0 font-medium"
-                  data-section="headerMain" data-value="contactenos">
-                  Contáctenos
-                </a>
-              </li>
-
-              <li class="py-2 md:py-0">
-                <a href="https://www.utch.edu.mx" data-translate-key="headerMain.utch"
-                  class="text-zinc-400 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-gray-500 md:hover:italic hover:font-bold md:p-0 font-medium"
-                  data-section="headerMain" data-value="utch">
-                  Utch
-                </a>
               </li>
 
               <li class="py-2 md:py-0">
@@ -147,6 +140,15 @@
                   class="text-zinc-400 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-gray-500 md:hover:italic hover:font-bold md:p-0 font-medium"
                   data-section="headerMain" data-value="registrese">
                   Regístrese
+                </a>
+              </li>
+
+
+              <li class="py-2 md:py-0">
+                <a href="https://www.utch.edu.mx" data-translate-key="headerMain.utch"
+                  class="text-zinc-400 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-gray-500 md:hover:italic hover:font-bold md:p-0 font-medium"
+                  data-section="headerMain" data-value="utch">
+                  Utch
                 </a>
               </li>
 

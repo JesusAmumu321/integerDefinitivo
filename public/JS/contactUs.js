@@ -1,6 +1,3 @@
-// JavaScript Code Review
-
-// 1. Event Listener Setup
 document.addEventListener("DOMContentLoaded", () => {
     console.log("DOM fully loaded");
     const form = document.getElementById("formularioContacto");
@@ -12,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// 2. Form Submission Handler
+
 async function handleContacto(event) {
     console.log("Función handleContacto llamada");
     event.preventDefault();

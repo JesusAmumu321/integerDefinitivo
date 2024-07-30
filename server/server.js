@@ -251,12 +251,10 @@ app.get("/getEventosMedicamentos", async (req, res) => {
     res.json(rows);
   } catch (error) {
     console.error("Error al obtener eventos de medicamentos:", error);
-    res
-      .status(500)
-      .json({
-        message: "Error al obtener eventos de medicamentos",
-        error: error.message,
-      });
+    res.status(500).json({
+      message: "Error al obtener eventos de medicamentos",
+      error: error.message,
+    });
   }
 });
 
@@ -279,18 +277,16 @@ app.post("/borrarEvento", async (req, res) => {
     res.json({ success: true, message: "Evento borrado con éxito" });
   } catch (error) {
     console.error("Error al borrar evento:", error);
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Error al borrar evento",
-        error: error.message,
-      });
+    res.status(500).json({
+      success: false,
+      message: "Error al borrar evento",
+      error: error.message,
+    });
   }
 });
 
 app.post("/api/agregar-contacto", async (req, res) => {
-  const { usuario, correo, razon_contacto, detalles, como_nos_ubico } =
+    const { usuario, correo, razon_contacto, detalles, como_nos_ubico } =
     req.body;
 
   // Verificar campos obligatorios

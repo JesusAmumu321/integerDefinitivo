@@ -190,6 +190,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   };
-
-  // esto es para el calendaroi
 });
