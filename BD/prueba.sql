@@ -20,6 +20,7 @@ CREATE TABLE usuarios (
 );
 
 CREATE TABLE medicamento (
+  id_medicamento int auto_increment primary key,
   tipo_medicamento varchar(30) NOT NULL,
   cantidadUnaCaja INT NOT NULL,
   cantidadCajas INT NOT NULL,
@@ -34,7 +35,7 @@ CREATE TABLE medicamento (
 
 
 
-drop table medicamento;
+-- drop table medicamento;
 
 desc medicamento;
 -- drop table medicamento;
@@ -58,3 +59,80 @@ CREATE TABLE contactos (
   FOREIGN KEY (correo) REFERENCES usuarios(correo)
 );
 select * from contactos;
+
+CREATE TABLE eventos (
+  id_evento INT PRIMARY KEY AUTO_INCREMENT,
+  id_medicamento INT NOT NULL,
+  titulo VARCHAR(100) NOT NULL,
+  fecha_hora DATETIME NOT NULL,
+  FOREIGN KEY (id_medicamento) REFERENCES medicamento(id_medicamento)
+);
+-- drop table eventos;
+
+select * from eventos;
+
+DELIMITER //
+
+DELIMITER //
+
+CREATE PROCEDURE GenerarEventosMedicamento(
+    IN p_id_medicamento INT,
+    IN p_nombre_med VARCHAR(30),
+    IN p_frecuencia_toma INT,
+    IN p_ultima_toma DATE
+)
+BEGIN
+    DECLARE fecha_actual DATE;
+    DECLARE fecha_final DATE;
+    
+    SET fecha_actual = CURDATE(); -- Empezamos desde hoy
+    SET fecha_final = p_ultima_toma;
+    
+    WHILE fecha_actual <= fecha_final DO
+        CASE p_frecuencia_toma
+            WHEN 8 THEN
+                INSERT INTO eventos (id_medicamento, titulo, fecha_hora)
+                VALUES (p_id_medicamento, p_nombre_med, TIMESTAMP(fecha_actual, '07:00:00')),
+                       (p_id_medicamento, p_nombre_med, TIMESTAMP(fecha_actual, '15:00:00')),
+                       (p_id_medicamento, p_nombre_med, TIMESTAMP(fecha_actual, '23:00:00'));
+            WHEN 6 THEN
+                INSERT INTO eventos (id_medicamento, titulo, fecha_hora)
+                VALUES (p_id_medicamento, p_nombre_med, TIMESTAMP(fecha_actual, '08:00:00')),
+                       (p_id_medicamento, p_nombre_med, TIMESTAMP(fecha_actual, '14:00:00')),
+                       (p_id_medicamento, p_nombre_med, TIMESTAMP(fecha_actual, '20:00:00'));
+            WHEN 12 THEN
+                INSERT INTO eventos (id_medicamento, titulo, fecha_hora)
+                VALUES (p_id_medicamento, p_nombre_med, TIMESTAMP(fecha_actual, '08:00:00')),
+                       (p_id_medicamento, p_nombre_med, TIMESTAMP(fecha_actual, '20:00:00'));
+            WHEN 24 THEN
+                INSERT INTO eventos (id_medicamento, titulo, fecha_hora)
+                VALUES (p_id_medicamento, p_nombre_med, TIMESTAMP(fecha_actual, '08:00:00'));
+            WHEN 10 THEN
+                INSERT INTO eventos (id_medicamento, titulo, fecha_hora)
+                VALUES (p_id_medicamento, p_nombre_med, TIMESTAMP(fecha_actual, '08:00:00')),
+                       (p_id_medicamento, p_nombre_med, TIMESTAMP(fecha_actual, '18:00:00'));
+        END CASE;
+        
+        SET fecha_actual = DATE_ADD(fecha_actual, INTERVAL 1 DAY);
+    END WHILE;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE TRIGGER after_medicamento_insert
+AFTER INSERT ON medicamento
+FOR EACH ROW
+BEGIN
+    CALL GenerarEventosMedicamento(
+        NEW.id_medicamento,
+        NEW.nombreMed,
+        NEW.frecuenciaToma,
+        NEW.ultimaToma
+    );
+END //
+
+DELIMITER ;
+-- DROP PROCEDURE IF EXISTS GenerarEventosMedicamento;
+-- DROP TRIGGER IF EXISTS after_medicamento_insert;
