@@ -262,7 +262,6 @@ app.post("/borrarEvento", async (req, res) => {
       DELETE FROM eventos 
       WHERE id_evento = ? AND id_medicamento IN (
         SELECT id_medicamento FROM medicamento WHERE Pk_Usuario = ?
-      )
     `, [idEvento, userId]);
     await db.end();
     res.json({ success: true, message: "Evento borrado con éxito" });
