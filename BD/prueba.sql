@@ -33,8 +33,6 @@ CREATE TABLE medicamento (
   foreign key (Pk_Usuario) references usuarios(id_usuario)
 );
 
-
-
 -- drop table medicamento;
 
 desc medicamento;
@@ -60,6 +58,7 @@ CREATE TABLE contactos (
 );
 select * from contactos;
 
+
 CREATE TABLE eventos (
   id_evento INT PRIMARY KEY AUTO_INCREMENT,
   id_medicamento INT NOT NULL,
@@ -70,8 +69,6 @@ CREATE TABLE eventos (
 -- drop table eventos;
 
 select * from eventos;
-
-DELIMITER //
 
 DELIMITER //
 
@@ -134,5 +131,3 @@ BEGIN
 END //
 
 DELIMITER ;
--- DROP PROCEDURE IF EXISTS GenerarEventosMedicamento;
--- DROP TRIGGER IF EXISTS after_medicamento_insert;
