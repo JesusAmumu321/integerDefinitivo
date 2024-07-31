@@ -15,10 +15,10 @@
       "Descargue su calendario en cualquier momento."
     ],
     "gifs": [
-      "https://github.com/JesusAmumu321/integerDefinitivo/blob/6a5f07d8437fe68d960608378d428f22f05257cc/public/assets/logo.png",
-      "https://github.com/JesusAmumu321/integerDefinitivo/blob/main/public/assets/images/Crear1.png",
-      "https://github.com/JesusAmumu321/integerDefinitivo/blob/main/public/assets/images/imagen2.png",
-      "https://github.com/JesusAmumu321/integerDefinitivo/blob/main/public/assets/images/calendario_med_and_track.png"
+      "../assets/logo.png",
+      "../assets/images/Crear1.png",
+      "../assets/images/imagen2.png",
+      "../assets/images/calendario_med_and_track.png"
     ]
   },
 
