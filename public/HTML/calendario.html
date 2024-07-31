@@ -20,6 +20,8 @@
   <script type="module" src="../JS/mainPageHeader.js"></script>
   <script src="../JS/langs.js"></script>
   <script src="../JS/calendario.js" defer></script>
+  <script src="../JS/btnDscarga.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
   <script>
     tailwind.config = {
@@ -199,7 +201,7 @@
         </p>
       </div>
 
-      <div
+      <div id="mi-calendario"
         class="relative w-full max-w-[1600px] min-h-[900px] mx-auto p-[5px] text-white flex rounded-[10px] bg-[#d9d9d9] container">
 
         <div class="w-full lg:w-[90%] p-[20px] izquierda">
@@ -286,7 +288,11 @@
             <div class="agregar-pie-pag">
               <button class="agregar-evento-btn">Agregar Evento</button>
 
+
+
+
             </div>
+
 
           </div>
 
