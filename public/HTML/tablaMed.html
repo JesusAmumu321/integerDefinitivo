@@ -152,13 +152,13 @@
             </li>
 
             <li class="py-2 md:py-0">
-             
+
               <a href="../HTML/contactUS.html" data-translate-key="headerMain.contactUs"
                 class="text-zinc-400 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-gray-500 md:hover:italic hover:font-bold md:p-0 font-medium"
                 data-section="headerMain" data-value="contactenos">
                 Contáctenos
               </a>
-            
+
             </li>
 
             <li class="py-2 md:py-0">
@@ -167,55 +167,81 @@
                 data-section="headerMain" data-value="utch">
                 Utch
               </a>
+
             </li>
+
           </ul>
+
         </div>
+
       </div>
     </nav>
 
     <section class="flex-1 flex flex-col p-5 bg-white">
 
       <div class="mb-4">
+
         <div class="inline-flex bg-gray-100 rounded-lg overflow-hidden">
+
           <a href="../HTML/agregarMed.html" data-section="textosNavPaginas" data-value="agregarMedicamento"
             class="px-4 py-1.5 text-gray-600 text-m hover:bg-hd-personalizado hover:ease-in-out hover:duration-300 hover:z-10 hover:transition-colors hover:rounded">Agregar
             Medicamento</a>
+
           <a data-section="textosNavPaginas" data-value="susMedicamentos"
             class="bg-white border-solid border-2 rounded-lg font-semibold 1 border-bg-personalizado px-4 py-1.5 text-gray-600 text-m">Sus
             Medicamentos</a>
+
           <a href="../HTML/calendario.html" data-section="textosNavPaginas" data-value="calendario"
             class="px-4 py-1.5 text-gray-600 text-m hover:bg-hd-personalizado hover:ease-in-out hover:duration-300 hover:z-10 hover:transition-colors hover:rounded">Calendario</a>
         </div>
+
       </div>
 
       <div class="flex flex-col items-center border-b-2 border-t-2 py-3 my-4">
+
         <h2 data-section="seccionVisualiceSusMedicamentos" data-value="h2" class="text-g font-bold mb-2">Visualice sus
           Medicamentos</h2>
+
         <p data-section="seccionVisualiceSusMedicamentos" data-value="p" class="text-s mb-2 text-center">Aquí puede ver
           todos los medicamentos que ha agregado.</p>
+
       </div>
 
       <div class="flex-grow flex justify-center items-start p-5 bg-gray-100 overflow-x-auto">
+
         <div class="w-full">
+
           <table class="w-full table-auto border-collapse mb-2 text-m tabla-responsive ">
+
             <thead class="bg-gray-800 text-white">
+
               <tr>
+
                 <th data-section="headersVisualiceSusMedicamentos" data-value="medicamento" class="p-2 text-left">
-                  Medicamento</th>
+                  cMedicamento </th>
+
                 <th data-section="headersVisualiceSusMedicamentos" data-value="caducidad" class="p-2 text-left">
-                  Caducidad</th>
+                  Caducidad </th>
+
                 <th data-section="headersVisualiceSusMedicamentos" data-value="cantidadCaja" class="p-2 text-left">
-                  Cantidad de la caja</th>
-                <th data-section="headersVisualiceSusMedicamentos" data-value="dosis" class="p-2 text-left">Dosis</th>
+                  Cantidad de la caja </th>
+
+                <th data-section="headersVisualiceSusMedicamentos" data-value="dosis" class="p-2 text-left"> Dosis </th>
+
                 <th data-section="headersVisualiceSusMedicamentos" data-value="proxConsumo" class="p-2 text-left">
-                  Próximo consumo</th>
+                  Próximo consumo </th>
+
                 <th data-section="headersVisualiceSusMedicamentos" data-value="finConsumo" class="p-2 text-left">Fin de
-                  consumo</th>
+                  consumo </th>
+
               </tr>
+
             </thead>
+
             <tbody id="laTablona">
-              <!-- Las filas se insertarán dinámicamente aquí -->
+              <!-- las filas de la tabla se van a insertar aqui con el js -->
             </tbody>
+
           </table>
         </div>
       </div>
@@ -224,20 +250,29 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+
       const tabla = document.getElementById('laTablona');
+
       const filas = tabla.getElementsByTagName('tr');
 
       for (let i = 0; i < filas.length; i++) {
+
         const celdas = filas[i].getElementsByTagName('td');
+
         for (let j = 0; j < celdas.length; j++) {
+
           const encabezado = document.querySelector('th:nth-child(' + (j + 1) + ')');
+
           celdas[j].setAttribute('data-label', encabezado.textContent);
 
           const contenido = celdas[j].innerHTML;
+
           celdas[j].innerHTML = '<span>' + contenido + '</span>';
         }
       }
+
     });
+
   </script>
 </body>
 
