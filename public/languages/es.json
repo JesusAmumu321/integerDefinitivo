@@ -15,8 +15,8 @@
       "Descargue su calendario en cualquier momento."
     ],
     "gifs": [
-      "url_del_gif_1.gif",
-      "url_del_gif_2.gif",
+      "../assets/imagenesMain/img1.png",
+      "../assets/imagenesMain/img2.png",
       "url_del_gif_3.gif",
       "url_del_gif_4.gif"
     ]
@@ -134,7 +134,6 @@
     "cada24Hrs": "Cada 24 horas",
 
     "botonAgregar": "Agregar"
-
   },
 
   "seccionVisualiceSusMedicamentos": {
@@ -180,7 +179,6 @@
       "6": "Sábado",
       "7": "Domingo"
     },
-   
 
     "irCalendario": "Ir",
 
