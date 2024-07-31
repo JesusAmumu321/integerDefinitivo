@@ -4,23 +4,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calendario - Med & Track</title>
 
+  <title>Calendario - Med & Track</title>
   <link rel="icon" href="../assets/LOGO_VECTORIZADOsvg.svg" type="image/x-icon">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script type="module" src="../JS/mainPageHeader.js"></script>
+
   <link rel="stylesheet" href="../CSS/calendario.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <script type="module" src="../JS/mainPageHeader.js"></script>
   <script src="../JS/langs.js"></script>
-
   <script src="../JS/calendario.js" defer></script>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
-
 
   <script>
     tailwind.config = {
@@ -42,6 +41,7 @@
       },
     };
   </script>
+
   <style>
     @media (max-width: 768px) {
       .container {
@@ -64,6 +64,7 @@
       }
     }
   </style>
+
 </head>
 
 <body class="min-h-full m-0 p-0 bg-bg-personalizado flex justify-center items-center overflow-x-hidden font-roboto">
@@ -71,130 +72,143 @@
 
     <nav class="max-w-2xl p-2 w-full mx-auto mb-2 text-xl">
 
-      <!-- ------------------------------------------------------- -->
-
       <div class="container flex flex-col items-center">
 
         <div class="flex items-center justify-center w-full mb-4">
           <img src="../assets/LOGO_VECTORIZADOsvg.svg" alt="logo" class="h-12 mr-2" />
           <span class="self-center font-semibold whitespace-nowrap" style="cursor: default;">Med & Track</span>
-        </div>
 
-        <!-- ------------------------------------------------------- -->
+          <!-- BOTON PARA EL MENIU EN CELULAR -->
+          <button data-collapse-toggle="mobile-menu" type="button"
+            class="md:hidden ml-3 text-gray-400 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg inline-flex items-center justify-center"
+            aria-controls="mobile-menu-2" aria-expanded="false">
+            <span class="sr-only">abrir menu movil</span>
 
-        <!-- BOTON PARA EL MENIU EN CELULAR -->
-        <button data-collapse-toggle="mobile-menu" type="button"
-          class="md:hidden ml-3 text-gray-400 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg inline-flex items-center justify-center"
-          aria-controls="mobile-menu-2" aria-expanded="false">
-          <span class="sr-only">abrir menu movil</span>
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd"></path>
+            </svg>
 
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-              clip-rule="evenodd"></path>
-          </svg>
+          </button>
 
-        </button>
+          <div class="hidden md:block w-full md:w-auto" id="mobile-menu">
 
-        <div class="hidden md:block w-full md:w-auto" id="mobile-menu">
+            <ul class="flex-col md:flex-row flex md:space-x-8 mt-4 md:mt-0 md:font-medium">
 
-          <ul class="flex-col md:flex-row flex md:space-x-8 mt-4 md:mt-0 md:font-medium">
+              <li class="py-2 md:py-0">
+                <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
+                  class="text-zinc-400 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 pl-3 pr-4 py-2 md:hover:text-gray-500 md:hover:italic hover:font-bold md:p-0 font-medium flex items-center justify-between w-full md:w-auto">
+                  <span data-section="headerMain" data-value="idioma">Idioma</span>
+                  <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 111.414 1.414l-4 4a1 1 01-1.414 0l-4-4a1 1 010-1.414z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                </button>
 
-            <li class="py-2 md:py-0">
-              <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
-                class="text-zinc-400 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 pl-3 pr-4 py-2 md:hover:text-gray-500 md:hover:italic hover:font-bold md:p-0 font-medium flex items-center justify-between w-full md:w-auto">
-                <span data-section="headerMain" data-value="idioma">Idioma</span>
-                <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 111.414 1.414l-4 4a1 1 01-1.414 0l-4-4a1 1 010-1.414z"
-                    clip-rule="evenodd"></path>
-                </svg>
-              </button>
+                <!-- Dropdown menu -->
+                <div id="dropdownNavbar" class="hidden bg-white z-10 divide-y divide-gray-100 rounded shadow">
 
-              <!-- Dropdown menu -->
-              <div id="dropdownNavbar" class="hidden bg-white z-10 divide-y divide-gray-100 rounded shadow">
+                  <div id="flags" class="flags py-1 flex flex-wrap" aria-labelledby="dropdownLargeButton">
 
-                <div id="flags" class="flags py-1 flex flex-wrap" aria-labelledby="dropdownLargeButton">
+                    <div class="flags__item" data-language="es">
 
-                  <div class="flags__item" data-language="es">
-                    <!-- <li> -->
-                    <button
-                      class="langs translate text-sm hover:bg-gray-100 text-zinc-400 hover:text-gray-700 hover:italic hover:font-bold hover:rounded block px-4 py-2 ml-2">Español</button>
-                    <!-- </li> -->
+                      <button
+                        class="langs translate text-sm hover:bg-gray-100 text-zinc-400 hover:text-gray-700 hover:italic hover:font-bold hover:rounded block px-4 py-2 ml-2">Español</button>
+
+                    </div>
+
+                    <p style="cursor: default;" class="py-1">
+                      |
+                    </p>
+
+                    <div class="flags__item" data-language="en">
+
+                      <button
+                        class="langs translate text-sm hover:bg-gray-100 text-zinc-400 hover:text-gray-700 hover:italic hover:font-bold hover:rounded block px-4 py-2 mr-2">English</button>
+
+                    </div>
+
+
                   </div>
 
-                  <p style="cursor: default;" class="py-1">
-                    |
-                  </p>
+                </div> <!-- DIV dropdownNavbar-->
+              </li>
 
-                  <div class="flags__item" data-language="en">
-                    <!-- <li style="cursor: default;" class="py-1">|</li> -->
-                    <!-- <li> -->
-                    <button
-                      class="langs translate text-sm hover:bg-gray-100 text-zinc-400 hover:text-gray-700 hover:italic hover:font-bold hover:rounded block px-4 py-2 mr-2">English</button>
-                    <!-- </li> -->
-                  </div>
+              <li class="py-2 md:py-0">
 
-                </div>
-              </div> <!-- DIV dropdownNavbar-->
-            </li>
+                <a href="../HTML/contactUS.html" data-translate-key="headerMain.contactUs"
+                  class="text-zinc-400 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-gray-500 md:hover:italic hover:font-bold md:p-0 font-medium"
+                  data-section="headerMain" data-value="contactenos">
+                  Contáctenos
+                </a>
 
-            <li class="py-2 md:py-0">
-              <a href="../HTML/contactUS.html" data-translate-key="headerMain.contactUs"
-                class="text-zinc-400 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-gray-500 md:hover:italic hover:font-bold md:p-0 font-medium"
-                data-section="headerMain" data-value="contactenos">
-                Contáctenos
-              </a>
-            </li>
+              </li>
 
-            <li class="py-2 md:py-0">
-              <a href="https://www.utch.edu.mx" data-translate-key="headerMain.utch"
-                class="text-zinc-400 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-gray-500 md:hover:italic hover:font-bold md:p-0 font-medium"
-                data-section="headerMain" data-value="utch">
-                Utch
-              </a>
-            </li>
+              <li class="py-2 md:py-0">
 
-          </ul>
+                <a href="https://www.utch.edu.mx" data-translate-key="headerMain.utch"
+                  class="text-zinc-400 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-gray-500 md:hover:italic hover:font-bold md:p-0 font-medium"
+                  data-section="headerMain" data-value="utch">
+                  Utch
+                </a>
+
+              </li>
+
+            </ul>
+          </div>
+
         </div>
-      </div>
     </nav>
 
     <section class="flex-1 flex flex-col p-5 bg-white">
 
       <div class="mb-4">
         <div class="inline-flex bg-gray-100 rounded-lg overflow-hidden">
+
           <a href="../HTML/agregarMed.html" data-section="textosNavPaginas" data-value="agregarMedicamento"
             class="px-4 py-1.5 text-gray-600 text-m hover:bg-hd-personalizado hover:ease-in-out hover:duration-300 hover:z-10 hover:transition-colors hover:rounded">Agregar
             Medicamento</a>
+
           <a href="../HTML/tablaMed.html" data-section="textosNavPaginas" data-value="susMedicamentos"
             class="px-4 py-1.5 text-gray-600 text-m hover:bg-hd-personalizado hover:ease-in-out hover:duration-300 hover:z-10 hover:transition-colors hover:rounded">Sus
             Medicamentos</a>
+
           <a data-section="textosNavPaginas" data-value="calendario"
             class="bg-white border-solid border-2 rounded-lg font-semibold 1 border-bg-personalizado px-4 py-1.5 text-gray-600 text-m">Calendario</a>
+
         </div>
       </div>
 
 
 
       <div class="flex flex-col items-center border-b-2 border-t-2 py-3 mb-4">
+
         <h2 data-section="seccionConsulteCalendario" data-value="h2" class="text-g font-bold mb-2">Consulte su
           calendario</h2>
+
         <p data-section="seccionConsulteCalendario" data-value="p" class="text-s mb-2 text-center">
           Consulte sus proximas tomas.
+
         </p>
       </div>
 
       <div
         class="relative w-full max-w-[1600px] min-h-[900px] mx-auto p-[5px] text-white flex rounded-[10px] bg-[#d9d9d9] container">
+
         <div class="w-full lg:w-[90%] p-[20px] izquierda">
+
           <div
             class="relative w-full h-full flex flex-col flex-wrap justify-between text-[#878895] rounded-[5px] bg-white calendar-custom">
+
             <div class="mes">
               <i class="fa fa-angle-left prev"></i>
               <div class="date" data-section="divCalendario" data-value="meses"></div>
               <i class="fa fa-angle-right next"></i>
+
             </div>
+
             <div class="diasSemana">
               <div data-value="0">Dom</div>
               <div data-value="1">Lun</div>
@@ -203,51 +217,79 @@
               <div data-value="4">Jue</div>
               <div data-value="5">Vie</div>
               <div data-value="6">Sáb</div>
+
             </div>
+
             <div class="dias">
               <!-- se anaden los dias con el js -->
             </div>
+
             <div class="goto-hoy">
+
               <div class="goto">
                 <input type="text" placeholder="mm/aaaa" class="tiempo-input" />
                 <button data-section="divCalendario" data-value="irCalendario" class="goto-btn">Ir</button>
+
               </div>
+
               <button data-section="divCalendario" data-value="botonHoy" class="hoy-btn">Hoy</button>
+
             </div>
+
           </div>
+
         </div>
+
         <div class="derecha w-full lg:w-auto">
+
           <div class="hoy-fecha">
+
             <div class="evento-dia"></div>
             <div class="evento-fecha"></div>
+
           </div>
+
           <div class="eventos">
 
           </div>
 
           <div class="agregar-evento-contenedor">
+
             <div class="agregar-encabezado-evento">
               <div class="titulo">Agregar evento</div>
               <i class="fas fa-times close"></i>
+
             </div>
+
             <div class="agregar-cuerpo-evento">
+
               <div class="agregar-entrada-evento">
                 <input type="text" placeholder="Nombre del Evento" class="nombre-evento" />
               </div>
+
               <div class="agregar-entrada-evento">
                 <input type="text" placeholder="Hora de Inicio del Evento" class="inicio-evento" />
               </div>
+
               <div class="agregar-entrada-evento">
                 <input type="text" placeholder="Hora de Fin del Evento" class="fin-evento" />
+
               </div>
+
             </div>
+
             <div class="agregar-pie-pag">
               <button class="agregar-evento-btn">Agregar Evento</button>
+
             </div>
+
           </div>
+
         </div>
+
       </div>
     </section>
+
   </div>
 </body>
 

@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html lang="es-ES">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Med & Track</title>
   <link rel="icon" href="../assets/LOGO_VECTORIZADOsvg.svg" type="image/x-icon">
-  <script src="../JS/login.js"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <script src="../JS/login.js"></script>
   <script src="../JS/langs.js"></script>
+
   <script>
     tailwind.config = {
       theme: {
@@ -27,41 +30,57 @@
     };
   </script>
 
-
-
 </head>
 
 <body class="bg-custom-bg min-h-screen flex items-center justify-center p-4 font-roboto">
   <div
     class="flex flex-col md:flex-row w-full max-w-6xl h-auto md:h-[90vh] bg-white shadow-2xl rounded-lg overflow-hidden">
+
     <!-- Sección izquierda (imagen de fondo) -->
     <div class="w-full md:w-1/2 bg-cover bg-center h-64 md:h-auto relative">
+
       <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center p-4">
+
         <img src="../assets/LOGO_VECTORIZADOsvg.svg" class="h-32 w-32 rounded-full object-cover shadow-lg mb-4" />
+
         <div class="text-white text-center">
+
           <h1 class="text-3xl md:text-5xl font-bold mb-2">Med & Track</h1>
-          <p class="text-lg md:text-xl" data-section="inicioSesionPagina" data-value="ladoDerecho">Su compañero de salud</p>
+          <p class="text-lg md:text-xl" data-section="inicioSesionPagina" data-value="ladoDerecho">Su compañero de salud
+          </p>
+
         </div>
+
       </div>
+
     </div>
 
-    <!-- Sección derecha (formulario) -->
+    <!-- seccion derecha (formulario) -->
     <div class="w-full md:w-1/2 bg-custom-form p-6 md:p-8 lg:p-12 flex flex-col justify-center">
+
       <div>
-        <h2  data-section="inicioSesionPagina" data-value="bienvenido" class="text-2xl md:text-4xl font-bold mb-6 md:mb-8">
+
+        <h2 data-section="inicioSesionPagina" data-value="bienvenido"
+          class="text-2xl md:text-4xl font-bold mb-6 md:mb-8">
           ¡Bienvenido de nuevo!
         </h2>
+
         <p data-section="inicioSesionPagina" data-value="noTieneCuenta" class="mb-8 text-xl">
           ¿No tiene una cuenta?
+
           <a href="../HTML/registro.html" data-section="inicioSesionPagina" data-value="registreseAqui"
             class="text-blue-600 font-roboto italic hover:not-italic hover:text-black hover:ease-in-out hover:duration-300">Regístrese
-            aquí</a>
+            aquí </a>
+
         </p>
       </div>
 
+      <!-- Formulario (seccion dereccha) -->
       <form class="space-y-5 md:space-y-7" id="loginForm">
+
         <div>
-          <label data-section="inicioSesionPagina" data-value="labelCorreo" class="block text-lg md:text-xl font-medium text-gray-700 mb-1">
+          <label data-section="inicioSesionPagina" data-value="labelCorreo"
+            class="block text-lg md:text-xl font-medium text-gray-700 mb-1">
             Dirección de correo electrónico
             <span class="text-red-500">*</span>
           </label>
@@ -70,7 +89,8 @@
         </div>
 
         <div>
-          <label data-section="inicioSesionPagina" data-value="labelContrasena" class="block text-lg md:text-xl font-medium text-gray-700 mb-1">
+          <label data-section="inicioSesionPagina" data-value="labelContrasena"
+            class="block text-lg md:text-xl font-medium text-gray-700 mb-1">
             Contraseña <span class="text-red-500">*</span>
           </label>
           <input type="password" name="contrasena" id="contrasena" minlength="8" required
@@ -79,15 +99,21 @@
         </div>
 
         <div class="flex flex-col items-end">
+         
           <button
             class="w-full sm:w-auto relative inline-flex items-center justify-center px-6 py-2 overflow-hidden rounded-lg group bg-black text-white hover:text-white text-s mx-1 sm:mx-2 transition duration-300 ease-in-out transform hover:scale-105">
+            
             <span
               class="absolute inset-0 w-full h-full transition-all duration-300 ease-out bg-gray-700 rounded-lg opacity-0 group-hover:opacity-100"></span>
-            <span data-section="inicioSesionPagina" data-value="botonInicioSesion" class="relative transition-colors duration-200 ease-in-out z-10">
+            
+              <span data-section="inicioSesionPagina" data-value="botonInicioSesion"
+              class="relative transition-colors duration-200 ease-in-out z-10">
               Inicie sesión
             </span>
+
           </button>
         </div>
+
       </form>
     </div>
   </div>

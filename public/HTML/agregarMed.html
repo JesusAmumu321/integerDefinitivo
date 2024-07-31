@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html lang="es-ES" class="min-h-full w-full">
+<html lang="es" class="min-h-full w-full">
 
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Agregar un medicamento - Med & Track</title>
   <link rel="icon" href="../assets/LOGO_VECTORIZADOsvg.svg" type="image/x-icon">
+
   <script src="https://cdn.tailwindcss.com"></script>
-  <script type="module" src="../JS/agregarMed.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="../JS/langs.js"></script>
+
+  <script type="module" src="../JS/agregarMed.js"></script>
   <script type="module" src="../JS/mainPageHeader.js"></script>
+
+  <script src="../JS/langs.js"></script>
 
 
   <script>
@@ -33,7 +38,6 @@
       }
     }
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 
 <body class="min-h-full m-0 p-0 bg-bg-personalizado flex justify-center items-center overflow-x-hidden font-roboto">
@@ -109,49 +113,63 @@
             </li>
 
             <li class="py-2 md:py-0">
+
               <a href="../HTML/contactUS.html" data-translate-key="headerMain.contactUs"
                 class="text-zinc-400 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-gray-500 md:hover:italic hover:font-bold md:p-0 font-medium"
                 data-section="headerMain" data-value="contactenos">
                 Contáctenos
               </a>
+
             </li>
 
             <li class="py-2 md:py-0">
+
               <a href="https://www.utch.edu.mx" data-translate-key="headerMain.utch"
                 class="text-zinc-400 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-gray-500 md:hover:italic hover:font-bold md:p-0 font-medium"
                 data-section="headerMain" data-value="utch">
                 Utch
               </a>
+
             </li>
 
           </ul>
         </div>
+
       </div>
+
     </nav>
 
     <section class="flex-1 flex flex-col p-5 bg-white ">
+
       <div class="mb-4">
+
         <div class="inline-flex bg-gray-100 rounded-lg overflow-hidden">
+
           <a data-section="textosNavPaginas" data-value="agregarMedicamento"
             class="bg-white border-solid border-2 rounded-lg font-semibold border-bg-personalizado px-4 py-1.5 text-gray-600 text-m">Agregar
             Medicamento</a>
+
           <a href="../HTML/tablaMed.html" data-section="textosNavPaginas" data-value="susMedicamentos"
             class="px-4 py-1.5 text-gray-600 text-m hover:bg-hd-personalizado hover:ease-in-out hover:duration-300 hover:z-10 hover:transition-colors hover:rounded">Sus
             Medicamentos</a>
+
           <a href="../HTML/calendario.html" data-section="textosNavPaginas" data-value="calendario"
             class="px-4 py-1.5 text-gray-600 text-m hover:bg-hd-personalizado hover:ease-in-out hover:duration-300 hover:z-10 hover:transition-colors hover:rounded">Calendario</a>
+
         </div>
       </div>
 
       <div class="flex flex-col items-center border-b-2 border-t-2 py-3 my-4">
+
         <h2 data-section="seccionAnadaMedicamento" data-value="h2" class="text-g font-bold mb-2">Agregar un medicamento
         </h2>
+
         <p data-section="seccionAnadaMedicamento" data-value="p" class="text-s mb-2 text-center">Para añadir un
-          medicamento, asegúrese de completar correctamente todos los
-          campos.</p>
+          medicamento, asegúrese de completar correctamente todos los campos.</p>
       </div>
 
       <form id="formularioMedicamento" class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 mb-4 mt-10">
+
         <div class="flex flex-col">
 
           <label data-section="formularioAnadirMedicamento" data-value="labelPresentacionMedicamento"
@@ -161,60 +179,67 @@
 
           <select id="tipo_medicamento" name="tipo_medicamento" required
             class="w-full h-12 bg-white border border-gray-300 rounded-md px-3 pr-8 text-s focus:outline-none focus:ring-2 focus:ring-black transition duration-300 ease-in-out transform hover:scale-105">
+
             <option data-section="formularioAnadirMedicamento" data-value="input1PresentacionMed" value="" selected>
               Seleccione</option>
+
             <option data-section="formularioAnadirMedicamento" data-value="input2PresentacionMed" value="pastillas">
               Pastillas</option>
+
             <option data-section="formularioAnadirMedicamento" data-value="input3PresentacionMed" value="ml">Líquido
+
             </option>
           </select>
 
         </div>
-<!-- 
-        <div class="flex flex-col">
 
-          <label data-section="formularioAnadirMedicamento" data-value="labelFrecuenciaDosis" for="frecuenciaToma"
+        <div class="flex flex-col">
+          <label data-section="formularioAnadirMedicamento" data-value="frecuenciaDosis" for="frecuenciaToma"
             class="mb-1 text-m font-medium">
-            Frecuencia de la dosis: (en horas) <span class="text-red-500">*</span>
-          </label>
-          <input type="number" name="frecuenciaToma" id="frecuenciaToma" required min="1" step="1"
-            class="numero-positivo w-full px-1.5 h-12 py-2 text-base md:text-l border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black transition duration-300 ease-in-out transform hover:scale-105">
-        </div> -->
-
-        <div class="flex flex-col">
-          <label data-section="formularioAnadirMedicamento" data-value="frecuenciaDosis" for="frecuenciaToma" class="mb-1 text-m font-medium">
             Frecuencia de la dosis: <span class="text-red-500">*</span>
           </label>
           <select name="frecuenciaToma" id="frecuenciaToma" required
-          class="w-full h-12 bg-white border border-gray-300 rounded-md px-3 pr-8 text-s focus:outline-none focus:ring-2 focus:ring-black transition duration-300 ease-in-out transform hover:scale-105">
-          <option data-section="formularioAnadirMedicamento" data-value="cada8Hrs" value="8" selected>Cada 8 horas</option>
-          <option data-section="formularioAnadirMedicamento" data-value="cada6Hrs" value="6">Cada 6 horas</option>
-          <option data-section="formularioAnadirMedicamento" data-value="cada10Hrs" value="10">Cada 10 horas</option>
-          <option data-section="formularioAnadirMedicamento" data-value="cada12Hrs" value="12">Cada 12 horas</option>
-          <option data-section="formularioAnadirMedicamento" data-value="cada24Hrs" value="24">Cada 24 horas</option>
-        </select>
+            class="w-full h-12 bg-white border border-gray-300 rounded-md px-3 pr-8 text-s focus:outline-none focus:ring-2 focus:ring-black transition duration-300 ease-in-out transform hover:scale-105">
+
+            <option data-section="formularioAnadirMedicamento" data-value="cada8Hrs" value="8" selected>Cada 8 horas
+            </option>
+
+            <option data-section="formularioAnadirMedicamento" data-value="cada6Hrs" value="6">Cada 6 horas</option>
+
+            <option data-section="formularioAnadirMedicamento" data-value="cada10Hrs" value="10">Cada 10 horas</option>
+
+            <option data-section="formularioAnadirMedicamento" data-value="cada12Hrs" value="12">Cada 12 horas</option>
+
+
+            <option data-section="formularioAnadirMedicamento" data-value="cada24Hrs" value="24">Cada 24 horas</option>
+          </select>
 
         </div>
 
         <div class="flex flex-col">
+
           <label data-section="formularioAnadirMedicamento" data-value="labelNombreMedicamento" for="nombreMed"
             class="mb-1 text-m font-medium">
             Nombre del medicamento o suplemento: <span class="text-red-500">*</span>
           </label>
           <input type="text" name="nombreMed" id="nombreMed" required placeholder="Ej. Paracetamol."
             class="w-full h-12 px-1.5 py-2 text-base md:text-l border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black transition duration-300 ease-in-out transform hover:scale-105">
+
         </div>
 
         <div class="flex flex-col">
+
           <label data-section="formularioAnadirMedicamento" data-value="labelCantidadPastillas" id="cantidadDosisLabel"
             for="cantidadDosis" class="mb-1 text-m font-medium">
             Cantidad de pastillas por dosis: <span class="text-red-500">*</span>
           </label>
           <input type="number" name="cantidadDosis" id="cantidadDosis" required placeholder="Ej. 2." min="1" step="1"
             class="numero-positivo w-full px-1.5 h-12 py-2 text-base md:text-l border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black transition duration-300 ease-in-out transform hover:scale-105">
+
         </div>
 
         <div class="flex flex-col">
+
           <label data-section="formularioAnadirMedicamento" data-value="labelCantidadUnidadesCaja" for="cantidadUnaCaja"
             class="mb-1 text-m font-medium">
             Cantidad de unidades por caja: <span class="text-red-500">*</span>
@@ -222,48 +247,64 @@
           <input type="number" name="cantidadUnaCaja" id="cantidadUnaCaja" required placeholder="Ej. 10." min="1"
             step="1"
             class="numero-positivo w-full px-1.5 h-12 py-2 text-base md:text-l border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black transition duration-300 ease-in-out transform hover:scale-105">
+
         </div>
 
         <div class="flex flex-col">
+
           <label data-section="formularioAnadirMedicamento" data-value="labelCantidadCajasDisponibles"
             id="cantidadUnaCaja2" for="cantidadCajas" class="mb-1 text-m font-medium">
             Cantidad de cajas disponibles: <span class="text-red-500">*</span>
           </label>
           <input type="number" name="cantidadCajas" id="cantidadCajas" required placeholder="Ej. 3." min="1" step="1"
             class="numero-positivo border h-12 rounded-md p-1.5 w-full text-s focus:ring-black transition duration-300 ease-in-out transform hover:scale-105" />
+
         </div>
 
         <div class="flex flex-col">
+
           <label data-section="formularioAnadirMedicamento" data-value="labelCaducidadMedicamento" for="caducidadMed"
             class="mb-1 text-m font-medium">
             Fecha de caducidad del medicamento:
           </label>
+
           <input type="date" id="caducidadMed" name="caducidadMed"
             class="border h-12 rounded-md p-1.5 w-full text-s focus:ring-black transition duration-300 ease-in-out transform hover:scale-105" />
+
         </div>
 
         <div class="flex flex-col">
+
           <label data-section="formularioAnadirMedicamento" data-value="labelFechaFinalizacion" for="ultimaToma"
             class="mb-1 text-m font-medium">
             Fecha de finalización del medicamento:
           </label>
           <input type="date" id="ultimaToma" name="ultimaToma"
             class="border h-12 rounded-md p-1.5 w-full text-s focus:ring-black transition duration-300 ease-in-out transform hover:scale-105" />
+
         </div>
+
       </form>
 
       <div class="flex justify-end mt-5">
+
         <button id="envioMedicamento" name="envioMedicamento"
           class="w-full sm:w-auto relative inline-flex items-center justify-center px-6 sm:px-8 py-2 overflow-hidden rounded-lg group bg-black text-white hover:text-white text-lg/6 shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
           <span
             class="absolute w-0 h-0 transition-all duration-500 ease-out bg-gray-700 rounded-full group-hover:w-56 group-hover:h-56"></span>
+
           <span data-section="formularioAnadirMedicamento" data-value="botonAgregar"
             class="relative transition-colors duration-200 ease-in-out z-10">
             Agregar
+
           </span>
+
         </button>
+
       </div>
+
     </section>
+
   </div>
 </body>
 
