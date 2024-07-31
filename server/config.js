@@ -1,4 +1,3 @@
 export const {
     PORT = 3000,
-    SECRET_JWT_KEY = 'LA-LLAVE-TIENE-QUE-SER-DEMASIADO-LARGA-PA.,-QUE-SEA-SEGURA-,S-USA-HASH-Y,-COSAS.ASI'
 } = process.env;

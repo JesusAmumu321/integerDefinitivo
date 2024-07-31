@@ -1,6 +1,6 @@
 import express from "express";
-import { PORT } from "./config.js";
-import cors from "cors";
+import { PORT } from "./config.js"; 
+import cors from "cors"; // esto es para conectar el node con los middleware
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import connect from "./coneccionMYSQL.js";
@@ -46,13 +46,16 @@ app.post("/api/verificar-correo", async (req, res) => {
   const { correo } = req.body; // body es le cuerpo de la peticion, el cual va a contener el correo
 
   try {
-    const db = await connect();
+    const db = await connect(); // coneccion con la bd
+
     const [rows] = await db.execute("SELECT * FROM usuarios WHERE correo = ?", [
       correo,
-    ]);
-    await db.end();
+    ]); 
+
+    await db.end(); // cerrar coneccion con la bd
 
     res.json({ existe: rows.length > 0 });
+    
   } catch (error) {
     // aqui se pueden poner if y cosas asi para manejar bien los errores y no tener un despapaye
     console.error("Error al verificar el correo:", error.message);

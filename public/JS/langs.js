@@ -1,16 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
+
   const textoCarruselContainer = document.getElementById(
     "textoCarruselContainer"
   );
+  
   const items = document.querySelectorAll(".carrusel-item");
+  
   const botonesInferiores = document.querySelectorAll(".botonInferior");
 
   let indexActual = 0;
+
   let textos = [];
   let gifs = [];
+
   let alertTexts = {};
+
   let errorMessages = {};
+
   let registroTexts = {};
+
   let loginTexts = {};
 
   window.translations = {
@@ -38,11 +46,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const value = textToChange.dataset.value;
 
         if (textToChange.tagName === "BUTTON") {
-          // ... (código para botones sin cambios)
         } else if (textToChange.tagName === "A") {
-          // Manejar enlaces de forma especial
+          
+          // manejar enlaces de forma especial, cambia el contenido de los textos del carrusel
           textToChange.textContent = texts[section][value];
+        
         } else if (textToChange.querySelector("a")) {
+          
           // Manejar párrafos que contienen enlaces
           const link = textToChange.querySelector("a");
           const linkSection = link.dataset.section;
@@ -62,7 +72,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // Añadir el enlace de vuelta al párrafo
           textToChange.appendChild(link);
+
         } else {
+
           const originalHTML = textToChange.innerHTML;
           const asterisk = originalHTML.includes(
             '<span class="text-red-500">*</span>'
@@ -72,13 +84,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
           textToChange.innerHTML = texts[section][value] + asterisk;
         }
+
       });
 
-      // Actualizar los días de la semana
+      // actualizar los dias de la semana
       actualizarDiasSemana(texts);
 
       // aqui se crean las cosas dinamicas
+
       if (textoCarruselContainer) {
+
         textoCarruselContainer.innerHTML = "";
         textos = texts.carrusel.textos;
         gifs = texts.carrusel.gifs;
@@ -100,11 +115,12 @@ document.addEventListener("DOMContentLoaded", () => {
           textoCarruselContainer.appendChild(p);
         });
 
-        // Mostrar el primer texto
+        // mostrar el primer texto
         mostrarItem(indexActual);
       }
 
-      // Guardar el idioma seleccionado en localStorage
+      // guardar el idioma seleccionado en localStorage para q cuando se actualice la pagina, se mantenga el idioma q se
+      // lecciono el usuario
       localStorage.setItem("language", language);
     } catch (error) {
       console.error("Error al cambiar el idioma:", error);
@@ -112,40 +128,54 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const mostrarItem = (index) => {
+
     if (items.length > 0 && botonesInferiores.length > 0) {
+
       items.forEach((item, i) => {
+
         item.classList.add("opacity-0");
         item.classList.remove("opacity-100");
+
         if (i === index) {
+
           item.classList.remove("opacity-0");
           item.classList.add("opacity-100");
           item.style.backgroundImage = `url(${gifs[i]})`;
+
         }
       });
 
       botonesInferiores.forEach((boton, i) => {
         if (i === index) {
+
           boton.classList.remove("bg-gray-300");
           boton.classList.add("bg-black");
+
         } else {
+
           boton.classList.remove("bg-black");
           boton.classList.add("bg-gray-300");
+
         }
       });
     }
 
     if (textoCarruselContainer) {
+
       textoCarruselContainer
         .querySelectorAll(".textoCarruselItem")
         .forEach((p, i) => {
+          
           p.style.opacity = i === index ? "1" : "0";
         });
     }
   };
 
   const siguienteItem = () => {
+
     indexActual = (indexActual + 1) % textos.length;
     mostrarItem(indexActual);
+
   };
 
   // cargar el idioma guardado en el local storage
@@ -173,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const intervalo = setInterval(siguienteItem, 5000);
   }
 
-  // funcion actializar los dias d la sea
+  // funcion actializar los dias d la sema
   const actualizarDiasSemana = (texts) => {
     const divs = document.querySelectorAll(".diasSemana div");
 

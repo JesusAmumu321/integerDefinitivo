@@ -1,13 +1,3 @@
-// import { createPool } from "mysql2/promise";
-
-// export const pool = createPool({
-//   host: "localhost",
-//   port: 3306,
-//   database: "prueba",
-//   user: "root",
-//   password: "root",
-// });
-
 import mysql from 'mysql2/promise';
 
 async function connect() {
@@ -19,8 +9,13 @@ async function connect() {
       database: 'prueba',
       port: 3306
     });
+
+    console.log("\n");
     console.log('Conexion a MySQL establecida.');
+    console.log("\n");
+
     return connection;
+    
   } catch (error) {
     console.log("\n");
     console.log("----------------------------------");
