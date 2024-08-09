@@ -331,3 +331,35 @@ app.post("/api/agregar-contacto", async (req, res) => {
     });
   }
 });
+
+app.post('/enviar-correo', (req, res) => {
+  const { nombreMedicamento, destinatario } = req.body;
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'medytrack@gmail.com',
+    pass: 'Daemos117'
+  }
+});
+const mailOptions = {
+  from: 'medytrack@gmail.com',
+  to: destinatario,
+  subject: 'Alerta de medicamento',
+  text: "El medicamento ${nombreMedicamento} está por acabarse. Quedan pocas unidades."
+};
+
+transporter.sendMail(mailOptions, (error, info) => {
+  if (error) {
+      console.log(error);
+      res.status(500).json({ success: false, error: 'Error al enviar el correo' });
+  } else {
+      console.log('Email enviado: ' + info.response);
+      res.json({ success: true, message: 'Correo enviado correctamente' });
+  }
+});
+});
+
+app.get('/check-medications', async (req,res) => {
+  await verificarmedicamento(fechasCalculadas, userId)
+  res.send('Medicamento verificado')
+})
