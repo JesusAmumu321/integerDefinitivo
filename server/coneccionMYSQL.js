@@ -3,10 +3,10 @@ import mysql from "mysql2/promise";
 async function connect() {
   try {
     const connection = await mysql.createConnection({
-      host: "srv1578.hstgr.io",
-      user: "u589597310_jrodriguez",
-      password: "fJM[$f&RW*8",
-      database: "u589597310_integradora",
+      host: "localhost",
+      user: "root",
+      password: "root",
+      database: "prueba",
       port: 3306,
     });
 
