@@ -28,6 +28,7 @@ CREATE TABLE medicamento (
   caducidadMed DATE not null,
   ultimaToma DATE not null,
   cantidadDosis int not null,
+  cantidad_total INT AS (cantidad_cajas * cantidad_por_caja) STORED
   frecuenciaToma int not null,
   Pk_usuario int not null,
   foreign key (Pk_Usuario) references usuarios(id_usuario)
