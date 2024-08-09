@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# OS generated files
+.DS_Store
+
+# Build output
+dist/
+build/
+
+# Windows command scripts
+*.cmd
+
+# PowerShell scripts
+*.ps1
